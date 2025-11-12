@@ -835,6 +835,125 @@ console.log(pallet);
 
 Chromatic adaptation can be preformed in two ways, either by using a standalone "adapt" function or by using an Adapter class.
 
+
+### Supported Illuminants
+
+The following illuminant adaptations are supported:
+
+| Code | Reference Illuminant | Destination Illuminant | Description |
+|------|---------------------|----------------------|-------------|
+| A_B | Illuminant A → | Illuminant B | Incandescent/tungsten to direct sunlight |
+| A_C | Illuminant A → | Illuminant C | Incandescent/tungsten to average daylight |
+| A_D50 | Illuminant A → | Illuminant D50 | Incandescent/tungsten to horizon light |
+| A_D55 | Illuminant A → | Illuminant D55 | Incandescent/tungsten to mid-morning light |
+| A_D65 | Illuminant A → | Illuminant D65 | Incandescent/tungsten to noon daylight |
+| A_D75 | Illuminant A → | Illuminant D75 | Incandescent/tungsten to north sky daylight |
+| A_E | Illuminant A → | Illuminant E | Incandescent/tungsten to equal energy |
+| A_F2 | Illuminant A → | Illuminant F2 | Incandescent/tungsten to cool white fluorescent |
+| A_F7 | Illuminant A → | Illuminant F7 | Incandescent/tungsten to daylight fluorescent |
+| A_F11 | Illuminant A → | Illuminant F11 | Incandescent/tungsten to narrow band white fluorescent |
+| B_A | Illuminant B → | Illuminant A | Direct sunlight to incandescent/tungsten |
+| B_C | Illuminant B → | Illuminant C | Direct sunlight to average daylight |
+| B_D50 | Illuminant B → | Illuminant D50 | Direct sunlight to horizon light |
+| B_D55 | Illuminant B → | Illuminant D55 | Direct sunlight to mid-morning light |
+| B_D65 | Illuminant B → | Illuminant D65 | Direct sunlight to noon daylight |
+| B_D75 | Illuminant B → | Illuminant D75 | Direct sunlight to north sky daylight |
+| B_E | Illuminant B → | Illuminant E | Direct sunlight to equal energy |
+| B_F2 | Illuminant B → | Illuminant F2 | Direct sunlight to cool white fluorescent |
+| B_F7 | Illuminant B → | Illuminant F7 | Direct sunlight to daylight fluorescent |
+| B_F11 | Illuminant B → | Illuminant F11 | Direct sunlight to narrow band white fluorescent |
+| C_A | Illuminant C → | Illuminant A | Average daylight to incandescent/tungsten |
+| C_B | Illuminant C → | Illuminant B | Average daylight to direct sunlight |
+| C_D50 | Illuminant C → | Illuminant D50 | Average daylight to horizon light |
+| C_D55 | Illuminant C → | Illuminant D55 | Average daylight to mid-morning light |
+| C_D65 | Illuminant C → | Illuminant D65 | Average daylight to noon daylight |
+| C_D75 | Illuminant C → | Illuminant D75 | Average daylight to north sky daylight |
+| C_E | Illuminant C → | Illuminant E | Average daylight to equal energy |
+| C_F2 | Illuminant C → | Illuminant F2 | Average daylight to cool white fluorescent |
+| C_F7 | Illuminant C → | Illuminant F7 | Average daylight to daylight fluorescent |
+| C_F11 | Illuminant C → | Illuminant F11 | Average daylight to narrow band white fluorescent |
+| D50_A | Illuminant D50 → | Illuminant A | Horizon light to incandescent/tungsten |
+| D50_B | Illuminant D50 → | Illuminant B | Horizon light to direct sunlight |
+| D50_C | Illuminant D50 → | Illuminant C | Horizon light to average daylight |
+| D50_D55 | Illuminant D50 → | Illuminant D55 | Horizon light to mid-morning light |
+| D50_D65 | Illuminant D50 → | Illuminant D65 | Horizon light to noon daylight |
+| D50_D75 | Illuminant D50 → | Illuminant D75 | Horizon light to north sky daylight |
+| D50_E | Illuminant D50 → | Illuminant E | Horizon light to equal energy |
+| D50_F2 | Illuminant D50 → | Illuminant F2 | Horizon light to cool white fluorescent |
+| D50_F7 | Illuminant D50 → | Illuminant F7 | Horizon light to daylight fluorescent |
+| D50_F11 | Illuminant D50 → | Illuminant F11 | Horizon light to narrow band white fluorescent |
+| D55_A | Illuminant D55 → | Illuminant A | Mid-morning light to incandescent/tungsten |
+| D55_B | Illuminant D55 → | Illuminant B | Mid-morning light to direct sunlight |
+| D55_C | Illuminant D55 → | Illuminant C | Mid-morning light to average daylight |
+| D55_D50 | Illuminant D55 → | Illuminant D50 | Mid-morning light to horizon light |
+| D55_D65 | Illuminant D55 → | Illuminant D65 | Mid-morning light to noon daylight |
+| D55_D75 | Illuminant D55 → | Illuminant D75 | Mid-morning light to north sky daylight |
+| D55_E | Illuminant D55 → | Illuminant E | Mid-morning light to equal energy |
+| D55_F2 | Illuminant D55 → | Illuminant F2 | Mid-morning light to cool white fluorescent |
+| D55_F7 | Illuminant D55 → | Illuminant F7 | Mid-morning light to daylight fluorescent |
+| D55_F11 | Illuminant D55 → | Illuminant F11 | Mid-morning light to narrow band white fluorescent |
+| D65_A | Illuminant D65 → | Illuminant A | Noon daylight to incandescent/tungsten |
+| D65_B | Illuminant D65 → | Illuminant B | Noon daylight to direct sunlight |
+| D65_C | Illuminant D65 → | Illuminant C | Noon daylight to average daylight |
+| D65_D50 | Illuminant D65 → | Illuminant D50 | Noon daylight to horizon light |
+| D65_D55 | Illuminant D65 → | Illuminant D55 | Noon daylight to mid-morning light |
+| D65_D75 | Illuminant D65 → | Illuminant D75 | Noon daylight to north sky daylight |
+| D65_E | Illuminant D65 → | Illuminant E | Noon daylight to equal energy |
+| D65_F2 | Illuminant D65 → | Illuminant F2 | Noon daylight to cool white fluorescent |
+| D65_F7 | Illuminant D65 → | Illuminant F7 | Noon daylight to daylight fluorescent |
+| D65_F11 | Illuminant D65 → | Illuminant F11 | Noon daylight to narrow band white fluorescent |
+| D75_A | Illuminant D75 → | Illuminant A | North sky daylight to incandescent/tungsten |
+| D75_B | Illuminant D75 → | Illuminant B | North sky daylight to direct sunlight |
+| D75_C | Illuminant D75 → | Illuminant C | North sky daylight to average daylight |
+| D75_D50 | Illuminant D75 → | Illuminant D50 | North sky daylight to horizon light |
+| D75_D55 | Illuminant D75 → | Illuminant D55 | North sky daylight to mid-morning light |
+| D75_D65 | Illuminant D75 → | Illuminant D65 | North sky daylight to noon daylight |
+| D75_E | Illuminant D75 → | Illuminant E | North sky daylight to equal energy |
+| D75_F2 | Illuminant D75 → | Illuminant F2 | North sky daylight to cool white fluorescent |
+| D75_F7 | Illuminant D75 → | Illuminant F7 | North sky daylight to daylight fluorescent |
+| D75_F11 | Illuminant D75 → | Illuminant F11 | North sky daylight to narrow band white fluorescent |
+| E_A | Illuminant E → | Illuminant A | Equal energy to incandescent/tungsten |
+| E_B | Illuminant E → | Illuminant B | Equal energy to direct sunlight |
+| E_C | Illuminant E → | Illuminant C | Equal energy to average daylight |
+| E_D50 | Illuminant E → | Illuminant D50 | Equal energy to horizon light |
+| E_D55 | Illuminant E → | Illuminant D55 | Equal energy to mid-morning light |
+| E_D65 | Illuminant E → | Illuminant D65 | Equal energy to noon daylight |
+| E_D75 | Illuminant E → | Illuminant D75 | Equal energy to north sky daylight |
+| E_F2 | Illuminant E → | Illuminant F2 | Equal energy to cool white fluorescent |
+| E_F7 | Illuminant E → | Illuminant F7 | Equal energy to daylight fluorescent |
+| E_F11 | Illuminant E → | Illuminant F11 | Equal energy to narrow band white fluorescent |
+| F2_A | Illuminant F2 → | Illuminant A | Cool white fluorescent to incandescent/tungsten |
+| F2_B | Illuminant F2 → | Illuminant B | Cool white fluorescent to direct sunlight |
+| F2_C | Illuminant F2 → | Illuminant C | Cool white fluorescent to average daylight |
+| F2_D50 | Illuminant F2 → | Illuminant D50 | Cool white fluorescent to horizon light |
+| F2_D55 | Illuminant F2 → | Illuminant D55 | Cool white fluorescent to mid-morning light |
+| F2_D65 | Illuminant F2 → | Illuminant D65 | Cool white fluorescent to noon daylight |
+| F2_D75 | Illuminant F2 → | Illuminant D75 | Cool white fluorescent to north sky daylight |
+| F2_E | Illuminant F2 → | Illuminant E | Cool white fluorescent to equal energy |
+| F2_F7 | Illuminant F2 → | Illuminant F7 | Cool white fluorescent to daylight fluorescent |
+| F2_F11 | Illuminant F2 → | Illuminant F11 | Cool white fluorescent to narrow band white fluorescent |
+| F7_A | Illuminant F7 → | Illuminant A | Daylight fluorescent to incandescent/tungsten |
+| F7_B | Illuminant F7 → | Illuminant B | Daylight fluorescent to direct sunlight |
+| F7_C | Illuminant F7 → | Illuminant C | Daylight fluorescent to average daylight |
+| F7_D50 | Illuminant F7 → | Illuminant D50 | Daylight fluorescent to horizon light |
+| F7_D55 | Illuminant F7 → | Illuminant D55 | Daylight fluorescent to mid-morning light |
+| F7_D65 | Illuminant F7 → | Illuminant D65 | Daylight fluorescent to noon daylight |
+| F7_D75 | Illuminant F7 → | Illuminant D75 | Daylight fluorescent to north sky daylight |
+| F7_E | Illuminant F7 → | Illuminant E | Daylight fluorescent to equal energy |
+| F7_F2 | Illuminant F7 → | Illuminant F2 | Daylight fluorescent to cool white fluorescent |
+| F7_F11 | Illuminant F7 → | Illuminant F11 | Daylight fluorescent to narrow band white fluorescent |
+| F11_A | Illuminant F11 → | Illuminant A | Narrow band white fluorescent to incandescent/tungsten |
+| F11_B | Illuminant F11 → | Illuminant B | Narrow band white fluorescent to direct sunlight |
+| F11_C | Illuminant F11 → | Illuminant C | Narrow band white fluorescent to average daylight |
+| F11_D50 | Illuminant F11 → | Illuminant D50 | Narrow band white fluorescent to horizon light |
+| F11_D55 | Illuminant F11 → | Illuminant D55 | Narrow band white fluorescent to mid-morning light |
+| F11_D65 | Illuminant F11 → | Illuminant D65 | Narrow band white fluorescent to noon daylight |
+| F11_D75 | Illuminant F11 → | Illuminant D75 | Narrow band white fluorescent to north sky daylight |
+| F11_E | Illuminant F11 → | Illuminant E | Narrow band white fluorescent to equal energy |
+| F11_F2 | Illuminant F11 → | Illuminant F2 | Narrow band white fluorescent to cool white fluorescent |
+| F11_F7 | Illuminant F11 → | Illuminant F7 | Narrow band white fluorescent to daylight fluorescent |
+
+
 ### adapt
 
 "adapt" function which takes two arguments, first being XYZ values 0f the color to be adapted, and a string value representing reference illuminant and a destination illuminant.
