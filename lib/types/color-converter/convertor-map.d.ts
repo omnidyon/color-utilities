@@ -6,10 +6,10 @@
  * found at https://www.isc.org/licenses/
  */
 import { ColorConverters, ToRGBConverters, ToXyzConverters } from "../interfaces/converters.interface";
-import { RGBResolverMap, XYZRezolverMap } from "../interfaces/resolver.interface";
+import { RGBResolverMap, XYZResolverMap } from "../interfaces/resolver.interface";
 /**
  * Map of color converter paired with the
- * space used for fonversion
+ * space used for conversion
  */
 export declare const colorConverters: ColorConverters;
 /**
@@ -24,4 +24,4 @@ export declare const fromRgbConverters: RGBResolverMap;
  * Map of conversion to get XYZ
  */
 export declare const toXyzConverters: ToXyzConverters;
-export declare const fromXyzConverters: XYZRezolverMap;
+export declare const fromXyzConverters: XYZResolverMap;

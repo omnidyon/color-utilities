@@ -1,6 +1,6 @@
-import { RGB, RGBA, RGBA_M, RGB_M } from "../interfaces/color-spaces.interface";
-import { RGBConSpaces } from "../types/colors";
-import { ColorConverter } from "./color-converter";
+import { RGB, RGBA, RGBA_M, RGB_M } from '../interfaces/color-spaces.interface';
+import { RGBConSpaces } from '../types/colors';
+import { ColorConverter } from './color-converter';
 /**
  * @description
  * A class used to convert a color in RGB color space in to other color spaces

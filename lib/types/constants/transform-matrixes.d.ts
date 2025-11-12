@@ -7,7 +7,7 @@
  *
  *  Matrices chromatic adaptation algorithms.
  ***************************************************************/
-import { ResponseDomain } from '../interfaces/responce-domain';
+import { ResponseDomain } from '../interfaces/response-domain';
 /**
  * @description Bradford Transform Matrices
  */

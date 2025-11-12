@@ -17,7 +17,7 @@ export interface BlenderOptions {
     returnType?: "rgb" | "cmyk" | "hsl" | "hsv" | "hwb" | "hex" | "ryb" | "xyz";
 }
 /**
- * @description Represntation of the data form from blending two colors:
+ * @description Representation of the data form from blending two colors:
  *  - color1: first color used for blending
  *  - color2: second color used for blending
  *  - resultColor: resulting color
@@ -28,7 +28,7 @@ export interface BlendData {
     resultColor: BlenderColor;
 }
 /**
- * @description Represntation of the color data used for blending:
+ * @description Representation of the color data used for blending:
  *  - data: color values in any of the acceptable formats
  *          (string | RGB | RGBA | RGB_M | RYB | RYB_M | HSL
  *          | HSLA | HSL_M | HSV | HSVA | HSV_M | CMYK | CMYK_M | XYZ)

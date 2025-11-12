@@ -328,7 +328,7 @@ export declare const D55toEAdaptation: (xyz: XYZ) => XYZ;
 /**
  * Chromatic adaptation from reference white D55 to reference white F2
  * @param {XYZ}                   - color values
- * @returns {XYZ}                 - adapted xyz valuess
+ * @returns {XYZ}                 - adapted xyz values
  */
 export declare const D55toF2Adaptation: (xyz: XYZ) => XYZ;
 /**

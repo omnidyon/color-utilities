@@ -7,8 +7,9 @@
   "module": "./lib/esm/public_api.js",
   "exports": {
     ".": {
-      "types": "./lib/types/index.d.ts",
-      "import": "./lib/esm/public_api.js"
+      "types": "./lib/types/public_api.d.ts",
+      "import": "./lib/esm/public_api.js",
+      "require": "./lib/esm/public_api.js"
     }
   },
   "files": [

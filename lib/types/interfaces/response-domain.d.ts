@@ -17,6 +17,6 @@ import { Matrix3x3 } from "../types/math-types";
  *    http://www.brucelindbloom.com/index.html?Eqn_ChromAdapt.html
  */
 export interface ResponseDomain {
-  MA: Matrix3x3;
-  MA_1: Matrix3x3;
+    MA: Matrix3x3;
+    MA_1: Matrix3x3;
 }

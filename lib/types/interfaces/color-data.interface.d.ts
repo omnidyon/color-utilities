@@ -7,7 +7,7 @@
  */
 import { CMY, CMYK, HCY, HSI, HSL, HSV, HWB, LAB, LCH, LMS, LUV, RGB, RYB, TSL, UVW, XYY, XYZ, YCbCr, YCoCg, YDbDr, YIQ, YPbPr, YcCbcCrc, xvYCC } from "./color-spaces.interface";
 /**
- * @description Represntation of color values for a given color:
+ * @description Representation of color values for a given color:
  */
 export interface ColorData {
     adobe_98_rgb?: RGB;

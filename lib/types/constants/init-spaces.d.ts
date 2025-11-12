@@ -6,5 +6,5 @@
  * found at https://www.isc.org/licenses/
  */
 import { Spaces } from "../types/colors";
-export declare const DefaultResolv: (Spaces | "web_safe")[];
-export declare const AllResolv: (Spaces | "web_safe")[];
+export declare const DefaultResolve: (Spaces | "web_safe")[];
+export declare const AllResolve: (Spaces | "web_safe")[];

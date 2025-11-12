@@ -5,7 +5,7 @@
  * Use of this source code is governed by an ISC-style license that can be
  * found at https://opensource.org/license/isc-license-txt/
  */
-import { Adaptations, AdaptiveColorSpaces, AdaptiveColors } from 'types/adaptations';
+import { Adaptations, AdaptiveColorSpaces, AdaptiveColors } from '../types/adaptations';
 import { XYZ } from '../interfaces/color-spaces.interface';
 /**
  * Preforms a chromatic adaptation on a color in a XYZ space

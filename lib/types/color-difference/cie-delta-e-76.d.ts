@@ -8,21 +8,21 @@
 import { LAB, LCH, RGB } from "../interfaces/color-spaces.interface";
 /**
  * Gets a delta E CIE 1976 value for a given colors
- * @param {LAB}                   - LAB values for the frist color
+ * @param {LAB}                   - LAB values for the first color
  * @param {LAB}                   - LAB values for the second color
  * @returns {number}              - color difference value
  */
 export declare const deltaECIE76Lab: (lab1: LAB, lab2: LAB) => number;
 /**
  * Gets a delta E CIE 1976 value for a given colors
- * @param {LCH}                   - LCH values for the frist color
+ * @param {LCH}                   - LCH values for the first color
  * @param {LCH}                   - LCH values for the second color
  * @returns {number}              - color difference value
  */
 export declare const deltaECIE76Lch: (lch1: LCH, lch2: LCH) => number;
 /**
  * Gets a delta E CIE 1976 value for a given colors
- * @param {RBG}                   - sRBG values for the frist color
+ * @param {RBG}                   - sRBG values for the first color
  * @param {RBG}                   - sRBG values for the second color
  * @returns {number}              - color difference value
  *  ΔE - (Delta E, dE) The measure of change in visual
