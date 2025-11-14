@@ -1,4 +1,6 @@
-# Color Utilities
+<p align="center">
+  <img src="./imgs/color_utilities_full.svg" alt="cu-logo" width="500"/>
+</p>
 
 #### _Tools for all your color needs_
 
