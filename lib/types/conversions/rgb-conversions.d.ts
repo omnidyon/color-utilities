@@ -5,14 +5,35 @@
  * Use of this source code is governed by an ISC-style license that can be
  * found at https://www.isc.org/licenses/
  */
-import { CMY, CMYK, HCY, HSI, HSL, HSV, HWB, LAB, LCH, LUV, RGB, RGBA, RYB, SpaceData, TSL, UVW, XYZ, YCbCr, YCoCg, YDbDr, YIQ, YPbPr, YcCbcCrc, xvYCC } from "../interfaces/color-spaces.interface";
+import { CMY, CMYK, HCY, HSI, HSL, HSV, HWB, LAB, LCH, LUV, RGB, RGBA, RYB, SpaceData, TSL, UVW, XYZ, YCbCr, YCoCg, YDbDr, YIQ, YPbPr, YcCbcCrc, xvYCC } from '../interfaces/color-spaces.interface';
 /*******************************************************************
  *                           HELPERS
  * *****************************************************************/
 /**
+ * Converts a color from sRGB color space to linear RGB
+ *
+ * @param {RGB} srgb               - sRGB color object to convert
+ * @returns {RGB}                  - linear RGB color object
+ */
+export declare const sRGBToLinear: (srgb: RGB) => RGB;
+/**
+ * Converts a color from linear RGB to sRGB color space
+ *
+ * @param {RGB} linearRgb          - linear RGB color object to convert
+ * @returns {RGB}                  - sRGB color object
+ */
+export declare const linearToSRGB: (linerRgb: RGB) => RGB;
+/**
+ * Converts a single color value from linear RGB to sRGB
+ *
+ * @param {number} val              - linear RGB color value (0-1 range)
+ * @returns {number}                - sRGB color value (0-1 range)
+ */
+export declare const linearValToSRGBVal: (val: number) => number;
+/**
  * Normalizes an RBG value
  *
- * @param {RBG}                   -  color to normalize
+ * @param {RBG}                   - color to normalize
  * @returns {RGB}                 - normalized sRBG color value
  */
 export declare const normalizeRgb: ({ red, green, blue }: RGB) => RGB;
@@ -603,3 +624,10 @@ export declare const sRgbToYiq: ({ red, green, blue }: RGB) => YIQ;
  * @returns {xvYCC}               - xvYCC values for a color
  */
 export declare const sRgbToXvYcc: (rgb: RGB) => xvYCC;
+/**
+ * Converts a color from sRGB color space to OKLCH
+ *
+ * @param {RGB} srgb               - sRGB color object to convert
+ * @returns {LCH}                  - OKLCH color object with lightness, chroma, hue, and inGamut status
+ */
+export declare const sRGBToOKLCH: (srgb: RGB) => LCH;

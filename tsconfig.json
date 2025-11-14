@@ -20,7 +20,10 @@
     "traceResolution": false,
     "declarationDir": "./lib/types",
     "declaration": true,
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "paths": {
+      "*": ["*", "../*"]
+    }
   },
   "max-line-length": [true, 120],
   "compileOnSave": false,

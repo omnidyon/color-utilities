@@ -6,22 +6,22 @@
  * found at https://www.isc.org/licenses/
  */
 
-import { CB_CR_CONVERSION_MATRICES } from "../constants/cb-cr-conversions-matrices";
-import { Nb, Nr } from "../constants/conditionals";
-import { SPACE_DATASETS } from "../constants/space-datasets";
+import { CB_CR_CONVERSION_MATRICES } from '../constants/cb-cr-conversions-matrices';
+import { Nb, Nr } from '../constants/conditionals';
+import { SPACE_DATASETS } from '../constants/space-datasets';
 import {
   CtoD65Adaptation,
   D50toD65Adaptation,
   EtoD65Adaptation,
-} from "../helpers/chromatic-adaptation";
+} from '../helpers/chromatic-adaptation';
 import {
   inverseCompanding,
   inverseGammaCompanding,
   inverseLCompanding,
   inverseSrbgCompanding,
-} from "../helpers/companding";
-import { clamp, formatValue, gamutCheck } from "../helpers/formats-and-checks";
-import { matrixByVectorObjMultiAsSpace } from "../helpers/matrix";
+} from '../helpers/companding';
+import { clamp, formatValue, gamutCheck } from '../helpers/formats-and-checks';
+import { matrixByVectorObjMultiAsSpace } from '../helpers/matrix';
 import {
   CMY,
   CMYK,
@@ -47,10 +47,10 @@ import {
   YPbPr,
   YcCbcCrc,
   xvYCC,
-} from "../interfaces/color-spaces.interface";
-import { labToLch_ab } from "./lab-conversions";
-import { luvToLch_uv } from "./luv-conversions";
-import { decimalToHex } from "./number-conversions";
+} from '../interfaces/color-spaces.interface';
+import { labToLch_ab } from './lab-conversions';
+import { luvToLch_uv } from './luv-conversions';
+import { decimalToHex } from './number-conversions';
 import {
   xyzToAdobeRgb,
   xyzToAppleRgb,
@@ -70,16 +70,68 @@ import {
   xyzToSmpteCRgb,
   xyzToUvw,
   xyzToWideGamutRgb,
-} from "./xyz-conversions";
-import { yCbCrBT601ToXvYcc } from "./ycbcr-jpeg-conversions";
+} from './xyz-conversions';
+import { yCbCrBT601ToXvYcc } from './ycbcr-jpeg-conversions';
+import { isOKLCHInGamut } from './lch-conversions';
 
 /*******************************************************************
  *                           HELPERS
  * *****************************************************************/
 /**
+ * Converts a color from sRGB color space to linear RGB
+ *
+ * @param {RGB} srgb               - sRGB color object to convert
+ * @returns {RGB}                  - linear RGB color object
+ */
+export const sRGBToLinear = (srgb: RGB): RGB => {
+  const { red, green, blue } = srgb;
+  return {
+    red: red <= 0.04045 ? red / 12.92 : Math.pow((red + 0.055) / 1.055, 2.4),
+    green:
+      green <= 0.04045 ? green / 12.92 : Math.pow((green + 0.055) / 1.055, 2.4),
+    blue:
+      blue <= 0.04045 ? blue / 12.92 : Math.pow((blue + 0.055) / 1.055, 2.4),
+  };
+};
+
+/**
+ * Converts a color from linear RGB to sRGB color space
+ *
+ * @param {RGB} linearRgb          - linear RGB color object to convert
+ * @returns {RGB}                  - sRGB color object
+ */
+export const linearToSRGB = (linerRgb: RGB): RGB => {
+  const { red, green, blue } = linerRgb;
+  return {
+    red:
+      red <= 0.0031308 ? red * 12.92 : 1.055 * Math.pow(red, 1 / 2.4) - 0.055,
+    green:
+      green <= 0.0031308
+        ? green * 12.92
+        : 1.055 * Math.pow(green, 1 / 2.4) - 0.055,
+    blue:
+      blue <= 0.0031308
+        ? blue * 12.92
+        : 1.055 * Math.pow(blue, 1 / 2.4) - 0.055,
+  };
+};
+
+/**
+ * Converts a single color value from linear RGB to sRGB
+ *
+ * @param {number} val              - linear RGB color value (0-1 range)
+ * @returns {number}                - sRGB color value (0-1 range)
+ */
+export const linearValToSRGBVal = (val: number): number => {
+  return val <= 0.0031308
+    ? val * 12.92
+    : 1.055 * Math.pow(val, 1 / 2.4) - 0.055;
+};
+
+/**
  * Normalizes an RBG value
  *
- * @param {RBG}                   -  color to normalize
+ * @param {RBG}                   - color to normalize
  * @returns {RGB}                 - normalized sRBG color value
  */
 export const normalizeRgb = ({ red, green, blue }: RGB): RGB => ({
@@ -707,7 +759,7 @@ export const sRgbToCmy = (rgb: RGB): CMY => {
  */
 export const sRgbToCmyk = (rgb: RGB, round?: boolean): CMYK => {
   if (!gamutCheck(rgb.red) || !gamutCheck(rgb.green) || !gamutCheck(rgb.blue)) {
-    throw new Error("Provided rgb values must be within range of 0 to 255!");
+    throw new Error('Provided rgb values must be within range of 0 to 255!');
   }
   const { red, green, blue } = normalizeRgb(rgb);
   let key = 1 - Math.max(red, green, blue);
@@ -732,10 +784,10 @@ export const sRgbToCmyk = (rgb: RGB, round?: boolean): CMYK => {
  */
 const sRgbToHcyOrHsi = (
   { red, green, blue }: RGB,
-  ret: "hcy" | "hsi"
+  ret: 'hcy' | 'hsi'
 ): HCY | HSI => {
   if (!gamutCheck(red) || !gamutCheck(green) || !gamutCheck(blue)) {
-    throw new Error("Provided rgb values must be within range of 0 to 255!");
+    throw new Error('Provided rgb values must be within range of 0 to 255!');
   }
   const sum = red + green + blue;
   red = red / sum;
@@ -750,7 +802,7 @@ const sRgbToHcyOrHsi = (
   if (blue > green) hue = ((2 * Math.PI - hue) * 180) / Math.PI;
   else hue = (hue * 180) / Math.PI;
 
-  if (ret === "hsi") {
+  if (ret === 'hsi') {
     const intensity = sum / 3;
     const saturation = (1 - 3 * Math.min(red, green, blue)) * 100;
     return { hue, saturation, intensity };
@@ -768,7 +820,7 @@ const sRgbToHcyOrHsi = (
  * @returns {HCY}                 - HCY values for a color
  */
 export const sRgbToHcy = (rgb: RGB): HCY => {
-  return sRgbToHcyOrHsi(rgb, "hcy") as HCY;
+  return sRgbToHcyOrHsi(rgb, 'hcy') as HCY;
 };
 
 /*******************************************************************
@@ -790,7 +842,7 @@ export const sRgbToHex = (
     (Math.round(blue) & 0xff);
 
   const string = integer.toString(16).toUpperCase();
-  return (prefixed ? "#" : "") + "000000".substring(string.length) + string;
+  return (prefixed ? '#' : '') + '000000'.substring(string.length) + string;
 };
 
 /**
@@ -810,8 +862,8 @@ export const sRgbaToHex = (
 
   const string = integer.toString(16).toUpperCase();
   return (
-    (prefixed ? "#" : "") +
-    "000000".substring(string.length) +
+    (prefixed ? '#' : '') +
+    '000000'.substring(string.length) +
     string +
     decimalToHex(alpha)
   );
@@ -827,7 +879,7 @@ export const sRgbaToHex = (
  * @returns {HSI}                 - HSI values for a color
  */
 export const sRgbToHsi = (rgb: RGB): HSI => {
-  return sRgbToHcyOrHsi(rgb, "hsi") as HSI;
+  return sRgbToHcyOrHsi(rgb, 'hsi') as HSI;
 };
 
 /*******************************************************************
@@ -1076,7 +1128,7 @@ export const sRgbToYCbCrBT601 = ({ red, green, blue }: RGB): YCbCr => {
   const { Y, Cb, Cr } = matrixByVectorObjMultiAsSpace(
     CB_CR_CONVERSION_MATRICES.RGB_TO_YCBCR_BT_601,
     { red, green, blue },
-    ["Y", "Cb", "Cr"]
+    ['Y', 'Cb', 'Cr']
   ) as unknown as YCbCr;
   return {
     Y: 16 + Y,
@@ -1095,7 +1147,7 @@ export const sRgbToYCbCrBT709 = ({ red, green, blue }: RGB): YCbCr => {
   return matrixByVectorObjMultiAsSpace(
     CB_CR_CONVERSION_MATRICES.RGB_TO_BT_709_YCBCR,
     { red, green, blue },
-    ["Y", "Cb", "Cr"]
+    ['Y', 'Cb', 'Cr']
   ) as unknown as YCbCr;
 };
 
@@ -1109,7 +1161,7 @@ export const sRgbToYDbDr = ({ red, green, blue }: RGB): YDbDr => {
   return matrixByVectorObjMultiAsSpace(
     CB_CR_CONVERSION_MATRICES.RGB_TO_YDBDR,
     { red, green, blue },
-    ["Y", "Db", "Dr"]
+    ['Y', 'Db', 'Dr']
   ) as unknown as YDbDr;
 };
 
@@ -1123,7 +1175,7 @@ export const sRgbToYPbPr = ({ red, green, blue }: RGB): YPbPr => {
   return matrixByVectorObjMultiAsSpace(
     CB_CR_CONVERSION_MATRICES.RGB_TO_YPBPR,
     { red, green, blue },
-    ["Y", "Pb", "Pr"]
+    ['Y', 'Pb', 'Pr']
   ) as unknown as YPbPr;
 };
 
@@ -1137,17 +1189,17 @@ export const sRgbToYPbPr = ({ red, green, blue }: RGB): YPbPr => {
  */
 export const sRgbToYcCbcCrc = ({ red, green, blue }: RGB): YcCbcCrc => {
   const Yc = 0.2627 * red + 0.678 * green + 0.0593 * blue;
-  const Cbc = (blue - Yc) / getDivider({ red, green, blue }, Yc, "Cbc");
-  const Crc = (red - Yc) / getDivider({ red, green, blue }, Yc, "Crc");
+  const Cbc = (blue - Yc) / getDivider({ red, green, blue }, Yc, 'Cbc');
+  const Crc = (red - Yc) / getDivider({ red, green, blue }, Yc, 'Crc');
   return { Yc, Cbc, Crc };
 };
 
 const getDivider = (
   { red, blue }: RGB,
   Yc: number,
-  chroma: "Cbc" | "Crc"
+  chroma: 'Cbc' | 'Crc'
 ): number => {
-  if (chroma === "Crc") {
+  if (chroma === 'Crc') {
     if (Nr <= red - Yc || red - Yc <= 0) return 1.7182;
     else return 0.9938;
   }
@@ -1165,7 +1217,7 @@ export const sRgbToYCgCo = ({ red, green, blue }: RGB): YCoCg => {
   return matrixByVectorObjMultiAsSpace(
     CB_CR_CONVERSION_MATRICES.RGB_TO_YCOCG,
     { red, green, blue },
-    ["Y", "Co", "Cg"]
+    ['Y', 'Co', 'Cg']
   ) as unknown as YCoCg;
 };
 
@@ -1180,7 +1232,7 @@ export const sRgbToYiq = ({ red, green, blue }: RGB): YIQ => {
     return matrixByVectorObjMultiAsSpace(
       CB_CR_CONVERSION_MATRICES.RGB_TO_YIQ,
       { red, green, blue },
-      ["Y", "I", "Q"]
+      ['Y', 'I', 'Q']
     ) as unknown as YIQ;
   } else return { Y: red * 0.299 + green * 0.587 + blue * 0.114, I: 0, Q: 0 };
 };
@@ -1193,4 +1245,67 @@ export const sRgbToYiq = ({ red, green, blue }: RGB): YIQ => {
  */
 export const sRgbToXvYcc = (rgb: RGB): xvYCC => {
   return yCbCrBT601ToXvYcc(sRgbToYCbCrBT601(rgb));
+};
+
+/**
+ * Converts a color from sRGB color space to OKLCH
+ *
+ * @param {RGB} srgb               - sRGB color object to convert
+ * @returns {LCH}                  - OKLCH color object with lightness, chroma, hue, and inGamut status
+ */
+export const sRGBToOKLCH = (srgb: RGB): LCH => {
+  if (srgb.red === 255 && srgb.green === 255 && srgb.blue === 255) {
+    return { lightness: 1, chroma: 0, hue: 0, inGamut: true };
+  }
+  if (srgb.red === 0 && srgb.green === 0 && srgb.blue === 0) {
+    return { lightness: 0, chroma: 0, hue: 0, inGamut: true };
+  }
+
+  const linearRGB = sRGBToLinear(srgb);
+
+
+  const LMS = matrixByVectorObjMultiAsSpace(
+    CB_CR_CONVERSION_MATRICES.RGB_TO_LMS,
+    linearRGB as any,
+    ['L', 'M', 'S']
+  );
+
+  const LMS_c = {
+    L: Math.cbrt(LMS.L),
+    M: Math.cbrt(LMS.M),
+    S: Math.cbrt(LMS.S),
+  };
+
+  const OKLab = matrixByVectorObjMultiAsSpace(
+    CB_CR_CONVERSION_MATRICES.LMS_c_TO_OKLab,
+    LMS_c,
+    ['L', 'A', 'B']
+  );
+
+  const chroma = Math.sqrt(OKLab.A * OKLab.A + OKLab.B * OKLab.B);
+
+  const achromaticThreshold = 1e-6;
+  let hue = 0;
+
+  if (chroma > achromaticThreshold) {
+    hue = Math.atan2(OKLab.B, OKLab.A) * (180 / Math.PI);
+    if (hue < 0) hue += 360;
+  }
+
+  if (srgb.red === srgb.green && srgb.green === srgb.blue) {
+    hue = 0;
+  }
+
+  return {
+    lightness: OKLab.L,
+    chroma: chroma < achromaticThreshold ? 0 : chroma,
+    hue: hue,
+    get inGamut() {
+      return isOKLCHInGamut({
+        lightness: this.lightness,
+        chroma: this.chroma,
+        hue: this.hue,
+      });
+    },
+  };
 };

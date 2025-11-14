@@ -32,3 +32,10 @@ export const EXACT_OPPOSITE: number = 100;
 export const SRGB_INVERSE_NORMALIZED_BELOW: number = 0.04045;
 export const SRGB_NORMALIZED_BELOW: number = 0.0031308;
 export const L_INVERSE_NORMALIZED_BELOW: number = 0.08;
+
+export const OKLCH_TOLERANCE_VALUES = {
+  lightness: 0.005,   
+  chroma: 0.005,      
+  hue: 0.5,          
+};
+

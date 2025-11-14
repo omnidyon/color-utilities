@@ -33,4 +33,8 @@ export interface CoefficientsMatrices {
     RGB_TO_HDTV_YCBCR: Matrix3x3;
     HDTV_YCBCR_TO_RGB: Matrix3x3;
     RGB_TO_YCOCG: Matrix3x3;
+    RGB_TO_LMS: Matrix3x3;
+    LMS_c_TO_OKLab: Matrix3x3;
+    OKLab_TO_LMS: Matrix3x3;
+    LMS_TO_Linear_RGB: Matrix3x3;
 }

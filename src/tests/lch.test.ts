@@ -1,6 +1,7 @@
 import { NOT_PERCEPTIBLE_BY_HUMAN_EYE } from '../constants/conditionals';
 import {
   XYZ,
+  RGB,
   deltaECIE76Lch,
   deltaECIE00Rgb,
   labToLch_ab,
@@ -9,7 +10,9 @@ import {
   lch_uvToXyz,
   xyzToLch_ab,
   xyzToLch_uv,
-  xyzToSrgb
+  xyzToSrgb,
+  oKLCHToSRGB,
+  sRGBToOKLCH,
 } from '../public_api';
 
 const Test = (xyz: XYZ, colorName: string) => {
@@ -243,3 +246,29 @@ Test3(
   { x: 2.98933568708001, y: 3.1050304894404497, z: 3.4588402502271727 },
   'Printer Black'
 );
+
+// Test if OKLCH → RGB → OKLCH preserves the color
+const Test4 = (rgb: RGB, colorName: string) => {
+  test(`Checking sRGB <-> OKLCH conversions for ${colorName}`, () => {
+    const lch = sRGBToOKLCH(rgb);
+    const srgb = oKLCHToSRGB(lch);
+    expect(srgb).toEqual(rgb);
+  });
+};
+
+Test4({ red: 238, green: 200, blue: 27 }, "Yellow");
+Test4({ red: 217, green: 122, blue: 37 }, "Orange");
+Test4({ red: 72, green: 91, blue: 165 }, "Purplish Blue");
+Test4({ red: 194, green: 84, blue: 98 }, "Moderate Red");
+Test4({ red: 91, green: 59, blue: 107 }, "Purple");
+Test4({ red: 160, green: 188, blue: 60 }, "Yellow Green");
+Test4({ red: 230, green: 163, blue: 42 }, "Orange Yellow");
+Test4({ red: 46, green: 60, blue: 153 }, "Blue");
+Test4({ red: 94, green: 123, blue: 156 }, "Blue Sky");
+Test4({ red: 130, green: 129, blue: 177 }, "Blue Flower");
+Test4({ red: 100, green: 190, blue: 171 }, "Bluish Green");
+Test4({ red: 71, green: 150, blue: 69 }, "Green");
+Test4({ red: 177, green: 44, blue: 56 }, "Red");
+Test4({ red: 187, green: 82, blue: 148 }, "Magenta");
+Test4({ red: 243, green: 242, blue: 237 }, "White");
+Test4({ red: 50, green: 49, blue: 50 }, "Printer Black");

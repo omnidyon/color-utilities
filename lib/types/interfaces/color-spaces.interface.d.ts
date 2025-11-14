@@ -211,6 +211,7 @@ export interface LCH {
     lightness: number;
     chroma: number;
     hue: number;
+    inGamut?: boolean;
 }
 /**
  * @description Representation of an LCH color space:

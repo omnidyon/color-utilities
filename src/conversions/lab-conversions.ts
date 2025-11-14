@@ -51,6 +51,20 @@ export const labToLch_ab = ({ luminance, a, b }: LAB): LCH => {
 };
 
 /**
+ * Converts a color from OKLab color space to OKLCH
+ *
+ * @param {OKLab} oklab            - OKLab color object to convert
+ * @returns {LCH}                  - OKLCH color object with lightness, chroma, and hue
+ */
+export const oklabToOKLCH = (oklab: LAB): LCH =>  {
+  const C = Math.sqrt(oklab.a * oklab.a + oklab.b * oklab.b);
+  let H = Math.atan2(oklab.b, oklab.a) * (180 / Math.PI);
+  if (H < 0) H += 360;
+  
+  return { lightness: oklab.luminance, chroma: C, hue: H };
+}
+
+/**
  * Converts a color from CIE-L*ab color space to sRGB color space
  * @param {LAB}                   - Lab color value
  * @returns {RGB}                 - sRGB color value
@@ -73,3 +87,5 @@ export const hunterLabToXyz = ({ luminance, a, b }: LAB): XYZ => {
   const z = -(((b / 7) * luminance) / 10 - y) / 0.847;
   return { x, y, z };
 };
+
+

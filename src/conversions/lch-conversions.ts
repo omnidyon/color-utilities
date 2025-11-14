@@ -6,9 +6,12 @@
  * found at https://www.isc.org/licenses/
  */
 
-import { LAB, LCH, LUV, XYZ } from "../interfaces/color-spaces.interface";
-import { labToXyz } from "./lab-conversions";
-import { luvToXyz } from "./luv-conversions";
+import { LAB, LCH, LUV, XYZ, RGB } from '../interfaces/color-spaces.interface';
+import { labToXyz } from './lab-conversions';
+import { luvToXyz } from './luv-conversions';
+import { deNormalizeRGB, linearValToSRGBVal } from './rgb-conversions';
+import { matrixByVectorObjMultiAsSpace } from '../helpers/matrix';
+import { CB_CR_CONVERSION_MATRICES } from '../constants/cb-cr-conversions-matrices';
 
 /**
  * Converts a color from LCH(ab) color space to LAB color space
@@ -52,4 +55,79 @@ export const lch_abToXyz = (lch: LCH): XYZ => {
  */
 export const lch_uvToXyz = (lch: LCH): XYZ => {
   return luvToXyz(lch_uvToLuv(lch));
+};
+
+/**
+ * Converts a color from OKLCH color space to OKLab
+ *
+ * @param {LCH} oklch              - OKLCH color object to convert
+ * @returns {LAB}                  - OKLab color object with L, A, B components
+ */
+export const oKLCHToOKLab = (oklch: LCH): LAB => {
+  const { lightness, chroma, hue } = oklch;
+  const hueRad = hue * (Math.PI / 180);
+
+  return {
+    luminance: lightness,
+    a: chroma * Math.cos(hueRad),
+    b: chroma * Math.sin(hueRad),
+  };
+};
+
+/**
+ * Converts a color from OKLCH color space to sRGB
+ *
+ * @param {LCH} oklch              - OKLCH color object to convert
+ * @returns {RGB}                  - sRGB color object
+ */
+export const oKLCHToSRGB = (oklch: LCH): RGB => {
+  const OKLab = oKLCHToOKLab(oklch);
+
+  const LMS_c = matrixByVectorObjMultiAsSpace(
+    CB_CR_CONVERSION_MATRICES.OKLab_TO_LMS,
+    { luminance: OKLab.luminance, a: OKLab.a, b: OKLab.b },
+    ['L', 'M', 'S']
+  );
+
+  const LMS = {
+    L: LMS_c.L * LMS_c.L * LMS_c.L,
+    M: LMS_c.M * LMS_c.M * LMS_c.M,
+    S: LMS_c.S * LMS_c.S * LMS_c.S,
+  };
+
+  const linearRGB = matrixByVectorObjMultiAsSpace(
+    CB_CR_CONVERSION_MATRICES.LMS_TO_Linear_RGB,
+    LMS,
+    ['red', 'green', 'blue']
+  );
+
+  const srgb = {
+    red: Math.round(linearValToSRGBVal(linearRGB.red)),
+    green: Math.round(linearValToSRGBVal(linearRGB.green)),
+    blue: Math.round(linearValToSRGBVal(linearRGB.blue)),
+  };
+  return srgb;
+};
+
+/**
+ * Checks if an OKLCH color is within the sRGB gamut
+ *
+ * @param {LCH}                    - OKLCH color object with lightness, chroma, and hue
+ * @returns {boolean}              - true if color is within sRGB gamut, false otherwise
+ */
+export const isOKLCHInGamut = ({ lightness, chroma, hue }: LCH): boolean => {
+  if (lightness < 0 || lightness > 1 || chroma < 0) {
+    return false;
+  }
+
+  const testRGB = oKLCHToSRGB({ lightness, chroma, hue });
+
+  return (
+    testRGB.red >= 0 &&
+    testRGB.red <= 255 &&
+    testRGB.green >= 0 &&
+    testRGB.green <= 255 &&
+    testRGB.blue >= 0 &&
+    testRGB.blue <= 255
+  );
 };
