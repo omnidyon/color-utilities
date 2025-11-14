@@ -222,6 +222,8 @@ Some of them might have multiple conversions and that will be stated in the tabl
 | lmsToXyz            | Converts a colors LMS values in to XYZ values        | LMS to XYZ               | No major data loss | { long: number, medium: number, short: number }                |
 | luvToLch_uv         | Converts a colors LUV values to LCH(uv) values       | LUV to LCH               | No major data loss | { L: number, u: number, v: number }                            |
 | luvToXyz            | Converts a colors LUV values to XYZ values           | LUV to XYZ               | No major data loss | { L: number, u: number, v: number }                            |
+| oKLCHToOKLab        | Converts a colors OKLCH values to LAB values         | OKLCH to RGB             | No major data loss | { luminance: number, a: number, b: number }                    |
+| oKLCHToSRGB         | Converts a colors OKLCH values to sRGB values        | OKLCH to LMS to RGB      | No major data loss | { red: number, green: number, blue: number }                   |
 | sRgbToAdobeRgb      | Converts a colors sRGB values in to Adobe 98 RGB     | RGB to XYZ to RGB        | No major data loss | { red: number, green: number, blue: number }                   |
 | sRgbToAppleRgb      | Converts a colors sRGB values in to Apple RGB        | RGB to XYZ to RGB        | No major data loss | { red: number, green: number, blue: number }                   |
 | sRgbToBestRgb       | Converts a colors sRGB values in to Best RGB         | RGB to XYZ to RGB        | No major data loss | { red: number, green: number, blue: number }                   |
@@ -253,6 +255,7 @@ Some of them might have multiple conversions and that will be stated in the tabl
 | sRgbToLch_uv        | Converts a colors sRGB values in to LCH(uv) values   | RGB to XYZ to LUV to LCH | No major data loss | { red: number, green: number, blue: number }                   |
 | sRgbToLuv           | Converts a colors sRGB values in to LUV values       | RGB to XYZ to LUV        | No major data loss | { red: number, green: number, blue: number }                   |
 | sRgbToRyb           | Converts a colors sRGB values in to RYB values       | RGB to RYB               | No major data loss | { red: number, green: number, blue: number }                   |
+| sRGBToOKLCH         | Converts a colors sRGB values in to OKLch values     | RGB to LMS to LAB to LCH | No major data loss | { red: number, green: number, blue: number }                   |
 | sRgbToTsl           | Converts a colors sRGB values in to TSL values       | RGB to TSL               | No major data loss | { red: number, green: number, blue: number }                   |
 | sRgbToUvq           | Converts a colors sRGB values in to UVW values       | RGB to XYZ to UVW        | No major data loss | { red: number, green: number, blue: number }                   |
 | sRgbToYCbCrBT601    | Converts a colors sRGB values in to Y′CbCr (YUV)     | RGB to YCbCr             | No major data loss | { red: number, green: number, blue: number }                   |
@@ -264,21 +267,21 @@ Some of them might have multiple conversions and that will be stated in the tabl
 | sRgbToYiq           | Converts a colors sRGB values in to YIQ values       | RGB to YIQ               | No major data loss | { red: number, green: number, blue: number }                   |
 | sRgbToXvYcc         | Converts a colors sRGB values in to xvYCC values     | RGB to xvYCC             | No major data loss | { red: number, green: number, blue: number }                   |
 | sRgbToXyz           | Converts a colors sRGB values in to XYZ values       | RGB to XYZ               | No major data loss | { red: number, green: number, blue: number }                   |
-| adobeRgbToXyz       | Converts a colors Adobe 98 values in to XYZ values    | RGB to XYZ               | No major data loss | { red: number, green: number, blue: number }                   |
-| appleRgbToXyz       | Converts a colors Apple RGB values in to XYZ values   | RGB to XYZ               | No major data loss | { red: number, green: number, blue: number }                   |
-| bestRgbToXyz        | Converts a colors Best RGB values in to XYZ values    | RGB to XYZ               | No major data loss | { red: number, green: number, blue: number }                   |
-| betaRgbToXyz        | Converts a colors Beta RGB values in to XYZ values    | RGB to XYZ               | No major data loss | { red: number, green: number, blue: number }                   |
-| bruceRgbToXyz       | Converts a colors Bruce RGB values in to XYZ values   | RGB to XYZ               | No major data loss | { red: number, green: number, blue: number }                   |
-| cieRgbToXyz         | Converts a colors CIE RGB values in to XYZ values     | RGB to XYZ               | No major data loss | { red: number, green: number, blue: number }                   |
-| colorMatchRgbToXyz  | Converts a colors COLOR MATCH RGB values in to XYZ    | RGB to XYZ               | No major data loss | { red: number, green: number, blue: number }                   |
-| donRgb4ToXyz        | Converts a colors DON RGB 4 values in to XYZ values   | RGB to XYZ               | No major data loss | { red: number, green: number, blue: number }                   |
-| etkaSpacePs5ToXyz   | Converts a colors ETKA SPACE PS5 values in to XYZ     | RGB to XYZ               | No major data loss | { red: number, green: number, blue: number }                   |
-| ntscRgbToXyz        | Converts a colors NTSC RGB values in to XYZ values    | RGB to XYZ               | No major data loss | { red: number, green: number, blue: number }                   |
-| palSecamRgbToXyz    | Converts a colors PAL/SECAM RGB values in to XYZ      | RGB to XYZ               | No major data loss | { red: number, green: number, blue: number }                   |
-| proPhotoRgbToXyz    | Converts a colors PRO PHOTO RGB values in to XYZ      | RGB to XYZ               | No major data loss | { red: number, green: number, blue: number }                   |
-| smpteCRgbToXyz      | Converts a colors SMPTE-C RGB values in to XYZ        | RGB to XYZ               | No major data loss | { red: number, green: number, blue: number }                   |
-| wideGamutRgbToXyz   | Converts a colors WIDE GAMUT RGB values in to XYZ     | RGB to XYZ               | No major data loss | { red: number, green: number, blue: number }                   |
-| eciRgbV2ToXyz       | Converts a colors ECI RGB V2 values in to XYZ         | RGB to XYZ               | No major data loss | { red: number, green: number, blue: number }                   |
+| adobeRgbToXyz       | Converts a colors Adobe 98 values in to XYZ values   | RGB to XYZ               | No major data loss | { red: number, green: number, blue: number }                   |
+| appleRgbToXyz       | Converts a colors Apple RGB values in to XYZ values  | RGB to XYZ               | No major data loss | { red: number, green: number, blue: number }                   |
+| bestRgbToXyz        | Converts a colors Best RGB values in to XYZ values   | RGB to XYZ               | No major data loss | { red: number, green: number, blue: number }                   |
+| betaRgbToXyz        | Converts a colors Beta RGB values in to XYZ values   | RGB to XYZ               | No major data loss | { red: number, green: number, blue: number }                   |
+| bruceRgbToXyz       | Converts a colors Bruce RGB values in to XYZ values  | RGB to XYZ               | No major data loss | { red: number, green: number, blue: number }                   |
+| cieRgbToXyz         | Converts a colors CIE RGB values in to XYZ values    | RGB to XYZ               | No major data loss | { red: number, green: number, blue: number }                   |
+| colorMatchRgbToXyz  | Converts a colors COLOR MATCH RGB values in to XYZ   | RGB to XYZ               | No major data loss | { red: number, green: number, blue: number }                   |
+| donRgb4ToXyz        | Converts a colors DON RGB 4 values in to XYZ values  | RGB to XYZ               | No major data loss | { red: number, green: number, blue: number }                   |
+| etkaSpacePs5ToXyz   | Converts a colors ETKA SPACE PS5 values in to XYZ    | RGB to XYZ               | No major data loss | { red: number, green: number, blue: number }                   |
+| ntscRgbToXyz        | Converts a colors NTSC RGB values in to XYZ values   | RGB to XYZ               | No major data loss | { red: number, green: number, blue: number }                   |
+| palSecamRgbToXyz    | Converts a colors PAL/SECAM RGB values in to XYZ     | RGB to XYZ               | No major data loss | { red: number, green: number, blue: number }                   |
+| proPhotoRgbToXyz    | Converts a colors PRO PHOTO RGB values in to XYZ     | RGB to XYZ               | No major data loss | { red: number, green: number, blue: number }                   |
+| smpteCRgbToXyz      | Converts a colors SMPTE-C RGB values in to XYZ       | RGB to XYZ               | No major data loss | { red: number, green: number, blue: number }                   |
+| wideGamutRgbToXyz   | Converts a colors WIDE GAMUT RGB values in to XYZ    | RGB to XYZ               | No major data loss | { red: number, green: number, blue: number }                   |
+| eciRgbV2ToXyz       | Converts a colors ECI RGB V2 values in to XYZ        | RGB to XYZ               | No major data loss | { red: number, green: number, blue: number }                   |
 | rybToSrgb           | Converts a colors RYB values to a sRGB values        | RYB to RGB               | No major data loss | { red: number, green: number, blue: number }                   |
 | tslToSrgb           | Converts a colors TSL values to a sRGB values        | TSL to RGB               | No major data loss | { red: number, green: number, blue: number }                   |
 | uvwToXyz            | Converts a colors UVW values to a XYZ values         | UVW to XYZ               | No major data loss | { u: number, v: number, w: number }                            |
@@ -308,16 +311,16 @@ Some of them might have multiple conversions and that will be stated in the tabl
 | xyzToLms            | Converts colors XYZ values to LMS values             | XYZ to LMS               | No major data loss | { x: number, y: number, z: number }                            |
 | xyzToHunterLab      | Converts colors XYZ values to Hunter's Lab values    | XYZ to LAB               | No major data loss | { x: number, y: number, z: number }                            |
 | xyzToXyY            | Converts colors XYZ values to XYY values             | XYZ to XYY               | No major data loss | { x: number, y: number, z: number }                            |
-| yCbCrBT601ToSrgb    | Converts colors Y′CbCr (YUV) values to sRGB values    | YCbCr to RGB             | No major data loss | { Y: number, Cb: number, Cr: number }                          |
-| yCbCrBT601ToXvYcc   | Converts colors Y′CbCr (YUV) values to xvYCC values   | YCbCr to xvYCC           | No major data loss | { Y: number, Cb: number, Cr: number }                          |
-| yCbCrBT601ToYPbPr   | Converts colors Y′CbCr (YUV) values to YPbPr values   | YCbCr to YPbPr           | No major data loss | { Y: number, Cb: number, Cr: number }                          |
-| yCbCrBT709ToSrgb    | Converts colors Y′CbCr BT.709 values to sRGB values   | YCbCr to RGB             | No major data loss | { Y: number, Cb: number, Cr: number }                          |
-| ycCbcCrcToSrgb      | Converts colors YcCbcCrc values to sRGB values        | YcCbcCrc to RGB          | No major data loss | { Yc: number, Cbc: number, Crc: number }                       |
-| yCgCoToSrgb         | Converts colors YCoCg values to sRGB values           | YCoCg to RGB             | No major data loss | { Y: number, Co: number, Cg: number }                          |
-| yDbDrToSrgb         | Converts colors YDbDr values to sRGB values           | YDbDr to RGB             | No major data loss | { Y: number, Co: number, Cg: number }                          |
-| yiqToSrgb           | Converts colors YIQ values to sRGB values             | YIQ to RGB               | No major data loss | { Y: number, Co: number, Cg: number }                          |
-| yPbPrToSrgb         | Converts colors YPbPr values to sRGB values           | YPbPr to RGB             | No major data loss | { Y: number, Co: number, Cg: number }                          |
-| yPbPrToYCbCr        | Converts colors YPbPr values to YCbCr values          | YPbPr to YCbCr           | No major data loss | { Y: number, Co: number, Cg: number }                          |
+| yCbCrBT601ToSrgb    | Converts colors Y′CbCr (YUV) values to sRGB values   | YCbCr to RGB             | No major data loss | { Y: number, Cb: number, Cr: number }                          |
+| yCbCrBT601ToXvYcc   | Converts colors Y′CbCr (YUV) values to xvYCC values  | YCbCr to xvYCC           | No major data loss | { Y: number, Cb: number, Cr: number }                          |
+| yCbCrBT601ToYPbPr   | Converts colors Y′CbCr (YUV) values to YPbPr values  | YCbCr to YPbPr           | No major data loss | { Y: number, Cb: number, Cr: number }                          |
+| yCbCrBT709ToSrgb    | Converts colors Y′CbCr BT.709 values to sRGB values  | YCbCr to RGB             | No major data loss | { Y: number, Cb: number, Cr: number }                          |
+| ycCbcCrcToSrgb      | Converts colors YcCbcCrc values to sRGB values       | YcCbcCrc to RGB          | No major data loss | { Yc: number, Cbc: number, Crc: number }                       |
+| yCgCoToSrgb         | Converts colors YCoCg values to sRGB values          | YCoCg to RGB             | No major data loss | { Y: number, Co: number, Cg: number }                          |
+| yDbDrToSrgb         | Converts colors YDbDr values to sRGB values          | YDbDr to RGB             | No major data loss | { Y: number, Co: number, Cg: number }                          |
+| yiqToSrgb           | Converts colors YIQ values to sRGB values            | YIQ to RGB               | No major data loss | { Y: number, Co: number, Cg: number }                          |
+| yPbPrToSrgb         | Converts colors YPbPr values to sRGB values          | YPbPr to RGB             | No major data loss | { Y: number, Co: number, Cg: number }                          |
+| yPbPrToYCbCr        | Converts colors YPbPr values to YCbCr values         | YPbPr to YCbCr           | No major data loss | { Y: number, Co: number, Cg: number }                          |
 
 ## Color Converter
 
