@@ -39,3 +39,4 @@ export * from "./utilities/adapter";
 export * from "./color-difference/cie-delta-e-00";
 export * from "./color-difference/cie-delta-e-76";
 export * from "./color-difference/cie-delta-e-94";
+export * from "./color-difference/comparative-difference";
