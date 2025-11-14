@@ -90,7 +90,12 @@
     "SMPTE-C RGB",
     "Wide Gamut RGB",
     "Web Safe",
-    "Out of Gamut"
+    "Out of Gamut",
+    "OKLCH",
+    "OK LCH",
+    "Ok_LCH",
+    "OkLch",
+    "OKLch"
   ],
   "author": "Slavko Mihajlovic - dynimorius",
   "license": "ISC",
