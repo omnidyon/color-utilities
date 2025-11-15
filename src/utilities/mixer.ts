@@ -6,9 +6,9 @@
  * found at https://www.isc.org/licenses/
  */
 
-import { sRgbToHex, sRgbaToHex } from '../conversions/rgb-conversions';
-import { RGB, RGBA } from '../interfaces/color-spaces.interface';
-import { MixerOptions } from '../interfaces/mixer.interface';
+import { sRgbToHex, sRgbaToHex } from "../conversions/rgb-conversions";
+import { RGB, RGBA } from "../interfaces/color-spaces.interface";
+import { MixerOptions } from "../interfaces/mixer.interface";
 
 /**
  * Creates an incremented color pallet
@@ -25,19 +25,37 @@ const scale = (
 ): string[] => {
   let { red, green, blue } = rgb;
   const scaled = [];
-  const scaleR = (scale - red) / size;
-  const scaleG = (scale - green) / size;
-  const scaleB = (scale - blue) / size;
+
+  const normRed = red / 255;
+  const normGreen = green / 255;
+  const normBlue = blue / 255;
+
+  const scaleR = (scale - normRed) / size;
+  const scaleG = (scale - normGreen) / size;
+  const scaleB = (scale - normBlue) / size;
+
+  let currentRed = normRed;
+  let currentGreen = normGreen;
+  let currentBlue = normBlue;
+
   for (let i = 0; i < size; i++) {
-    if ((rgb as RGBA).alpha)
-      scaled.push(
-        sRgbaToHex({ red, green, blue, alpha: (rgb as RGBA).alpha }, prefixed)
-      );
-    else scaled.push(sRgbToHex({ red, green, blue }, prefixed));
-    red += scaleR;
-    green += scaleG;
-    blue += scaleB;
+    const resultRGB = {
+      red: Math.round(currentRed * 255),
+      green: Math.round(currentGreen * 255),
+      blue: Math.round(currentBlue * 255),
+    };
+
+    if ("alpha" in rgb && rgb.alpha !== undefined) {
+      scaled.push(sRgbaToHex({ ...resultRGB, alpha: rgb.alpha }, prefixed));
+    } else {
+      scaled.push(sRgbToHex(resultRGB, prefixed));
+    }
+
+    currentRed += scaleR;
+    currentGreen += scaleG;
+    currentBlue += scaleB;
   }
+
   return scaled;
 };
 
@@ -55,7 +73,9 @@ export const getShades = (
   options?: MixerOptions
 ): string[] => {
   const size: number =
-    !options?.size || !isFinite(options?.size as number) ? 10 : options?.size as number;
+    !options?.size || !isFinite(options?.size as number)
+      ? 10
+      : (options?.size as number);
 
   return scale(rgb, size, 0, options?.prefixed);
 };
@@ -71,7 +91,9 @@ export const getShades = (
  */
 export const getTints = (rgb: RGB | RGBA, options?: MixerOptions): string[] => {
   const size: number =
-    !options?.size || !isFinite(options?.size as number) ? 10 : options?.size as number;
+    !options?.size || !isFinite(options?.size as number)
+      ? 10
+      : (options?.size as number);
 
   return scale(rgb, size, 1, options?.prefixed);
 };
@@ -87,7 +109,9 @@ export const getTints = (rgb: RGB | RGBA, options?: MixerOptions): string[] => {
  */
 export const getTones = (rgb: RGB | RGBA, options?: MixerOptions): string[] => {
   const size: number =
-    !options?.size || !isFinite(options?.size as number) ? 10 : options?.size as number;
+    !options?.size || !isFinite(options?.size as number)
+      ? 10
+      : (options?.size as number);
 
   return scale(rgb, size, 0.5, options?.prefixed);
 };
