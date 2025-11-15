@@ -1,5 +1,12 @@
 {
-  "name": "@dynimorius/color-utilities",
-  "version": "1.0.11",
-  "exports": "./src/public_api.ts"
+  "name": "@omnidyon/color-utilities",
+  "version": "1.0.2",
+  "type": "module",
+  "exports": "./src/public_api.ts",
+   "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "release": "npm publish --access public && npx jsr publish"
+  }
 }

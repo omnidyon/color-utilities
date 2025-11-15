@@ -1,7 +1,8 @@
 [![npm version](https://img.shields.io/npm/v/@omnidyon/color-utilities.svg)](https://www.npmjs.com/package/@omnidyon/color-utilities)
-[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
-[![Downloads](https://img.shields.io/npm/dm/@omnidyon/color-utilities.svg)](https://www.npmjs.com/package/@dynamize/color-utilities)
-[![TypeScript](https://img.shields.io/badge/TypeScript-Included-blue)](https://www.typescriptlang.org/)
+[![JSR version](https://img.shields.io/jsr/v/@omnidyon/color-utilities)](https://jsr.io/@omnidyon/color-utilities)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![npm downloads](https://img.shields.io/npm/dm/@omnidyon/color-utilities.svg)](https://www.npmjs.com/package/@omnidyon/color-utilities)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Included-blue)](https://github.com/omnidyon/color-utilities)
 
 <p align="center">
   <img src="./imgs/color_utilities_full.svg" alt="cu-logo" width="500"/>

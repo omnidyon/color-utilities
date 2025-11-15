@@ -1,6 +1,6 @@
 {
   "name": "@omnidyon/color-utilities",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "publishConfig": {
     "access": "public"
   },
@@ -25,7 +25,9 @@
     "build:linux": "rm -rf ./lib* && tsc --project tsconfig.esm.json",
     "build:win:esm": "del lib && tsc --project tsconfig.esm.json",
     "build:win:linux": "rm -rf ./lib* && tsc --project tsconfig.esm.json",
-    "publish": "npm publish && npx jsr publish"
+    "release": "npm publish --access public && npx jsr publish",
+    "pub": "npm publish --access public",
+    "jsr": "npx jsr publish"
   },
   "repository": {
     "type": "git",
