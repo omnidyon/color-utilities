@@ -1,6 +1,6 @@
-[![npm version](https://img.shields.io/npm/v/@dynamize/color-utilities.svg)](https://www.npmjs.com/package/@dynamize/color-utilities)
+[![npm version](https://img.shields.io/npm/v/@omnidyon/color-utilities.svg)](https://www.npmjs.com/package/@dynamize/color-utilities)
 [![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
-[![Downloads](https://img.shields.io/npm/dm/@dynamize/color-utilities.svg)](https://www.npmjs.com/package/@dynamize/color-utilities)
+[![Downloads](https://img.shields.io/npm/dm/@omnidyon/color-utilities.svg)](https://www.npmjs.com/package/@dynamize/color-utilities)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Included-blue)](https://www.typescriptlang.org/)
 
 <p align="center">
