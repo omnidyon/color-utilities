@@ -9,7 +9,7 @@
 import { LAB, LCH, LUV, XYZ, RGB } from '../interfaces/color-spaces.interface';
 import { labToXyz } from './lab-conversions';
 import { luvToXyz } from './luv-conversions';
-import { deNormalizeRGB, linearValToSRGBVal } from './rgb-conversions';
+import { linearValToSRGBVal } from './rgb-conversions';
 import { matrixByVectorObjMultiAsSpace } from '../helpers/matrix';
 import { CB_CR_CONVERSION_MATRICES } from '../constants/cb-cr-conversions-matrices';
 

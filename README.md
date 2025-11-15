@@ -1,3 +1,8 @@
+[![npm version](https://img.shields.io/npm/v/@dynamize/color-utilities.svg)](https://www.npmjs.com/package/@dynamize/color-utilities)
+[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
+[![Downloads](https://img.shields.io/npm/dm/@dynamize/color-utilities.svg)](https://www.npmjs.com/package/@dynamize/color-utilities)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Included-blue)](https://www.typescriptlang.org/)
+
 <p align="center">
   <img src="./imgs/color_utilities_full.svg" alt="cu-logo" width="500"/>
 </p>
@@ -8,53 +13,72 @@ Color utilities is a collection of tools used to work with colors.
 
 ## Features
 
-- Color conversions (ansi16, ansi256, cmy, cmyk, tsl, hsl, hsv, lab, luv, lch xyz ...)
-- Color blending
-- Color harmony pallet creation
-- Color mixers ( such as getting shades, tints and tones)
-- Performing Chromatic adaptation
+- **Color conversions (ansi16, ansi256, cmy, cmyk, tsl, hsl, hsv, lab, luv, lch xyz ...)**
+- **Color blending**
+- **Color harmony pallet creation**
+- **Color mixers ( such as getting shades, tints and tones)**
+- **Performing Chromatic adaptation**
+- **Color validation and sanitization**
+- **Color manipulation (lighten, darken, saturate, mix)**
+- **WCAG accessibility checking**
+- **CSS color string parsing and formatting**
+- **Color interpolation and scales**
+- **Gamut checking and mapping**
 
 ## Table of Contents
 
-- [Color Utilities](#color-utilities) - [_Tools for all your color needs_](#tools-for-all-your-color-needs)
-  - [Features](#features)
-  - [Table of Contents](#table-of-contents)
-  - [About Color Utilities](#about-color-utilities)
-    - [Limits](#limits)
-  - [Documentation](#documentation)
-    - [Dependencies](#dependencies)
-    - [Importing](#importing)
-  - [Color](#color)
-  - [Conversions](#conversions)
-  - [Color Converter](#color-converter)
-    - [RGB Converter](#rgb-converter)
-    - [XYZ Converter](#xyz_converter)
-  - [Color Blending](#color_blending)
-    - [Blender](#blender)
-    - [blend](#blend)
-  - [Color Harmonies](#color_harmonies)
-    - [Analogous](#analogous)
-    - [Clash](#clash)
-    - [Complementary](#complementary)
-    - [Split Complementary](#split_complementary)
-    - [Four Tone](#four_tone)
-    - [Five Tone](#five_tone)
-    - [Six Tone](#six_tone)
-    - [Neutral](#neutral)
-    - [Square](#square)
-    - [Tetradic](#tetradic)
-    - [Triadic](#triadic)
-  - [Color Mixes](#color_mixes)
-    - [Tones](#tones)
-    - [Tints](#tints)
-    - [Shades](#shades)
-  - [Chromatic adaptation](#chromatic_adaptation)
-    - [adapt](#adapt)
-    - [Adapter](#adapter)
-  - [Delta E / Color Difference](#delta_e)
-    - [CIE 76](#cie_76)
-    - [CIE 94](#cie_94)
-    - [CIE 00](#cie_00) 
+- [Color Utilities](#color-utilities)
+- [Features](#features)
+- [Table of Contents](#table-of-contents)
+- [About Color Utilities](#about-color-utilities)
+  - [Limits](#limits)
+  - [Performance Considerations](#performance-considerations)
+- [Documentation](#documentation)
+  - [Dependencies](#dependencies)
+  - [Importing](#importing)
+  - [TypeScript Support](#typescript-support)
+- [Color](#color)
+- [Common Use Cases](#common-use-cases)
+- [Conversions](#conversions)
+- [Color Converter](#color-converter)
+  - [RGB Converter](#rgb-converter)
+  - [XYZ Converter](#xyz-converter)
+- [Color Blending](#color-blending)
+  - [Blender](#blender)
+  - [blend](#blend)
+- [Color Harmonies](#color-harmonies)
+  - [Analogous](#analogous)
+  - [Clash](#clash)
+  - [Complementary](#complementary)
+  - [Split Complementary](#split-complementary)
+  - [Four Tone](#four-tone)
+  - [Five Tone](#five-tone)
+  - [Six Tone](#six-tone)
+  - [Neutral](#neutral)
+  - [Square](#square)
+  - [Tetradic](#tetradic)
+  - [Triadic](#triadic)
+- [Color Validation & Sanitization](#color-validation)
+- [Color Manipulation](#color-manipulation)
+- [Accessibility Utilities](#accessibility)
+- [CSS Color Utilities](#css-utilities)
+- [Color Interpolation & Scales](#color-interpolation)
+- [Gamut Utilities](#gamut-utilities)
+- [Color Mixes](#color-mixes)
+  - [Tones](#tones)
+  - [Tints](#tints)
+  - [Shades](#shades)
+- [Chromatic adaptation](#chromatic-adaptation)
+  - [Supported Illuminants](#supported-illuminants)
+  - [adapt](#adapt)
+  - [Adapter](#adapter)
+- [Delta E / Color Difference](#delta-e)
+  - [CIE 76](#cie-76)
+  - [CIE 94](#cie-94)
+  - [CIE 00](#cie-00)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## About Color Utilities
 
@@ -69,6 +93,16 @@ Due to the nature of color spaces, certain conversions are more computationally 
 Further, certain conversions lead to data loss like RGB to Ansi16 and then back to RGB will most probably result in a
 significant difference in color.
 
+### Performance Considerations
+
+<a name="performance-considerations"></a>
+
+- **Color Class**: Use with caution in performance-critical applications as it computes multiple color spaces
+- **Standalone Functions**: More efficient for single conversions
+- **Individual CSS Parsers**: Use specific parsers (parseHex, parseRgb) instead of fromCssString for better performance
+- **"all" Option**: Avoid in real-time applications due to computational cost
+- **Tree-shaking**: Individual functions can be imported separately to reduce bundle size
+
 ## Documentation
 
 <a name="documentation"></a>
@@ -80,11 +114,13 @@ npm install --save @dynamize/color-utilities
 ### Dependencies
 
 <a name="dependencies"></a>
+
 This library has no dependencies and is completely self-contained.
 
 ### Importing
 
 <a name="importing"></a>
+
 Importing is done using the ES static import declaration.
 Example:
 
@@ -94,6 +130,19 @@ import { Color } from "@dynamize/color-utilities";
 
 In order to use the import declaration in a source file, the file must be interpreted by the runtime as a
 module.
+
+### TypeScript Support
+
+<a name="typescript-support"></a>
+
+This library includes full TypeScript definitions. No additional `@types` package needed.
+
+```typescript
+import { Color, RGB } from "@dynamize/color-utilities";
+
+const color: Color = new Color("rgb", { red: 255, green: 0, blue: 0 });
+const rgb: RGB = color.data.rgb;
+```
 
 ## Color
 
@@ -111,10 +160,40 @@ const color = new Color("rgb", { red: 238, green: 200, blue: 27 });
 console.log(color.data);
 ```
 
-| Param place | Description                           |     | Formats                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| ----------- | ------------------------------------- | --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+## Common Use Cases
+
+<a name="common-use-cases"></a>
+
+### Color Picker Implementation
+
+```javascript
+// Efficient for color pickers - only compute needed spaces
+const pickerColor = new Color("hsv", { hue: 49, saturation: 86, value: 93 }, [
+  "rgb",
+  "hex",
+]);
+```
+
+### Theme Generation
+
+```javascript
+// Generate complete color themes
+const baseColor = new Color("hex", "#3498db");
+const shades = getShades(baseColor.data.rgb, { size: 10, prefixed: true });
+const harmony = analogousHarmony(baseColor.data.hsl, true);
+```
+
+### Color Analysis
+
+```javascript
+// Compare colors for accessibility
+const contrast = deltaECIE00Rgb(textColor.rgb, backgroundColor.rgb);
+```
+
+| Param place | Description                            |     | Formats                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| ----------- | -------------------------------------- | --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 1st         | Space in which color values are passed |     | adobe_98_rgb", "apple_rgb", "ansi16", "ansi256", "best_rgb", "beta_rgb", "bruce_rgb", "cie_rgb", "color_match_rgb", "cmy", "cmyk", "don_rgb_4", "eci_rgb_v2" "etka_space_ps5", "hcy", "hex", "hsi", "hsl", "hsv", "hunter_lab", "hwb", "lab", "lch_ab", "lch_uv", "luv", "lms", "ntsc_rgb", "pal_secam_rgb", "pro_photo_rgb", "rgb", "ryb", "tsl", "smpte_c_rgb", "wide_gamut_rgb", "uvw","xvycc", "xyy", "xyz", "ycbcr_BT601", "yccbccrc", "ycocg", "ydbdr", "yiq", "ypbpr" |
-| 2nd         | Color values                          |     | number, string, or color data object                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| 2nd         | Color values                           |     | number, string, or color data object                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | 3rd         | optional - colors spaces to compute    |     | string [] of "all"                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 
 - The first argument we pass is a string value and it represents the space in which color values will be passed.
@@ -185,7 +264,6 @@ If "all" is passed as a third argument, all 45 spaces will be computed (the retu
 this option is computationally tasking and it's not a good option for color pickers or other use cases where there
 is a high frequency of re computation. Accidentally the default (no third argument) will return values utilized in
 a Photoshop color picker (rgb, hsv, lab, cmyk and hex).
-
 
 ## Conversions
 
@@ -398,7 +476,7 @@ This will return HSV values for the above-given color.
 
 ### XYZ Converter
 
-<a name="xyz_converter"></a>
+<a name="xyz-converter"></a>
 
 XYZ Converter is a prebuilt Color Converter that takes a single attribute of a type:
 { x: number, y: number, z: number }.
@@ -444,7 +522,7 @@ This will return LUV values for the above-given color.
 
 ## Color Blending
 
-<a name="color_blending"></a>
+<a name="color-blending"></a>
 In Color Utilities, there are two ways you can blend colors: either by using the standalone method "blend" or by using a Color Blender.
 
 ### Blender
@@ -508,7 +586,7 @@ console.log(blended);
 
 ## Color Harmonies
 
-<a name="color_harmonies"></a>
+<a name="color-harmonies"></a>
 
 With Color utilities, you can also generate a number of Harmony pallets.
 For more information about Harmonies, visit: https://simplified.com/blog/colors/color-harmony
@@ -564,7 +642,7 @@ console.log(pallet);
 
 ### Split Complementary
 
-<a name="split_complementary"></a>
+<a name="split-complementary"></a>
 
 Usage example:
 
@@ -607,7 +685,7 @@ console.log(pallet);
 
 ### Four Tone
 
-<a name="four_tone"></a>
+<a name="four-tone"></a>
 
 Usage example:
 
@@ -637,7 +715,7 @@ console.log(pallet);
 
 ### Five Tone
 
-<a name="five_tone"></a>
+<a name="five-tone"></a>
 
 Usage example:
 
@@ -706,7 +784,7 @@ console.log(pallet);
 
 ### Six Tone
 
-<a name="six_tone"></a>
+<a name="six-tone"></a>
 
 Usage example:
 
@@ -767,7 +845,10 @@ console.log(pallet);
 ```javascript
 import { tetradicHarmony } from "@dynamize/color-utilities";
 
-const pallet = tetradicHarmony({ hue: 49, saturation: 86, lightness: 52 }, true);
+const pallet = tetradicHarmony(
+  { hue: 49, saturation: 86, lightness: 52 },
+  true
+);
 
 console.log(pallet);
 ```
@@ -784,9 +865,115 @@ const pallet = triadicHarmony({ hue: 49, saturation: 86, lightness: 52 }, true);
 console.log(pallet);
 ```
 
+## Color Validation & Sanitization
+
+<a name="color-validation"></a>
+
+### isValidColor
+
+```javascript
+import { isValidColor } from "@dynamize/color-utilities";
+
+// Check if color is valid for a space
+isValidColor("rgb", { red: 255, green: 0, blue: 0 }); // true
+isValidColor("hsl", { hue: 400, saturation: 150, lightness: 50 }); // false
+```
+
+### sanitizeColor
+
+```javascript
+import { sanitizeColor } from "@dynamize/color-utilities";
+
+// Clamp values to valid ranges
+sanitizeColor("rgb", { red: 300, green: -5, blue: 128 });
+// Returns: { red: 255, green: 0, blue: 128 }
+```
+
+## Color Manipulation
+
+<a name="color-manipulation"></a>
+
+```javascript
+import { lighten, darken, saturate, mix } from "@dynamize/color-utilities";
+
+const baseColor = { red: 238, green: 200, blue: 27 };
+
+// Basic adjustments
+const lighter = lighten(baseColor, 20);
+const darker = darken(baseColor, 15);
+const saturated = saturate(baseColor, 30);
+
+// Color mixing
+const mixed = mix(baseColor, { red: 255, green: 0, blue: 0 }, 0.5);
+```
+## Accessibility Utilities
+<a name="accessibility"></a>
+
+```javascript
+import { contrastRatio, isAccessible } from "@dynamize/color-utilities";
+
+// Check contrast ratio
+const ratio = contrastRatio(white, black); // ~21:1
+
+// Verify WCAG compliance
+const accessible = isAccessible(
+  { red: 255, green: 255, blue: 255 }, // text
+  { red: 0, green: 100, blue: 200 },   // background
+  'AA' // WCAG level
+);
+```
+
+## CSS Color Utilities
+<a name="css-utilities"></a>
+
+```javascript
+import { toCssString, fromCssString, parseHex, parseRgb } from "@dynamize/color-utilities";
+
+// Convert to CSS strings
+toCssString(color, 'hex');   // "#EEC81B"
+toCssString(color, 'rgb');   // "rgb(238 200 27)"
+toCssString(color, 'hsl');   // "hsl(49 86% 52%)"
+toCssString(color, 'oklch'); // "oklch(0.823 0.156 89.6)"
+
+// Parse CSS strings
+fromCssString('#EEC81B');
+fromCssString('rgb(238 200 27)');
+fromCssString('hsl(49 86% 52%)');
+
+// Or use individual parsers
+parseHex('#EEC81B');
+parseRgb('rgb(238, 200, 27)');
+```
+## Color Interpolation & Scales
+<a name="color-interpolation"></a>
+
+```javascript
+import { interpolate, createScale } from "@dynamize/color-utilities";
+
+// Interpolate between colors
+const purple = interpolate(red, blue, 0.5, 'lab');
+
+// Create color scales
+const gradient = createScale([red, green, blue], 10, 'hsl');
+```
+
+## Gamut Utilities
+<a name="gamut-utilities"></a>
+
+```javascript
+import { isInGamut, mapToGamut } from "@dynamize/color-utilities";
+
+// Check if color is in sRGB gamut
+isInGamut({ red: 300, green: -5, blue: 128 }); // false
+
+// Map to nearest in-gamut color
+mapToGamut({ red: 300, green: -5, blue: 128 });
+// Returns: { red: 255, green: 0, blue: 128, inGamut: true }
+```
+
 ## Color Mixes
 
-<a name="color_mixes"></a>
+<a name="color-mixes"></a>
 
 Color Utilities also provides three types of color mixes you can get: Shades, Tints and Tones.
 All of these are generated by a standalone function that receives two arguments, the first being a base color in RGB format, and the second one is an optional options object that can have two values: size (number of colors generated in the pallet) and prefixed (boolean stating if the colors should start with a #). The return value is an array of strings representing hex values.
@@ -803,7 +990,7 @@ const tones = getTones(
   { size: 10, prefixed: true }
 );
 
-console.log(pallet);
+console.log(tones);
 ```
 
 ### Tints
@@ -813,12 +1000,12 @@ console.log(pallet);
 ```javascript
 import { getTints } from "@dynamize/color-utilities";
 
-const tones = getTints(
+const tints = getTints(
   { red: 238, green: 200, blue: 27 },
   { size: 10, prefixed: true }
 );
 
-console.log(pallet);
+console.log(tints);
 ```
 
 ### Shades
@@ -828,136 +1015,136 @@ console.log(pallet);
 ```javascript
 import { getShades } from "@dynamize/color-utilities";
 
-const tones = getShades(
+const shades = getShades(
   { red: 238, green: 200, blue: 27 },
   { size: 10, prefixed: true }
 );
 
-console.log(pallet);
+console.log(shades);
 ```
 
 ## Chromatic adaptation
 
 Chromatic adaptation can be preformed in two ways, either by using a standalone "adapt" function or by using an Adapter class.
 
-
 ### Supported Illuminants
+
+<a name="supported-illuminants"></a>
 
 The following illuminant adaptations are supported:
 
-| Code | Reference Illuminant | Destination Illuminant | Description |
-|------|---------------------|----------------------|-------------|
-| A_B | Illuminant A → | Illuminant B | Incandescent/tungsten to direct sunlight |
-| A_C | Illuminant A → | Illuminant C | Incandescent/tungsten to average daylight |
-| A_D50 | Illuminant A → | Illuminant D50 | Incandescent/tungsten to horizon light |
-| A_D55 | Illuminant A → | Illuminant D55 | Incandescent/tungsten to mid-morning light |
-| A_D65 | Illuminant A → | Illuminant D65 | Incandescent/tungsten to noon daylight |
-| A_D75 | Illuminant A → | Illuminant D75 | Incandescent/tungsten to north sky daylight |
-| A_E | Illuminant A → | Illuminant E | Incandescent/tungsten to equal energy |
-| A_F2 | Illuminant A → | Illuminant F2 | Incandescent/tungsten to cool white fluorescent |
-| A_F7 | Illuminant A → | Illuminant F7 | Incandescent/tungsten to daylight fluorescent |
-| A_F11 | Illuminant A → | Illuminant F11 | Incandescent/tungsten to narrow band white fluorescent |
-| B_A | Illuminant B → | Illuminant A | Direct sunlight to incandescent/tungsten |
-| B_C | Illuminant B → | Illuminant C | Direct sunlight to average daylight |
-| B_D50 | Illuminant B → | Illuminant D50 | Direct sunlight to horizon light |
-| B_D55 | Illuminant B → | Illuminant D55 | Direct sunlight to mid-morning light |
-| B_D65 | Illuminant B → | Illuminant D65 | Direct sunlight to noon daylight |
-| B_D75 | Illuminant B → | Illuminant D75 | Direct sunlight to north sky daylight |
-| B_E | Illuminant B → | Illuminant E | Direct sunlight to equal energy |
-| B_F2 | Illuminant B → | Illuminant F2 | Direct sunlight to cool white fluorescent |
-| B_F7 | Illuminant B → | Illuminant F7 | Direct sunlight to daylight fluorescent |
-| B_F11 | Illuminant B → | Illuminant F11 | Direct sunlight to narrow band white fluorescent |
-| C_A | Illuminant C → | Illuminant A | Average daylight to incandescent/tungsten |
-| C_B | Illuminant C → | Illuminant B | Average daylight to direct sunlight |
-| C_D50 | Illuminant C → | Illuminant D50 | Average daylight to horizon light |
-| C_D55 | Illuminant C → | Illuminant D55 | Average daylight to mid-morning light |
-| C_D65 | Illuminant C → | Illuminant D65 | Average daylight to noon daylight |
-| C_D75 | Illuminant C → | Illuminant D75 | Average daylight to north sky daylight |
-| C_E | Illuminant C → | Illuminant E | Average daylight to equal energy |
-| C_F2 | Illuminant C → | Illuminant F2 | Average daylight to cool white fluorescent |
-| C_F7 | Illuminant C → | Illuminant F7 | Average daylight to daylight fluorescent |
-| C_F11 | Illuminant C → | Illuminant F11 | Average daylight to narrow band white fluorescent |
-| D50_A | Illuminant D50 → | Illuminant A | Horizon light to incandescent/tungsten |
-| D50_B | Illuminant D50 → | Illuminant B | Horizon light to direct sunlight |
-| D50_C | Illuminant D50 → | Illuminant C | Horizon light to average daylight |
-| D50_D55 | Illuminant D50 → | Illuminant D55 | Horizon light to mid-morning light |
-| D50_D65 | Illuminant D50 → | Illuminant D65 | Horizon light to noon daylight |
-| D50_D75 | Illuminant D50 → | Illuminant D75 | Horizon light to north sky daylight |
-| D50_E | Illuminant D50 → | Illuminant E | Horizon light to equal energy |
-| D50_F2 | Illuminant D50 → | Illuminant F2 | Horizon light to cool white fluorescent |
-| D50_F7 | Illuminant D50 → | Illuminant F7 | Horizon light to daylight fluorescent |
-| D50_F11 | Illuminant D50 → | Illuminant F11 | Horizon light to narrow band white fluorescent |
-| D55_A | Illuminant D55 → | Illuminant A | Mid-morning light to incandescent/tungsten |
-| D55_B | Illuminant D55 → | Illuminant B | Mid-morning light to direct sunlight |
-| D55_C | Illuminant D55 → | Illuminant C | Mid-morning light to average daylight |
-| D55_D50 | Illuminant D55 → | Illuminant D50 | Mid-morning light to horizon light |
-| D55_D65 | Illuminant D55 → | Illuminant D65 | Mid-morning light to noon daylight |
-| D55_D75 | Illuminant D55 → | Illuminant D75 | Mid-morning light to north sky daylight |
-| D55_E | Illuminant D55 → | Illuminant E | Mid-morning light to equal energy |
-| D55_F2 | Illuminant D55 → | Illuminant F2 | Mid-morning light to cool white fluorescent |
-| D55_F7 | Illuminant D55 → | Illuminant F7 | Mid-morning light to daylight fluorescent |
-| D55_F11 | Illuminant D55 → | Illuminant F11 | Mid-morning light to narrow band white fluorescent |
-| D65_A | Illuminant D65 → | Illuminant A | Noon daylight to incandescent/tungsten |
-| D65_B | Illuminant D65 → | Illuminant B | Noon daylight to direct sunlight |
-| D65_C | Illuminant D65 → | Illuminant C | Noon daylight to average daylight |
-| D65_D50 | Illuminant D65 → | Illuminant D50 | Noon daylight to horizon light |
-| D65_D55 | Illuminant D65 → | Illuminant D55 | Noon daylight to mid-morning light |
-| D65_D75 | Illuminant D65 → | Illuminant D75 | Noon daylight to north sky daylight |
-| D65_E | Illuminant D65 → | Illuminant E | Noon daylight to equal energy |
-| D65_F2 | Illuminant D65 → | Illuminant F2 | Noon daylight to cool white fluorescent |
-| D65_F7 | Illuminant D65 → | Illuminant F7 | Noon daylight to daylight fluorescent |
-| D65_F11 | Illuminant D65 → | Illuminant F11 | Noon daylight to narrow band white fluorescent |
-| D75_A | Illuminant D75 → | Illuminant A | North sky daylight to incandescent/tungsten |
-| D75_B | Illuminant D75 → | Illuminant B | North sky daylight to direct sunlight |
-| D75_C | Illuminant D75 → | Illuminant C | North sky daylight to average daylight |
-| D75_D50 | Illuminant D75 → | Illuminant D50 | North sky daylight to horizon light |
-| D75_D55 | Illuminant D75 → | Illuminant D55 | North sky daylight to mid-morning light |
-| D75_D65 | Illuminant D75 → | Illuminant D65 | North sky daylight to noon daylight |
-| D75_E | Illuminant D75 → | Illuminant E | North sky daylight to equal energy |
-| D75_F2 | Illuminant D75 → | Illuminant F2 | North sky daylight to cool white fluorescent |
-| D75_F7 | Illuminant D75 → | Illuminant F7 | North sky daylight to daylight fluorescent |
-| D75_F11 | Illuminant D75 → | Illuminant F11 | North sky daylight to narrow band white fluorescent |
-| E_A | Illuminant E → | Illuminant A | Equal energy to incandescent/tungsten |
-| E_B | Illuminant E → | Illuminant B | Equal energy to direct sunlight |
-| E_C | Illuminant E → | Illuminant C | Equal energy to average daylight |
-| E_D50 | Illuminant E → | Illuminant D50 | Equal energy to horizon light |
-| E_D55 | Illuminant E → | Illuminant D55 | Equal energy to mid-morning light |
-| E_D65 | Illuminant E → | Illuminant D65 | Equal energy to noon daylight |
-| E_D75 | Illuminant E → | Illuminant D75 | Equal energy to north sky daylight |
-| E_F2 | Illuminant E → | Illuminant F2 | Equal energy to cool white fluorescent |
-| E_F7 | Illuminant E → | Illuminant F7 | Equal energy to daylight fluorescent |
-| E_F11 | Illuminant E → | Illuminant F11 | Equal energy to narrow band white fluorescent |
-| F2_A | Illuminant F2 → | Illuminant A | Cool white fluorescent to incandescent/tungsten |
-| F2_B | Illuminant F2 → | Illuminant B | Cool white fluorescent to direct sunlight |
-| F2_C | Illuminant F2 → | Illuminant C | Cool white fluorescent to average daylight |
-| F2_D50 | Illuminant F2 → | Illuminant D50 | Cool white fluorescent to horizon light |
-| F2_D55 | Illuminant F2 → | Illuminant D55 | Cool white fluorescent to mid-morning light |
-| F2_D65 | Illuminant F2 → | Illuminant D65 | Cool white fluorescent to noon daylight |
-| F2_D75 | Illuminant F2 → | Illuminant D75 | Cool white fluorescent to north sky daylight |
-| F2_E | Illuminant F2 → | Illuminant E | Cool white fluorescent to equal energy |
-| F2_F7 | Illuminant F2 → | Illuminant F7 | Cool white fluorescent to daylight fluorescent |
-| F2_F11 | Illuminant F2 → | Illuminant F11 | Cool white fluorescent to narrow band white fluorescent |
-| F7_A | Illuminant F7 → | Illuminant A | Daylight fluorescent to incandescent/tungsten |
-| F7_B | Illuminant F7 → | Illuminant B | Daylight fluorescent to direct sunlight |
-| F7_C | Illuminant F7 → | Illuminant C | Daylight fluorescent to average daylight |
-| F7_D50 | Illuminant F7 → | Illuminant D50 | Daylight fluorescent to horizon light |
-| F7_D55 | Illuminant F7 → | Illuminant D55 | Daylight fluorescent to mid-morning light |
-| F7_D65 | Illuminant F7 → | Illuminant D65 | Daylight fluorescent to noon daylight |
-| F7_D75 | Illuminant F7 → | Illuminant D75 | Daylight fluorescent to north sky daylight |
-| F7_E | Illuminant F7 → | Illuminant E | Daylight fluorescent to equal energy |
-| F7_F2 | Illuminant F7 → | Illuminant F2 | Daylight fluorescent to cool white fluorescent |
-| F7_F11 | Illuminant F7 → | Illuminant F11 | Daylight fluorescent to narrow band white fluorescent |
-| F11_A | Illuminant F11 → | Illuminant A | Narrow band white fluorescent to incandescent/tungsten |
-| F11_B | Illuminant F11 → | Illuminant B | Narrow band white fluorescent to direct sunlight |
-| F11_C | Illuminant F11 → | Illuminant C | Narrow band white fluorescent to average daylight |
-| F11_D50 | Illuminant F11 → | Illuminant D50 | Narrow band white fluorescent to horizon light |
-| F11_D55 | Illuminant F11 → | Illuminant D55 | Narrow band white fluorescent to mid-morning light |
-| F11_D65 | Illuminant F11 → | Illuminant D65 | Narrow band white fluorescent to noon daylight |
-| F11_D75 | Illuminant F11 → | Illuminant D75 | Narrow band white fluorescent to north sky daylight |
-| F11_E | Illuminant F11 → | Illuminant E | Narrow band white fluorescent to equal energy |
-| F11_F2 | Illuminant F11 → | Illuminant F2 | Narrow band white fluorescent to cool white fluorescent |
-| F11_F7 | Illuminant F11 → | Illuminant F7 | Narrow band white fluorescent to daylight fluorescent |
-
+| Code    | Reference Illuminant | Destination Illuminant | Description                                             |
+| ------- | -------------------- | ---------------------- | ------------------------------------------------------- |
+| A_B     | Illuminant A →       | Illuminant B           | Incandescent/tungsten to direct sunlight                |
+| A_C     | Illuminant A →       | Illuminant C           | Incandescent/tungsten to average daylight               |
+| A_D50   | Illuminant A →       | Illuminant D50         | Incandescent/tungsten to horizon light                  |
+| A_D55   | Illuminant A →       | Illuminant D55         | Incandescent/tungsten to mid-morning light              |
+| A_D65   | Illuminant A →       | Illuminant D65         | Incandescent/tungsten to noon daylight                  |
+| A_D75   | Illuminant A →       | Illuminant D75         | Incandescent/tungsten to north sky daylight             |
+| A_E     | Illuminant A →       | Illuminant E           | Incandescent/tungsten to equal energy                   |
+| A_F2    | Illuminant A →       | Illuminant F2          | Incandescent/tungsten to cool white fluorescent         |
+| A_F7    | Illuminant A →       | Illuminant F7          | Incandescent/tungsten to daylight fluorescent           |
+| A_F11   | Illuminant A →       | Illuminant F11         | Incandescent/tungsten to narrow band white fluorescent  |
+| B_A     | Illuminant B →       | Illuminant A           | Direct sunlight to incandescent/tungsten                |
+| B_C     | Illuminant B →       | Illuminant C           | Direct sunlight to average daylight                     |
+| B_D50   | Illuminant B →       | Illuminant D50         | Direct sunlight to horizon light                        |
+| B_D55   | Illuminant B →       | Illuminant D55         | Direct sunlight to mid-morning light                    |
+| B_D65   | Illuminant B →       | Illuminant D65         | Direct sunlight to noon daylight                        |
+| B_D75   | Illuminant B →       | Illuminant D75         | Direct sunlight to north sky daylight                   |
+| B_E     | Illuminant B →       | Illuminant E           | Direct sunlight to equal energy                         |
+| B_F2    | Illuminant B →       | Illuminant F2          | Direct sunlight to cool white fluorescent               |
+| B_F7    | Illuminant B →       | Illuminant F7          | Direct sunlight to daylight fluorescent                 |
+| B_F11   | Illuminant B →       | Illuminant F11         | Direct sunlight to narrow band white fluorescent        |
+| C_A     | Illuminant C →       | Illuminant A           | Average daylight to incandescent/tungsten               |
+| C_B     | Illuminant C →       | Illuminant B           | Average daylight to direct sunlight                     |
+| C_D50   | Illuminant C →       | Illuminant D50         | Average daylight to horizon light                       |
+| C_D55   | Illuminant C →       | Illuminant D55         | Average daylight to mid-morning light                   |
+| C_D65   | Illuminant C →       | Illuminant D65         | Average daylight to noon daylight                       |
+| C_D75   | Illuminant C →       | Illuminant D75         | Average daylight to north sky daylight                  |
+| C_E     | Illuminant C →       | Illuminant E           | Average daylight to equal energy                        |
+| C_F2    | Illuminant C →       | Illuminant F2          | Average daylight to cool white fluorescent              |
+| C_F7    | Illuminant C →       | Illuminant F7          | Average daylight to daylight fluorescent                |
+| C_F11   | Illuminant C →       | Illuminant F11         | Average daylight to narrow band white fluorescent       |
+| D50_A   | Illuminant D50 →     | Illuminant A           | Horizon light to incandescent/tungsten                  |
+| D50_B   | Illuminant D50 →     | Illuminant B           | Horizon light to direct sunlight                        |
+| D50_C   | Illuminant D50 →     | Illuminant C           | Horizon light to average daylight                       |
+| D50_D55 | Illuminant D50 →     | Illuminant D55         | Horizon light to mid-morning light                      |
+| D50_D65 | Illuminant D50 →     | Illuminant D65         | Horizon light to noon daylight                          |
+| D50_D75 | Illuminant D50 →     | Illuminant D75         | Horizon light to north sky daylight                     |
+| D50_E   | Illuminant D50 →     | Illuminant E           | Horizon light to equal energy                           |
+| D50_F2  | Illuminant D50 →     | Illuminant F2          | Horizon light to cool white fluorescent                 |
+| D50_F7  | Illuminant D50 →     | Illuminant F7          | Horizon light to daylight fluorescent                   |
+| D50_F11 | Illuminant D50 →     | Illuminant F11         | Horizon light to narrow band white fluorescent          |
+| D55_A   | Illuminant D55 →     | Illuminant A           | Mid-morning light to incandescent/tungsten              |
+| D55_B   | Illuminant D55 →     | Illuminant B           | Mid-morning light to direct sunlight                    |
+| D55_C   | Illuminant D55 →     | Illuminant C           | Mid-morning light to average daylight                   |
+| D55_D50 | Illuminant D55 →     | Illuminant D50         | Mid-morning light to horizon light                      |
+| D55_D65 | Illuminant D55 →     | Illuminant D65         | Mid-morning light to noon daylight                      |
+| D55_D75 | Illuminant D55 →     | Illuminant D75         | Mid-morning light to north sky daylight                 |
+| D55_E   | Illuminant D55 →     | Illuminant E           | Mid-morning light to equal energy                       |
+| D55_F2  | Illuminant D55 →     | Illuminant F2          | Mid-morning light to cool white fluorescent             |
+| D55_F7  | Illuminant D55 →     | Illuminant F7          | Mid-morning light to daylight fluorescent               |
+| D55_F11 | Illuminant D55 →     | Illuminant F11         | Mid-morning light to narrow band white fluorescent      |
+| D65_A   | Illuminant D65 →     | Illuminant A           | Noon daylight to incandescent/tungsten                  |
+| D65_B   | Illuminant D65 →     | Illuminant B           | Noon daylight to direct sunlight                        |
+| D65_C   | Illuminant D65 →     | Illuminant C           | Noon daylight to average daylight                       |
+| D65_D50 | Illuminant D65 →     | Illuminant D50         | Noon daylight to horizon light                          |
+| D65_D55 | Illuminant D65 →     | Illuminant D55         | Noon daylight to mid-morning light                      |
+| D65_D75 | Illuminant D65 →     | Illuminant D75         | Noon daylight to north sky daylight                     |
+| D65_E   | Illuminant D65 →     | Illuminant E           | Noon daylight to equal energy                           |
+| D65_F2  | Illuminant D65 →     | Illuminant F2          | Noon daylight to cool white fluorescent                 |
+| D65_F7  | Illuminant D65 →     | Illuminant F7          | Noon daylight to daylight fluorescent                   |
+| D65_F11 | Illuminant D65 →     | Illuminant F11         | Noon daylight to narrow band white fluorescent          |
+| D75_A   | Illuminant D75 →     | Illuminant A           | North sky daylight to incandescent/tungsten             |
+| D75_B   | Illuminant D75 →     | Illuminant B           | North sky daylight to direct sunlight                   |
+| D75_C   | Illuminant D75 →     | Illuminant C           | North sky daylight to average daylight                  |
+| D75_D50 | Illuminant D75 →     | Illuminant D50         | North sky daylight to horizon light                     |
+| D75_D55 | Illuminant D75 →     | Illuminant D55         | North sky daylight to mid-morning light                 |
+| D75_D65 | Illuminant D75 →     | Illuminant D65         | North sky daylight to noon daylight                     |
+| D75_E   | Illuminant D75 →     | Illuminant E           | North sky daylight to equal energy                      |
+| D75_F2  | Illuminant D75 →     | Illuminant F2          | North sky daylight to cool white fluorescent            |
+| D75_F7  | Illuminant D75 →     | Illuminant F7          | North sky daylight to daylight fluorescent              |
+| D75_F11 | Illuminant D75 →     | Illuminant F11         | North sky daylight to narrow band white fluorescent     |
+| E_A     | Illuminant E →       | Illuminant A           | Equal energy to incandescent/tungsten                   |
+| E_B     | Illuminant E →       | Illuminant B           | Equal energy to direct sunlight                         |
+| E_C     | Illuminant E →       | Illuminant C           | Equal energy to average daylight                        |
+| E_D50   | Illuminant E →       | Illuminant D50         | Equal energy to horizon light                           |
+| E_D55   | Illuminant E →       | Illuminant D55         | Equal energy to mid-morning light                       |
+| E_D65   | Illuminant E →       | Illuminant D65         | Equal energy to noon daylight                           |
+| E_D75   | Illuminant E →       | Illuminant D75         | Equal energy to north sky daylight                      |
+| E_F2    | Illuminant E →       | Illuminant F2          | Equal energy to cool white fluorescent                  |
+| E_F7    | Illuminant E →       | Illuminant F7          | Equal energy to daylight fluorescent                    |
+| E_F11   | Illuminant E →       | Illuminant F11         | Equal energy to narrow band white fluorescent           |
+| F2_A    | Illuminant F2 →      | Illuminant A           | Cool white fluorescent to incandescent/tungsten         |
+| F2_B    | Illuminant F2 →      | Illuminant B           | Cool white fluorescent to direct sunlight               |
+| F2_C    | Illuminant F2 →      | Illuminant C           | Cool white fluorescent to average daylight              |
+| F2_D50  | Illuminant F2 →      | Illuminant D50         | Cool white fluorescent to horizon light                 |
+| F2_D55  | Illuminant F2 →      | Illuminant D55         | Cool white fluorescent to mid-morning light             |
+| F2_D65  | Illuminant F2 →      | Illuminant D65         | Cool white fluorescent to noon daylight                 |
+| F2_D75  | Illuminant F2 →      | Illuminant D75         | Cool white fluorescent to north sky daylight            |
+| F2_E    | Illuminant F2 →      | Illuminant E           | Cool white fluorescent to equal energy                  |
+| F2_F7   | Illuminant F2 →      | Illuminant F7          | Cool white fluorescent to daylight fluorescent          |
+| F2_F11  | Illuminant F2 →      | Illuminant F11         | Cool white fluorescent to narrow band white fluorescent |
+| F7_A    | Illuminant F7 →      | Illuminant A           | Daylight fluorescent to incandescent/tungsten           |
+| F7_B    | Illuminant F7 →      | Illuminant B           | Daylight fluorescent to direct sunlight                 |
+| F7_C    | Illuminant F7 →      | Illuminant C           | Daylight fluorescent to average daylight                |
+| F7_D50  | Illuminant F7 →      | Illuminant D50         | Daylight fluorescent to horizon light                   |
+| F7_D55  | Illuminant F7 →      | Illuminant D55         | Daylight fluorescent to mid-morning light               |
+| F7_D65  | Illuminant F7 →      | Illuminant D65         | Daylight fluorescent to noon daylight                   |
+| F7_D75  | Illuminant F7 →      | Illuminant D75         | Daylight fluorescent to north sky daylight              |
+| F7_E    | Illuminant F7 →      | Illuminant E           | Daylight fluorescent to equal energy                    |
+| F7_F2   | Illuminant F7 →      | Illuminant F2          | Daylight fluorescent to cool white fluorescent          |
+| F7_F11  | Illuminant F7 →      | Illuminant F11         | Daylight fluorescent to narrow band white fluorescent   |
+| F11_A   | Illuminant F11 →     | Illuminant A           | Narrow band white fluorescent to incandescent/tungsten  |
+| F11_B   | Illuminant F11 →     | Illuminant B           | Narrow band white fluorescent to direct sunlight        |
+| F11_C   | Illuminant F11 →     | Illuminant C           | Narrow band white fluorescent to average daylight       |
+| F11_D50 | Illuminant F11 →     | Illuminant D50         | Narrow band white fluorescent to horizon light          |
+| F11_D55 | Illuminant F11 →     | Illuminant D55         | Narrow band white fluorescent to mid-morning light      |
+| F11_D65 | Illuminant F11 →     | Illuminant D65         | Narrow band white fluorescent to noon daylight          |
+| F11_D75 | Illuminant F11 →     | Illuminant D75         | Narrow band white fluorescent to north sky daylight     |
+| F11_E   | Illuminant F11 →     | Illuminant E           | Narrow band white fluorescent to equal energy           |
+| F11_F2  | Illuminant F11 →     | Illuminant F2          | Narrow band white fluorescent to cool white fluorescent |
+| F11_F7  | Illuminant F11 →     | Illuminant F7          | Narrow band white fluorescent to daylight fluorescent   |
 
 ### adapt
 
@@ -966,10 +1153,14 @@ The following illuminant adaptations are supported:
 ```javascript
 import { adapt } from "@dynamize/color-utilities";
 
-const adapted = adapt({ x: 56.11537464609447, y: 59.56827248834963, z: 9.578873171265526 }, 'A_B');
+const adapted = adapt(
+  { x: 56.11537464609447, y: 59.56827248834963, z: 9.578873171265526 },
+  "A_B"
+);
 
 console.log(adapted);
 ```
+
 The above example will adapt from a from reference illuminant A to destination illuminant B.
 
 ### Adapter
@@ -979,25 +1170,24 @@ default values will be for color white in XYZ format.
 
 Here is a table of all available formats and values:
 
-
-| Param place | Description                           | Formats                                                                                                                                                  |
-| ----------- | ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| # 1         | Color data                            | { r: number, g: number, b: number }, { red: number, green: number, blue: number }, { l: number, a: number, b: number }, { luminance: number, a: number, b: number }, { L: number, u: number, v: number }, { l: number, c: number, h: number }, { lightness: number, chroma: number hue: number }, { long: number, medium: number, short: number }, { u: number, v: number, w: number }, { x: number, y: number, Y: number }, { x: number, y: number, z: number } |
-| # 2         | Color Space of the given color        |  adobe_98_rgb, apple_rgb, best_rgb, beta_rgb, bruce_rgb, cie_rgb, color_match_rgb, don_rgb_4, eci_rgb_v2, etka_space_ps5, ntsc_rgb, pal_secam_rgb, pro_photo_rgb, rgb, smpte_c_rgb, wide_gamut_rgb |                                                                                                                                                          |
-
+| Param place | Description                    | Formats                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| ----------- | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
+| # 1         | Color data                     | { r: number, g: number, b: number }, { red: number, green: number, blue: number }, { l: number, a: number, b: number }, { luminance: number, a: number, b: number }, { L: number, u: number, v: number }, { l: number, c: number, h: number }, { lightness: number, chroma: number hue: number }, { long: number, medium: number, short: number }, { u: number, v: number, w: number }, { x: number, y: number, Y: number }, { x: number, y: number, z: number } |
+| # 2         | Color Space of the given color | adobe_98_rgb, apple_rgb, best_rgb, beta_rgb, bruce_rgb, cie_rgb, color_match_rgb, don_rgb_4, eci_rgb_v2, etka_space_ps5, ntsc_rgb, pal_secam_rgb, pro_photo_rgb, rgb, smpte_c_rgb, wide_gamut_rgb                                                                                                                                                                                                                                                                |     |
 
 Example 1:
 
 ```javascript
 import { Adapter } from "@dynamize/color-utilities";
 
-const adapted = new Adapter(
-  { x: 56.11537464609447, y: 59.56827248834963, z: 9.578873171265526 }
-).adapt('A_B');
+const adapted = new Adapter({
+  x: 56.11537464609447,
+  y: 59.56827248834963,
+  z: 9.578873171265526,
+}).adapt("A_B");
 
 console.log(adapted);
 ```
-
 
 Example 2:
 
@@ -1005,13 +1195,14 @@ Example 2:
 import { Adapter } from "@dynamize/color-utilities";
 
 const adapter = new Adapter();
-const adapted = adapter.set(
-  { x: 56.11537464609447, y: 59.56827248834963, z: 9.578873171265526 }
-).adapt('A_B');
+const adapted = adapter
+  .set({ x: 56.11537464609447, y: 59.56827248834963, z: 9.578873171265526 })
+  .adapt("A_B");
 
 console.log(adapted);
 ```
-The above example is using the "adapt" method with in the Adapter. The difference being that it takes an optional second argument, which is the desired color space of returned color values.  
+
+The above example is using the "adapt" method with in the Adapter. The difference being that it takes an optional second argument, which is the desired color space of returned color values.
 
 Example 3:
 
@@ -1019,31 +1210,28 @@ Example 3:
 import { Adapter } from "@dynamize/color-utilities";
 
 const adapter = new Adapter();
-const adapted = adapter.set(
-  { x: 56.11537464609447, y: 59.56827248834963, z: 9.578873171265526 }
-).adapt(
-  'A_B', 
-  'adobe_98_rgb'
-);
+const adapted = adapter
+  .set({ x: 56.11537464609447, y: 59.56827248834963, z: 9.578873171265526 })
+  .adapt("A_B", "adobe_98_rgb");
 
 console.log(adapted);
 ```
 
 ## Delta E / Color Difference
-<a name="delta_e"></a>
+
+<a name="delta-e"></a>
 There are multiple ways to calculate the color difference or color distance.
 More information about color difference: https://en.wikipedia.org/wiki/Color_difference
 
-| Name                 | Description                           | Formats                                           |
-| -------------------- | ------------------------------------- | --------------------------------------------------|
-| comparativeDistance  | Euclidean distance                    | { red; number, green: number, blue: number }      |
-| deltaECIE76Lab       | Delta E using the CIE76 algorithm     | { luminance: number, a: number, b: number }       |
-| deltaECIE76Lch       | Delta E using the CIE76 algorithm     | { lightness: number, chroma: number, hue: number }|
-| deltaECIE76Rgb       | Delta E using the CIE76 algorithm     | { red; number, green: number, blue: number }      |
-| deltaECIE94Lab       | Delta E using the CIE94 algorithm     | { luminance: number, a: number, b: number }       |
-| deltaECIE00Lab       | Delta E using the CIE2000 algorithm   | { luminance: number, a: number, b: number }       |
-| deltaECIE00Rgb       | Delta E using the CIE2000 algorithm   | { red; number, green: number, blue: number }      | 
-
+| Name                | Description                         | Formats                                            |
+| ------------------- | ----------------------------------- | -------------------------------------------------- |
+| comparativeDistance | Euclidean distance                  | { red; number, green: number, blue: number }       |
+| deltaECIE76Lab      | Delta E using the CIE76 algorithm   | { luminance: number, a: number, b: number }        |
+| deltaECIE76Lch      | Delta E using the CIE76 algorithm   | { lightness: number, chroma: number, hue: number } |
+| deltaECIE76Rgb      | Delta E using the CIE76 algorithm   | { red; number, green: number, blue: number }       |
+| deltaECIE94Lab      | Delta E using the CIE94 algorithm   | { luminance: number, a: number, b: number }        |
+| deltaECIE00Lab      | Delta E using the CIE2000 algorithm | { luminance: number, a: number, b: number }        |
+| deltaECIE00Rgb      | Delta E using the CIE2000 algorithm | { red; number, green: number, blue: number }       |
 
 Usage examples:
 
@@ -1053,21 +1241,26 @@ import { comparativeDistance } from "@dynamize/color-utilities";
 const diff = comparativeDistance(
   { red: 238, green: 200, blue: 27 },
   { red: 217, green: 122, blue: 37 }
-  );
+);
 
 console.log(diff);
 ```
 
 ### CIE 76
-<a name="cie_76"></a>
+
+<a name="cie-76"></a>
 
 ```javascript
 import { deltaECIE76Lab } from "@dynamize/color-utilities";
 
 const diff = deltaECIE76Lab(
-  { luminance: 81.60296053275202, a: -1.2482727232548951, b: 79.33052440955292 } ,
+  {
+    luminance: 81.60296053275202,
+    a: -1.2482727232548951,
+    b: 79.33052440955292,
+  },
   { luminance: 60.61218950864361, a: 31.243719367882505, b: 58.52164206596838 }
-  );
+);
 
 console.log(diff);
 ```
@@ -1075,38 +1268,48 @@ console.log(diff);
 ```javascript
 import { deltaECIE76Rgb } from "@dynamize/color-utilities";
 
-const diff =  deltaECIE76Rgb(
+const diff = deltaECIE76Rgb(
   { red: 238, green: 200, blue: 27 },
   { red: 217, green: 122, blue: 37 }
-  );
+);
 
 console.log(diff);
 ```
 
 ### CIE 94
-<a name="cie_94"></a>
+
+<a name="cie-94"></a>
 
 ```javascript
 import { deltaECIE94Lab } from "@dynamize/color-utilities";
 
 const diff = deltaECIE94Lab(
-  { luminance: 81.60296053275202, a: -1.2482727232548951, b: 79.33052440955292 } ,
+  {
+    luminance: 81.60296053275202,
+    a: -1.2482727232548951,
+    b: 79.33052440955292,
+  },
   { luminance: 60.61218950864361, a: 31.243719367882505, b: 58.52164206596838 }
-  );
+);
 
 console.log(diff);
 ```
 
 ### CIE 00
-<a name="cie_00"></a>
+
+<a name="cie-00"></a>
 
 ```javascript
 import { deltaECIE00Lab } from "@dynamize/color-utilities";
 
 const diff = deltaECIE00Lab(
-  { luminance: 81.60296053275202, a: -1.2482727232548951, b: 79.33052440955292 } ,
+  {
+    luminance: 81.60296053275202,
+    a: -1.2482727232548951,
+    b: 79.33052440955292,
+  },
   { luminance: 60.61218950864361, a: 31.243719367882505, b: 58.52164206596838 }
-  );
+);
 
 console.log(diff);
 ```
@@ -1117,7 +1320,33 @@ import { deltaECIE00Rgb } from "@dynamize/color-utilities";
 const diff = deltaECIE00Rgb(
   { red: 238, green: 200, blue: 27 },
   { red: 217, green: 122, blue: 37 }
-  );
+);
 
 console.log(diff);
 ```
+
+## Troubleshooting
+
+<a name="troubleshooting"></a>
+
+### Common Issues
+
+**Module not found**: Ensure you're using a module-aware environment or bundler.
+
+**Color values incorrect**: Verify input ranges (RGB: 0-255, HSL: 0-100, etc.)
+
+**Performance issues**: Use standalone functions instead of Color class for single conversions.
+
+## Contributing
+
+<a name="contributing"></a>
+
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+
+## License
+
+<a name="license"></a>
+
+This project is licensed under the ISC License - see the [LICENSE.md](LICENSE.md) file for details.
+
+[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)

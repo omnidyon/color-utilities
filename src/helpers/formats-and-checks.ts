@@ -41,6 +41,20 @@ export const gamutCheck = (value: number): boolean => {
   return !isNaN(value) && value >= 0 && value <= 255;
 };
 
+/**
+ * Maps a color to the nearest in-gamut color using clipping
+ * @param {RGB} rgb - Input color in RGB format
+ * @returns {RGB} Nearest in-gamut color
+ */
+export const mapToGamut = (rgb: RGB): RGB => {
+  return {
+    red: Math.max(0, Math.min(255, Math.round(rgb.red))),
+    green: Math.max(0, Math.min(255, Math.round(rgb.green))),
+    blue: Math.max(0, Math.min(255, Math.round(rgb.blue))),
+    inGamut: true
+  };
+};
+
 export const formatValue = (value: number): number => Math.round(value * 100);
 
 /**

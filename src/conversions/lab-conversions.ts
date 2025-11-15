@@ -10,6 +10,9 @@ import { xyzToSrgb } from "./xyz-conversions";
 import { CIE_κ, CIE_ϵ } from "../constants/conditionals";
 import { REFERENCE_ILLUMINANT } from "../constants/reference-illuminants";
 import { LAB, LCH, RGB, XYZ } from "../interfaces/color-spaces.interface";
+import { matrixByVectorObjMultiAsSpace } from "../helpers/matrix";
+import { CB_CR_CONVERSION_MATRICES } from "../constants/cb-cr-conversions-matrices";
+import { linearValToSRGBVal } from "./rgb-conversions";
 /*************************************************************
  *                        CIE-L*ab
  *************************************************************/
@@ -63,6 +66,48 @@ export const oklabToOKLCH = (oklab: LAB): LCH =>  {
   
   return { lightness: oklab.luminance, chroma: C, hue: H };
 }
+
+/**
+ * Converts OKLAB color values to sRGB color values
+ * @param {OKLAB} oklab - OKLAB color values
+ * @returns {RGB} sRGB color values
+ */
+export const oKLabToSRGB = (oklab: LAB): RGB => {
+
+  const LMS_c = matrixByVectorObjMultiAsSpace(
+    CB_CR_CONVERSION_MATRICES.OKLab_TO_LMS,
+    { luminance: oklab.luminance, a: oklab.a, b: oklab.b },
+    ['L', 'M', 'S']
+  );
+
+  const LMS = {
+    L: LMS_c.L * LMS_c.L * LMS_c.L,
+    M: LMS_c.M * LMS_c.M * LMS_c.M,
+    S: LMS_c.S * LMS_c.S * LMS_c.S,
+  };
+
+  const linearRGB = matrixByVectorObjMultiAsSpace(
+    CB_CR_CONVERSION_MATRICES.LMS_TO_Linear_RGB,
+    LMS,
+    ['red', 'green', 'blue']
+  );
+
+  // Apply sRGB gamma correction
+   const srgb = {
+     red: Math.round(linearValToSRGBVal(linearRGB.red)),
+     green: Math.round(linearValToSRGBVal(linearRGB.green)),
+     blue: Math.round(linearValToSRGBVal(linearRGB.blue)),
+   };
+
+  // Convert to 0-255 range and check gamut
+  const rgb = {
+    red: Math.round(srgb.red * 255),
+    green: Math.round(srgb.green * 255),
+    blue: Math.round(srgb.blue * 255),
+  };
+
+  return rgb;
+};
 
 /**
  * Converts a color from CIE-L*ab color space to sRGB color space
