@@ -6,3 +6,6 @@
 
 # Build files
 /dist
+
+# Deno lock file
+deno.lock
