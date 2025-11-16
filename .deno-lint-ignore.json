@@ -1,0 +1,12 @@
+{
+  "files": {
+    "include": ["src/"],
+    "exclude": ["node_modules/", "dist/"]
+  },
+  "rules": {
+    "prefer-const": "off",
+    "no-explicit-any": "off",
+    "ban-types": "off",
+    "no-case-declarations": "off"
+  }
+}

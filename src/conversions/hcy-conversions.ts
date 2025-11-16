@@ -19,7 +19,7 @@ import { HCY, HSI, RGB } from "../interfaces/color-spaces.interface";
  */
 export const hcyOrHsiToSrgb = (val: HCY | HSI): RGB => {
   const values = Object.values(val);
-  let hue = values[0];
+  let hue: number = values[0];
   let chromaOrSaturation = values[1];
   let yOrIntensity = values[2];
   hue = ((hue < 0 ? (hue % 360) + 360 : hue % 360) * Math.PI) / 180;
@@ -30,12 +30,10 @@ export const hcyOrHsiToSrgb = (val: HCY | HSI): RGB => {
 
   if (hue < 2 * thirdOfPI) {
     return {
-      red:
-        yOrIntensity *
+      red: yOrIntensity *
         (1 + (chromaOrSaturation * Math.cos(hue)) / Math.cos(thirdOfPI - hue)) *
         255,
-      green:
-        yOrIntensity *
+      green: yOrIntensity *
         (1 +
           chromaOrSaturation *
             (1 - Math.cos(hue) / Math.cos(thirdOfPI - hue))) *
@@ -46,12 +44,10 @@ export const hcyOrHsiToSrgb = (val: HCY | HSI): RGB => {
     hue = hue - 2 * thirdOfPI;
     return {
       red: yOrIntensity * (1 - chromaOrSaturation) * 255,
-      green:
-        yOrIntensity *
+      green: yOrIntensity *
         (1 + (chromaOrSaturation * Math.cos(hue)) / Math.cos(thirdOfPI - hue)) *
         255,
-      blue:
-        yOrIntensity *
+      blue: yOrIntensity *
         (1 +
           chromaOrSaturation *
             (1 - Math.cos(hue) / Math.cos(thirdOfPI - hue))) *
@@ -60,15 +56,13 @@ export const hcyOrHsiToSrgb = (val: HCY | HSI): RGB => {
   } else {
     hue = hue - 4 * thirdOfPI;
     return {
-      red:
-        yOrIntensity *
+      red: yOrIntensity *
         (1 +
           chromaOrSaturation *
             (1 - Math.cos(hue) / Math.cos(thirdOfPI - hue))) *
         255,
       green: yOrIntensity * (1 - chromaOrSaturation) * 255,
-      blue:
-        yOrIntensity *
+      blue: yOrIntensity *
         (1 + (chromaOrSaturation * Math.cos(hue)) / Math.cos(thirdOfPI - hue)) *
         255,
     };

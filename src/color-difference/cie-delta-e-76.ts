@@ -1,10 +1,10 @@
 /**
  * @license
  * Copyright Slavko Mihajlovic All Rights Reserved.
- * 
+ *
  * Use of this source code is governed by an ISC-style license that can be
  * found at https://opensource.org/license/isc-license-txt/
-*/
+ */
 
 import { sRgbToLab } from "../conversions/rgb-conversions";
 import { LAB, LCH, RGB } from "../interfaces/color-spaces.interface";
@@ -19,7 +19,7 @@ export const deltaECIE76Lab = (lab1: LAB, lab2: LAB): number => {
   return Math.sqrt(
     Math.pow(lab1.luminance - lab2.luminance, 2) +
       Math.pow(lab1.a - lab2.a, 2) +
-      Math.pow(lab1.b - lab2.b, 2)
+      Math.pow(lab1.b - lab2.b, 2),
   );
 };
 
@@ -33,7 +33,7 @@ export const deltaECIE76Lch = (lch1: LCH, lch2: LCH): number => {
   return Math.sqrt(
     Math.pow(lch1.lightness - lch2.lightness, 2) +
       Math.pow(lch1.chroma - lch2.chroma, 2) +
-      Math.pow(lch1.hue - lch2.hue, 2)
+      Math.pow(lch1.hue - lch2.hue, 2),
   );
 };
 

@@ -12,8 +12,8 @@ export const DefaultResolve: (Spaces | "web_safe")[] = [
   "cmyk",
   "hex",
   "hsv",
-  "lab"
-]; 
+  "lab",
+];
 
 export const AllResolve: (Spaces | "web_safe")[] = [
   "adobe_98_rgb",

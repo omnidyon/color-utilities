@@ -18,9 +18,9 @@ export declare const xyzToLch_ab: (xyz: XYZ) => LCH;
  * @returns {LUV}                   - luv values for a color
  */
 export declare const xyzToLuv: ({ x, y, z }: XYZ, refIlluminant?: {
-    X: number;
-    Y: number;
-    Z: number;
+  X: number;
+  Y: number;
+  Z: number;
 }) => LUV;
 /**
  * Gets Lch(uv) values from given xyz values
@@ -34,9 +34,9 @@ export declare const xyzToLch_uv: (xyz: XYZ) => LCH;
  * @returns {UVW}                   - uvw values for a color
  */
 export declare const xyzToUvw: ({ x, y, z }: XYZ, refIlluminant?: {
-    X: number;
-    Y: number;
-    Z: number;
+  X: number;
+  Y: number;
+  Z: number;
 }) => UVW;
 /**
  * Gets sRGB values from given xyz values

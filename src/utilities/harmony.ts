@@ -19,7 +19,7 @@ import { HSL, HSLA, hslToHex } from "../public_api";
 const harmonizeHsl = (
   hsl: HSL | HSLA,
   degrees: number[],
-  prefixed?: boolean
+  prefixed?: boolean,
 ): string[] => {
   const harmonized: string[] = [];
   degrees.forEach((degree) => {
@@ -33,8 +33,8 @@ const harmonizeHsl = (
             lightness: hsl.lightness,
             alpha: (hsl as HSLA).alpha,
           },
-          prefixed
-        )
+          prefixed,
+        ),
       );
     }
   });
@@ -50,7 +50,7 @@ const harmonizeHsl = (
  */
 export const complementaryHarmony = (
   hsl: HSLA | HSL,
-  prefixed?: boolean
+  prefixed?: boolean,
 ): string[] => {
   return harmonizeHsl(hsl, HARMONIES.complementary, prefixed);
 };
@@ -64,7 +64,7 @@ export const complementaryHarmony = (
  */
 export const splitComplementaryHarmony = (
   hsl: HSLA | HSL,
-  prefixed?: boolean
+  prefixed?: boolean,
 ): string[] => {
   return harmonizeHsl(hsl, HARMONIES.splitComplementary, prefixed);
 };
@@ -78,7 +78,7 @@ export const splitComplementaryHarmony = (
  */
 export const splitComplementaryCWHarmony = (
   hsl: HSLA | HSL,
-  prefixed?: boolean
+  prefixed?: boolean,
 ): string[] => {
   return harmonizeHsl(hsl, HARMONIES.splitComplementaryCW, prefixed);
 };
@@ -92,7 +92,7 @@ export const splitComplementaryCWHarmony = (
  */
 export const splitComplementaryCCWHarmony = (
   hsl: HSLA | HSL,
-  prefixed?: boolean
+  prefixed?: boolean,
 ): string[] => {
   return harmonizeHsl(hsl, HARMONIES.splitComplementaryCCW, prefixed);
 };
@@ -106,7 +106,7 @@ export const splitComplementaryCCWHarmony = (
  */
 export const triadicHarmony = (
   hsl: HSLA | HSL,
-  prefixed?: boolean
+  prefixed?: boolean,
 ): string[] => {
   return harmonizeHsl(hsl, HARMONIES.triadic, prefixed);
 };
@@ -124,7 +124,7 @@ export const clashHarmony = (hsl: HSLA | HSL, prefixed?: boolean): string[] => {
  */
 export const tetradicHarmony = (
   hsl: HSLA | HSL,
-  prefixed?: boolean
+  prefixed?: boolean,
 ): string[] => {
   return harmonizeHsl(hsl, HARMONIES.tetradic, prefixed);
 };
@@ -137,7 +137,7 @@ export const tetradicHarmony = (
  */
 export const fourToneCWHarmony = (
   hsl: HSLA | HSL,
-  prefixed?: boolean
+  prefixed?: boolean,
 ): string[] => {
   return harmonizeHsl(hsl, HARMONIES.fourToneCW, prefixed);
 };
@@ -150,7 +150,7 @@ export const fourToneCWHarmony = (
  */
 export const fourToneCCWHarmony = (
   hsl: HSLA | HSL,
-  prefixed?: boolean
+  prefixed?: boolean,
 ): string[] => {
   return harmonizeHsl(hsl, HARMONIES.fourToneCCW, prefixed);
 };
@@ -163,7 +163,7 @@ export const fourToneCCWHarmony = (
  */
 export const fiveToneAHarmony = (
   hsl: HSLA | HSL,
-  prefixed?: boolean
+  prefixed?: boolean,
 ): string[] => {
   return harmonizeHsl(hsl, HARMONIES.fiveToneA, prefixed);
 };
@@ -176,7 +176,7 @@ export const fiveToneAHarmony = (
  */
 export const fiveToneBHarmony = (
   hsl: HSLA | HSL,
-  prefixed?: boolean
+  prefixed?: boolean,
 ): string[] => {
   return harmonizeHsl(hsl, HARMONIES.fiveToneB, prefixed);
 };
@@ -189,7 +189,7 @@ export const fiveToneBHarmony = (
  */
 export const fiveToneCHarmony = (
   hsl: HSLA | HSL,
-  prefixed?: boolean
+  prefixed?: boolean,
 ): string[] => {
   return harmonizeHsl(hsl, HARMONIES.fiveToneC, prefixed);
 };
@@ -202,7 +202,7 @@ export const fiveToneCHarmony = (
  */
 export const fiveToneDHarmony = (
   hsl: HSLA | HSL,
-  prefixed?: boolean
+  prefixed?: boolean,
 ): string[] => {
   return harmonizeHsl(hsl, HARMONIES.fiveToneD, prefixed);
 };
@@ -215,7 +215,7 @@ export const fiveToneDHarmony = (
  */
 export const fiveToneEHarmony = (
   hsl: HSLA | HSL,
-  prefixed?: boolean
+  prefixed?: boolean,
 ): string[] => {
   return harmonizeHsl(hsl, HARMONIES.fiveToneE, prefixed);
 };
@@ -228,7 +228,7 @@ export const fiveToneEHarmony = (
  */
 export const sixToneCWHarmony = (
   hsl: HSLA | HSL,
-  prefixed?: boolean
+  prefixed?: boolean,
 ): string[] => {
   return harmonizeHsl(hsl, HARMONIES.sixToneCW, prefixed);
 };
@@ -241,7 +241,7 @@ export const sixToneCWHarmony = (
  */
 export const sixToneCCWHarmony = (
   hsl: HSLA | HSL,
-  prefixed?: boolean
+  prefixed?: boolean,
 ): string[] => {
   return harmonizeHsl(hsl, HARMONIES.sixToneCCW, prefixed);
 };
@@ -254,7 +254,7 @@ export const sixToneCCWHarmony = (
  */
 export const neutralHarmony = (
   hsl: HSLA | HSL,
-  prefixed?: boolean
+  prefixed?: boolean,
 ): string[] => {
   return harmonizeHsl(hsl, HARMONIES.neutral, prefixed);
 };
@@ -268,7 +268,7 @@ export const neutralHarmony = (
  */
 export const analogousHarmony = (
   hsl: HSLA | HSL,
-  prefixed?: boolean
+  prefixed?: boolean,
 ): string[] => {
   return harmonizeHsl(hsl, HARMONIES.analogous, prefixed);
 };
@@ -282,7 +282,7 @@ export const analogousHarmony = (
  */
 export const squareHarmony = (
   hsl: HSLA | HSL,
-  prefixed?: boolean
+  prefixed?: boolean,
 ): string[] => {
   return harmonizeHsl(hsl, HARMONIES.square, prefixed);
 };

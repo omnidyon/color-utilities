@@ -1,12 +1,12 @@
-import { Blender, blend } from "../public_api";
+import { blend, Blender } from "../public_api";
 
 test("Using blend method", () => {
   expect(
     blend(
       { red: 255, green: 237, blue: 0 },
       { red: 255, green: 0, blue: 0 },
-      0.67
-    )
+      0.67,
+    ),
   ).toStrictEqual({ red: 255, green: 159, blue: 0 });
 });
 
@@ -14,7 +14,7 @@ test("Using a blender to blend RGB and RGB_M and return blend data", () => {
   const color = new Blender(
     { red: 255, green: 237, blue: 0 },
     { r: 255, g: 0, b: 0 },
-    { weight: 0.67 }
+    { weight: 0.67 },
   );
   expect(color.blendData).toStrictEqual({
     color1: {
@@ -40,7 +40,7 @@ test("Using a blender to blend two CMYK colors and return a color", () => {
   const color = new Blender(
     { c: 0, m: 7, y: 100, k: 0 },
     { c: 0, m: 100, y: 100, k: 0 },
-    { weight: 0.67 }
+    { weight: 0.67 },
   );
   expect(color.color).toStrictEqual({ red: 255, green: 159, blue: 0 });
 });
@@ -49,7 +49,7 @@ test("Using a blender to blend two HSL colors and return blend data", () => {
   const color = new Blender(
     { h: 56, s: 100, l: 50 },
     { h: 0, s: 100, l: 50 },
-    { weight: 0.67 }
+    { weight: 0.67 },
   );
   expect(color.blendData).toStrictEqual({
     color1: {
@@ -70,7 +70,7 @@ test("Using a blender to blend CMYK and HSV and return blend data", () => {
   const color = new Blender(
     { c: 0, m: 7, y: 100, k: 0 },
     { h: 0, s: 100, v: 100 },
-    { weight: 0.67, returnType: "hex" }
+    { weight: 0.67, returnType: "hex" },
   );
   expect(color.blendData).toStrictEqual({
     color1: {

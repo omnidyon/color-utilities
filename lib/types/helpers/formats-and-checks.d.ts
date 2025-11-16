@@ -24,6 +24,12 @@ export declare const isWebSafeHex: (color: string) => boolean;
  * @returns {boolean}             - is color whit in Gamut
  */
 export declare const gamutCheck: (value: number) => boolean;
+/**
+ * Maps a color to the nearest in-gamut color using clipping
+ * @param {RGB} rgb - Input color in RGB format
+ * @returns {RGB} Nearest in-gamut color
+ */
+export declare const mapToGamut: (rgb: RGB) => RGB;
 export declare const formatValue: (value: number) => number;
 /**
  * Bounds a numeric value to a range between 0 and 255

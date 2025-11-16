@@ -6,11 +6,7 @@
  * found at https://www.isc.org/licenses/
  */
 
-import {
-  colorConverters,
-  toRgbConverters,
-  toXyzConverters,
-} from "../color-converter/convertor-map";
+import { colorConverters, toRgbConverters, toXyzConverters } from "../color-converter/convertor-map";
 import { RGB, XYZ } from "../interfaces/color-spaces.interface";
 
 import { AllResolve, DefaultResolve } from "../constants/init-spaces";
@@ -18,11 +14,7 @@ import { sRgbToXyz } from "../conversions/rgb-conversions";
 import { xyzToSrgb } from "../conversions/xyz-conversions";
 import { checkAndFormat } from "../helpers/color-checks";
 import { ColorData } from "../interfaces/color-data.interface";
-import {
-  ColorConverters,
-  ToRGBConverters,
-  ToXyzConverters,
-} from "../interfaces/converters.interface";
+import { ColorConverters, ToRGBConverters, ToXyzConverters } from "../interfaces/converters.interface";
 import { ColorSpaceUnion, Spaces } from "../types/colors";
 
 /**
@@ -38,7 +30,7 @@ export class Color {
   constructor(
     space: Spaces,
     color: ColorSpaceUnion,
-    resolve: (Spaces | "web_safe")[] | "all" = DefaultResolve
+    resolve: (Spaces | "web_safe")[] | "all" = DefaultResolve,
   ) {
     resolve = resolve === "all" ? AllResolve : resolve;
     color = checkAndFormat(space, color);

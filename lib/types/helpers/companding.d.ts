@@ -43,9 +43,9 @@ export declare const LCompanding: (value: number) => number;
  * more info: http://www.brucelindbloom.com/index.html?Eqn_RGB_XYZ_Matrix.html
  */
 export declare const companding: ({ red, green, blue }: RGB, compandingFun: Function, options?: {
-    gamma?: number | null;
-    rounded?: boolean;
-    whitInBounds?: boolean;
+  gamma?: number | null;
+  rounded?: boolean;
+  whitInBounds?: boolean;
 }) => RGB;
 /*************************************************************
  *                    INVERSE COMPANDING
@@ -80,8 +80,13 @@ export declare const inverseLCompanding: (value: number) => number;
  *                                for a give RGB space data set should be used
  * @returns {RGB}                 - rgb values
  */
-export declare const inverseCompanding: ({ red, green, blue }: RGB, space: SpaceData, inverseCompandingFun: Function, gamma?: boolean) => {
-    Rlin: number;
-    Glin: number;
-    Blin: number;
+export declare const inverseCompanding: (
+  { red, green, blue }: RGB,
+  space: SpaceData,
+  inverseCompandingFun: Function,
+  gamma?: boolean,
+) => {
+  Rlin: number;
+  Glin: number;
+  Blin: number;
 };

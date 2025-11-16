@@ -27,9 +27,9 @@ export declare const blend: (rgb1: RGB, rgb2: RGB, weight?: number) => RGB;
  *  - return type (what color space would you like the return color to be in, default RGB)
  */
 export declare class Blender {
-    private rgb1;
-    private rgb2;
-    color: BlenderColor;
-    blendData: BlendData;
-    constructor(color1: BlenderColor, color2: BlenderColor, options: BlenderOptions);
+  private rgb1;
+  private rgb2;
+  color: BlenderColor;
+  blendData: BlendData;
+  constructor(color1: BlenderColor, color2: BlenderColor, options: BlenderOptions);
 }

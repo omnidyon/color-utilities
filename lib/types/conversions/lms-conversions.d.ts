@@ -12,6 +12,9 @@ import { Matrix3x3 } from "../types/math-types";
  * @param {LMS}                   - LMS values for a color
  * @returns {XYZ}                 - XYZ values for a color
  */
-export declare const lmsToXyz: (lms: LMS | {
+export declare const lmsToXyz: (
+  lms: LMS | {
     [key: string]: number;
-}, matrix?: Matrix3x3) => XYZ;
+  },
+  matrix?: Matrix3x3,
+) => XYZ;

@@ -14,8 +14,8 @@
  *              ( default is 6)
  */
 export interface XyzToRgbOptions {
-    gamma?: boolean;
-    whitInBounds?: boolean;
-    rounded?: boolean;
-    precision?: number;
+  gamma?: boolean;
+  whitInBounds?: boolean;
+  rounded?: boolean;
+  precision?: number;
 }

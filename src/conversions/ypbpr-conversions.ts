@@ -18,7 +18,7 @@ export const yPbPrToSrgb = ({ Y, Pb, Pr }: YPbPr): RGB => {
   const { red, green, blue } = matrixByVectorObjMultiAsSpace(
     CB_CR_CONVERSION_MATRICES.YPBPR_TO_RGB,
     { Y, Pb, Pr },
-    ["red", "green", "blue"]
+    ["red", "green", "blue"],
   ) as unknown as RGB;
   return {
     red: Math.round(red),

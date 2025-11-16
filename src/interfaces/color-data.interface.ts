@@ -22,15 +22,15 @@ import {
   RYB,
   TSL,
   UVW,
+  xvYCC,
   XYY,
   XYZ,
   YCbCr,
+  YcCbcCrc,
   YCoCg,
   YDbDr,
   YIQ,
   YPbPr,
-  YcCbcCrc,
-  xvYCC,
 } from "./color-spaces.interface";
 
 /**

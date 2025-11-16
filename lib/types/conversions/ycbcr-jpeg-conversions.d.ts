@@ -1,4 +1,4 @@
-import { RGB, YCbCr, YPbPr, xvYCC } from "../interfaces/color-spaces.interface";
+import { RGB, xvYCC, YCbCr, YPbPr } from "../interfaces/color-spaces.interface";
 /**
  * Converts a color form an ITU-R BT.601 Y′CbCr space to sRGB space:
  * JFIF (JPEG File Interchange Format) usage of JPEG supports

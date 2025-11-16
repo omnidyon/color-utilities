@@ -19,6 +19,6 @@ export const yiqToSrgb = ({ Y, I, Q }: YIQ): RGB => {
   return matrixByVectorObjMultiAsSpace(
     CB_CR_CONVERSION_MATRICES.YIQ_TO_RGB,
     { Y, I, Q },
-    ["red", "green", "blue"]
+    ["red", "green", "blue"],
   ) as unknown as RGB;
 };

@@ -1,0 +1,60 @@
+{
+  "tasks": {
+    "dev": "deno run --watch main.ts",
+    "lint": "deno lint",
+    "check": "deno check src/",
+    "test": "deno test",
+    "build": "deno run -A build.ts"
+  },
+  "compilerOptions": {
+    "checkJs": false,
+    "strict": false,
+    "noImplicitAny": false,
+    "noImplicitReturns": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "lib": ["deno.ns", "dom", "es2022"],
+    "types": ["node"]
+  },
+  "imports": {
+    "@std/testing": "https://deno.land/std/testing/mod.ts"
+  },
+  "lint": {
+    "rules": {
+      "tags": ["recommended"],
+      "exclude": [
+        "prefer-const",
+        "no-explicit-any",
+        "ban-types",
+        "no-case-declarations",
+        "**/test/**",
+        "**/tests/**",
+        "**/__tests__/**",
+        "**/*.test.*",
+        "**/*.spec.*",
+        "**/test-*",
+        "**/*-test.*"
+      ]
+    }
+  },
+  "fmt": {
+    "lineWidth": 120,
+    "indentWidth": 2,
+    "semiColons": true,
+    "singleQuote": false,
+    "exclude": [
+      "**/test/**",
+      "**/tests/**",
+      "**/__tests__/**",
+      "**/*.test.*",
+      "**/*.spec.*"
+    ]
+  },
+  "exclude": [
+    "**/test/**",
+    "**/tests/**",
+    "**/__tests__/**",
+    "**/*.test.*",
+    "**/*.spec.*"
+  ]
+}

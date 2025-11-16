@@ -12,7 +12,7 @@ import { UVW, XYZ } from "../interfaces/color-spaces.interface";
  * @returns {number}              - XYZ values
  */
 export declare const uvwToXyz: ({ u, v, w }: UVW, refIlluminant?: {
-    X: number;
-    Y: number;
-    Z: number;
+  X: number;
+  Y: number;
+  Z: number;
 }) => XYZ;

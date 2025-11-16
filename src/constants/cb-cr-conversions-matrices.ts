@@ -6,7 +6,7 @@
  * found at https://www.isc.org/licenses/
  */
 
-import { CoefficientsMatrices } from '../interfaces/con-coefficients';
+import { CoefficientsMatrices } from "../interfaces/con-coefficients";
 
 export const CB_CR_CONVERSION_MATRICES: CoefficientsMatrices = {
   /******** ITU_R_BT_601 Conversions */

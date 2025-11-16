@@ -7,40 +7,40 @@
  */
 
 import {
-    CMY,
-    CMYK,
-    CMYK_M,
-    CMY_M,
-    HCY,
-    HCY_M,
-    HSI,
-    HSL,
-    HSL_M,
-    HSV,
-    HSV_M,
-    HWB,
-    HWB_M,
-    LAB,
-    LAB_M,
-    LCH,
-    LCH_M,
-    LMS,
-    LUV,
-    RGB,
-    RGB_M,
-    RYB,
-    RYB_M,
-    TSL,
-    UVW,
-    XYY,
-    XYZ,
-    YCbCr,
-    YCoCg,
-    YDbDr,
-    YIQ,
-    YPbPr,
-    YcCbcCrc,
-    xvYCC,
+  CMY,
+  CMY_M,
+  CMYK,
+  CMYK_M,
+  HCY,
+  HCY_M,
+  HSI,
+  HSL,
+  HSL_M,
+  HSV,
+  HSV_M,
+  HWB,
+  HWB_M,
+  LAB,
+  LAB_M,
+  LCH,
+  LCH_M,
+  LMS,
+  LUV,
+  RGB,
+  RGB_M,
+  RYB,
+  RYB_M,
+  TSL,
+  UVW,
+  xvYCC,
+  XYY,
+  XYZ,
+  YCbCr,
+  YcCbcCrc,
+  YCoCg,
+  YDbDr,
+  YIQ,
+  YPbPr,
 } from "../interfaces/color-spaces.interface";
 import { ColorCheckers } from "../interfaces/converters.interface";
 import { FULL_HEX, HEX } from "../regex";
@@ -57,7 +57,7 @@ import { gamutCheck } from "./formats-and-checks";
  */
 export const checkAndFormat = (
   space: string,
-  color: ColorSpaceUnion
+  color: ColorSpaceUnion,
 ): ColorSpaceUnion => {
   const rgbCheck = new RegExp(/rgb|ps5/g);
   if (rgbCheck.exec(space)) return rgbColorCheck(color as RGB | RGB_M);
@@ -115,7 +115,6 @@ const cmykColorCheck = (color: CMYK | CMYK_M): CMYK => {
   };
 };
 
-
 /**
  * Checks if all HCY values are numeric
  * converts from HCY_M to HCY if needed
@@ -137,10 +136,11 @@ const hcyColorCheck = (color: HCY | HCY_M): HCY => {
 const hexColorCheck = (color: string): string => {
   if (new RegExp(FULL_HEX).exec(color)) return color.slice(1).toUpperCase();
   else if (new RegExp(HEX).exec(color)) return color.toUpperCase();
-  else
+  else {
     throw new Error(
-      "Color data is incorrect: color is not a proper hex value."
+      "Color data is incorrect: color is not a proper hex value.",
     );
+  }
 };
 
 /**
@@ -250,8 +250,7 @@ const rgbColorCheck = (color: RGB | RGB_M): RGB => {
     red: values[0],
     green: values[1],
     blue: values[2],
-    inGamut:
-      gamutCheck(values[0]) && gamutCheck(values[1]) && gamutCheck(values[2]),
+    inGamut: gamutCheck(values[0]) && gamutCheck(values[1]) && gamutCheck(values[2]),
   };
 };
 
@@ -372,7 +371,7 @@ const yDbDrColorCheck = (color: YDbDr): YDbDr => {
  * @returns {YIQ}                 - returns back the same color
  * @throws                        - Color data is incorrect
  */
-const yiqColorCheck = (color: YIQ ): YIQ  => {
+const yiqColorCheck = (color: YIQ): YIQ => {
   const values = Object.values(color);
   return { Y: values[0], I: values[1], Q: values[2] };
 };

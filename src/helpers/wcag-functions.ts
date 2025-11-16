@@ -14,7 +14,7 @@ import { RGB } from "../interfaces/color-spaces.interface";
  * @returns {number} Relative luminance (0-1)
  */
 export const getLuminance = (rgb: RGB): number => {
-  const [r, g, b] = [rgb.red, rgb.green, rgb.blue].map(value => {
+  const [r, g, b] = [rgb.red, rgb.green, rgb.blue].map((value) => {
     value /= 255;
     return value <= 0.03928 ? value / 12.92 : Math.pow((value + 0.055) / 1.055, 2.4);
   });
@@ -45,14 +45,14 @@ export function contrastRatio(color1: RGB, color2: RGB): number {
 export function isAccessible(
   textColor: RGB,
   backgroundColor: RGB,
-  level: 'AA' | 'AAA' = 'AA',
-  size: 'normal' | 'large' = 'normal'
+  level: "AA" | "AAA" = "AA",
+  size: "normal" | "large" = "normal",
 ): boolean {
   const ratio = contrastRatio(textColor, backgroundColor);
   const requirements = {
-    'AA': { 'normal': 4.5, 'large': 3 },
-    'AAA': { 'normal': 7, 'large': 4.5 }
+    "AA": { "normal": 4.5, "large": 3 },
+    "AAA": { "normal": 7, "large": 4.5 },
   };
-  
+
   return ratio >= requirements[level][size];
 }

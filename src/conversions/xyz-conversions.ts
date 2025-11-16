@@ -13,30 +13,11 @@ import { SPACE_DATASETS } from "../constants/space-datasets";
 import { XyzToRgbOptions } from "../interfaces/converter-options";
 
 import { VON_KRIES_COEFFICIENT_MATRICES } from "../constants/transform-matrixes";
-import {
-  D65toCAdaptation,
-  D65toD50Adaptation,
-  D65toEAdaptation,
-} from "../helpers/chromatic-adaptation";
-import {
-  LCompanding,
-  companding,
-  gammaCompanding,
-  sRgbCompanding,
-} from "../helpers/companding";
+import { D65toCAdaptation, D65toD50Adaptation, D65toEAdaptation } from "../helpers/chromatic-adaptation";
+import { companding, gammaCompanding, LCompanding, sRgbCompanding } from "../helpers/companding";
 import { matrixXyzMultiAsSpace } from "../helpers/matrix";
-import { Fu, Fv, _Fv } from "../helpers/white-point";
-import {
-  LAB,
-  LCH,
-  LMS,
-  LUV,
-  RGB,
-  SpaceData,
-  UVW,
-  XYY,
-  XYZ,
-} from "../interfaces/color-spaces.interface";
+import { _Fv, Fu, Fv } from "../helpers/white-point";
+import { LAB, LCH, LMS, LUV, RGB, SpaceData, UVW, XYY, XYZ } from "../interfaces/color-spaces.interface";
 import { Matrix3x3 } from "../types/math-types";
 import { luvToLch_uv } from "./luv-conversions";
 
@@ -77,7 +58,7 @@ export const xyzToLch_ab = (xyz: XYZ): LCH => {
  */
 export const xyzToLuv = (
   { x, y, z }: XYZ,
-  refIlluminant = REFERENCE_ILLUMINANT.D65
+  refIlluminant = REFERENCE_ILLUMINANT.D65,
 ): LUV => {
   x = x > 1 ? x / 100 : x;
   y = y > 1 ? y / 100 : y;
@@ -119,7 +100,7 @@ export const xyzToLch_uv = (xyz: XYZ): LCH => {
  */
 export const xyzToUvw = (
   { x, y, z }: XYZ,
-  refIlluminant = REFERENCE_ILLUMINANT.D65
+  refIlluminant = REFERENCE_ILLUMINANT.D65,
 ): UVW => {
   const u0 = Fu({
     x: refIlluminant.X,
@@ -157,8 +138,8 @@ export const xyzToUvw = (
 const xyzToRgb = (
   { x, y, z }: XYZ,
   space: SpaceData,
-  compandingFun: Function,
-  options?: XyzToRgbOptions
+  compandingFun: (value: number, gamma?: number | null | undefined) => number,
+  options?: XyzToRgbOptions,
 ): RGB => {
   x = x > 1 ? x / 100 : x;
   y = y > 1 ? y / 100 : y;
@@ -195,7 +176,7 @@ export const xyzToSrgb = (xyz: XYZ): RGB => {
 export const xyzToGammaRgb = (
   xyz: XYZ,
   ref: SpaceData,
-  whitInBounds?: boolean
+  whitInBounds?: boolean,
 ): RGB => {
   return xyzToRgb(xyz, ref, gammaCompanding, { gamma: true, whitInBounds });
 };

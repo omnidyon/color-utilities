@@ -18,15 +18,11 @@
  * spaces (𝑅, 𝐺, 𝐵 or 𝐿, 𝑀, 𝑆 spaces)
  */
 
-import { ADAPTIVE_MATRICES } from '../constants/adaptive_matrices';
-import { BRADFORD_COEFFICIENT_MATRICES } from '../constants/transform-matrixes';
-import { XYZ } from '../interfaces/color-spaces.interface';
-import { Matrix3x3 } from '../types/math-types';
-import {
-  matrix3x3Multi,
-  matrixVectorMulti,
-  matrixVectorMultiAsXyz,
-} from './matrix';
+import { ADAPTIVE_MATRICES } from "../constants/adaptive_matrices";
+import { BRADFORD_COEFFICIENT_MATRICES } from "../constants/transform-matrixes";
+import { XYZ } from "../interfaces/color-spaces.interface";
+import { Matrix3x3 } from "../types/math-types";
+import { matrix3x3Multi, matrixVectorMulti, matrixVectorMultiAsXyz } from "./matrix";
 
 /**
  * Transform from XYZ into a cone response domain (ρ, γ, β),
@@ -38,7 +34,7 @@ import {
  */
 const linearBradfordTransformation = (
   sourceWhite: number[],
-  destinationWhite: number[]
+  destinationWhite: number[],
 ): Matrix3x3 => {
   const Ma = BRADFORD_COEFFICIENT_MATRICES.MA;
   const Ma_1 = BRADFORD_COEFFICIENT_MATRICES.MA_1;
@@ -63,12 +59,12 @@ const linearBradfordTransformation = (
 export const bradfordChromaticAdaptation = (
   xyz: XYZ,
   sRefWhite: { X: number; Y: number; Z: number },
-  dRefWhite: { X: number; Y: number; Z: number }
+  dRefWhite: { X: number; Y: number; Z: number },
 ): XYZ => {
   //linear transformation
   const M = linearBradfordTransformation(
     [sRefWhite.X, sRefWhite.Y, sRefWhite.Z],
-    [dRefWhite.X, dRefWhite.Y, dRefWhite.Z]
+    [dRefWhite.X, dRefWhite.Y, dRefWhite.Z],
   );
   return matrixVectorMultiAsXyz(M, xyz);
 };
@@ -3753,7 +3749,7 @@ export const F12to9300KAdaptation = (xyz: XYZ): XYZ => {
  * @returns {XYZ}                 - adapted xyz values
  */
 export const N9300KtoAAdaptation = (xyz: XYZ): XYZ => {
-  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES['9300K_A']);
+  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES["9300K_A"]);
 };
 
 /**
@@ -3762,7 +3758,7 @@ export const N9300KtoAAdaptation = (xyz: XYZ): XYZ => {
  * @returns {XYZ}                 - adapted xyz values
  */
 export const N9300KtoBAdaptation = (xyz: XYZ): XYZ => {
-  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES['9300K_B']);
+  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES["9300K_B"]);
 };
 
 /**
@@ -3771,7 +3767,7 @@ export const N9300KtoBAdaptation = (xyz: XYZ): XYZ => {
  * @returns {XYZ}                 - adapted xyz values
  */
 export const N9300KtoCAdaptation = (xyz: XYZ): XYZ => {
-  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES['9300K_C']);
+  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES["9300K_C"]);
 };
 
 /**
@@ -3780,7 +3776,7 @@ export const N9300KtoCAdaptation = (xyz: XYZ): XYZ => {
  * @returns {XYZ}                 - adapted xyz values
  */
 export const N9300KtoD50Adaptation = (xyz: XYZ): XYZ => {
-  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES['9300K_D50']);
+  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES["9300K_D50"]);
 };
 
 /**
@@ -3789,7 +3785,7 @@ export const N9300KtoD50Adaptation = (xyz: XYZ): XYZ => {
  * @returns {XYZ}                 - adapted xyz values
  */
 export const N9300KtoD55Adaptation = (xyz: XYZ): XYZ => {
-  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES['9300K_D55']);
+  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES["9300K_D55"]);
 };
 
 /**
@@ -3798,7 +3794,7 @@ export const N9300KtoD55Adaptation = (xyz: XYZ): XYZ => {
  * @returns {XYZ}                 - adapted xyz values
  */
 export const N9300KtoD60Adaptation = (xyz: XYZ): XYZ => {
-  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES['9300K_D60']);
+  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES["9300K_D60"]);
 };
 
 /**
@@ -3807,7 +3803,7 @@ export const N9300KtoD60Adaptation = (xyz: XYZ): XYZ => {
  * @returns {XYZ}                 - adapted xyz values
  */
 export const N9300KtoD65Adaptation = (xyz: XYZ): XYZ => {
-  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES['9300K_D65']);
+  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES["9300K_D65"]);
 };
 
 /**
@@ -3816,7 +3812,7 @@ export const N9300KtoD65Adaptation = (xyz: XYZ): XYZ => {
  * @returns {XYZ}                 - adapted xyz values
  */
 export const N9300KtoD75Adaptation = (xyz: XYZ): XYZ => {
-  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES['9300K_D75']);
+  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES["9300K_D75"]);
 };
 
 /**
@@ -3825,7 +3821,7 @@ export const N9300KtoD75Adaptation = (xyz: XYZ): XYZ => {
  * @returns {XYZ}                 - adapted xyz values
  */
 export const N9300KtoD93Adaptation = (xyz: XYZ): XYZ => {
-  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES['9300K_D93']);
+  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES["9300K_D93"]);
 };
 
 /**
@@ -3834,7 +3830,7 @@ export const N9300KtoD93Adaptation = (xyz: XYZ): XYZ => {
  * @returns {XYZ}                 - adapted xyz values
  */
 export const N9300KtoEAdaptation = (xyz: XYZ): XYZ => {
-  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES['9300K_E']);
+  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES["9300K_E"]);
 };
 
 /**
@@ -3843,7 +3839,7 @@ export const N9300KtoEAdaptation = (xyz: XYZ): XYZ => {
  * @returns {XYZ}                 - adapted xyz values
  */
 export const N9300KtoF1Adaptation = (xyz: XYZ): XYZ => {
-  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES['9300K_F1']);
+  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES["9300K_F1"]);
 };
 
 /**
@@ -3852,7 +3848,7 @@ export const N9300KtoF1Adaptation = (xyz: XYZ): XYZ => {
  * @returns {XYZ}                 - adapted xyz values
  */
 export const N9300KtoF2Adaptation = (xyz: XYZ): XYZ => {
-  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES['9300K_F2']);
+  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES["9300K_F2"]);
 };
 
 /**
@@ -3861,7 +3857,7 @@ export const N9300KtoF2Adaptation = (xyz: XYZ): XYZ => {
  * @returns {XYZ}                 - adapted xyz values
  */
 export const N9300KtoF3Adaptation = (xyz: XYZ): XYZ => {
-  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES['9300K_F3']);
+  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES["9300K_F3"]);
 };
 
 /**
@@ -3870,7 +3866,7 @@ export const N9300KtoF3Adaptation = (xyz: XYZ): XYZ => {
  * @returns {XYZ}                 - adapted xyz values
  */
 export const N9300KtoF4Adaptation = (xyz: XYZ): XYZ => {
-  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES['9300K_F4']);
+  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES["9300K_F4"]);
 };
 
 /**
@@ -3879,7 +3875,7 @@ export const N9300KtoF4Adaptation = (xyz: XYZ): XYZ => {
  * @returns {XYZ}                 - adapted xyz values
  */
 export const N9300KtoF5Adaptation = (xyz: XYZ): XYZ => {
-  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES['9300K_F5']);
+  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES["9300K_F5"]);
 };
 
 /**
@@ -3888,7 +3884,7 @@ export const N9300KtoF5Adaptation = (xyz: XYZ): XYZ => {
  * @returns {XYZ}                 - adapted xyz values
  */
 export const N9300KtoF6Adaptation = (xyz: XYZ): XYZ => {
-  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES['9300K_F6']);
+  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES["9300K_F6"]);
 };
 
 /**
@@ -3897,7 +3893,7 @@ export const N9300KtoF6Adaptation = (xyz: XYZ): XYZ => {
  * @returns {XYZ}                 - adapted xyz values
  */
 export const N9300KtoF7Adaptation = (xyz: XYZ): XYZ => {
-  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES['9300K_F7']);
+  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES["9300K_F7"]);
 };
 
 /**
@@ -3906,7 +3902,7 @@ export const N9300KtoF7Adaptation = (xyz: XYZ): XYZ => {
  * @returns {XYZ}                 - adapted xyz values
  */
 export const N9300KtoF8Adaptation = (xyz: XYZ): XYZ => {
-  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES['9300K_F8']);
+  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES["9300K_F8"]);
 };
 
 /**
@@ -3915,7 +3911,7 @@ export const N9300KtoF8Adaptation = (xyz: XYZ): XYZ => {
  * @returns {XYZ}                 - adapted xyz values
  */
 export const N9300KtoF9Adaptation = (xyz: XYZ): XYZ => {
-  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES['9300K_F9']);
+  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES["9300K_F9"]);
 };
 
 /**
@@ -3924,7 +3920,7 @@ export const N9300KtoF9Adaptation = (xyz: XYZ): XYZ => {
  * @returns {XYZ}                 - adapted xyz values
  */
 export const N9300KtoF10Adaptation = (xyz: XYZ): XYZ => {
-  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES['9300K_F10']);
+  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES["9300K_F10"]);
 };
 
 /**
@@ -3933,7 +3929,7 @@ export const N9300KtoF10Adaptation = (xyz: XYZ): XYZ => {
  * @returns {XYZ}                 - adapted xyz values
  */
 export const N9300KtoF11Adaptation = (xyz: XYZ): XYZ => {
-  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES['9300K_F11']);
+  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES["9300K_F11"]);
 };
 
 /**
@@ -3942,5 +3938,5 @@ export const N9300KtoF11Adaptation = (xyz: XYZ): XYZ => {
  * @returns {XYZ}                 - adapted xyz values
  */
 export const N9300KtoF12Adaptation = (xyz: XYZ): XYZ => {
-  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES['9300K_F12']);
+  return chromaticAdaptationPreCal(xyz, ADAPTIVE_MATRICES["9300K_F12"]);
 };

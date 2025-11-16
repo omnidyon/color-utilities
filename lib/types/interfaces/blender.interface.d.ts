@@ -13,8 +13,8 @@ import { RGB } from "./color-spaces.interface";
  *  - returnType: color space that should the resulting color be returned in
  */
 export interface BlenderOptions {
-    weight: number;
-    returnType?: "rgb" | "cmyk" | "hsl" | "hsv" | "hwb" | "hex" | "ryb" | "xyz";
+  weight: number;
+  returnType?: "rgb" | "cmyk" | "hsl" | "hsv" | "hwb" | "hex" | "ryb" | "xyz";
 }
 /**
  * @description Representation of the data form from blending two colors:
@@ -23,9 +23,9 @@ export interface BlenderOptions {
  *  - resultColor: resulting color
  */
 export interface BlendData {
-    color1: BlendColorData;
-    color2: BlendColorData;
-    resultColor: BlenderColor;
+  color1: BlendColorData;
+  color2: BlendColorData;
+  resultColor: BlenderColor;
 }
 /**
  * @description Representation of the color data used for blending:
@@ -36,7 +36,7 @@ export interface BlendData {
  *  - amount: how much of this color was used in the blend
  */
 export interface BlendColorData {
-    data: BlenderColor;
-    rgb: RGB;
-    amount: number;
+  data: BlenderColor;
+  rgb: RGB;
+  amount: number;
 }

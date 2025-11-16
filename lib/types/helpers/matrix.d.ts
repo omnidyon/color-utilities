@@ -28,9 +28,9 @@ export declare const matrixVectorMulti: (matrix: Matrix3x3, vector: number[]) =>
  * @returns {{ [key: string]: number }} - resulting vector object
  */
 export declare const matrixByVectorObjMulti: (matrix: Matrix3x3, vector: {
-    [key: string]: number;
+  [key: string]: number;
 }) => {
-    [key: string]: number;
+  [key: string]: number;
 };
 /**
  * Multiplication of a 3 x 3 Matrix by an Object
@@ -40,9 +40,9 @@ export declare const matrixByVectorObjMulti: (matrix: Matrix3x3, vector: {
  * @returns {{ [key: string]: number }} - resulting vector object
  */
 export declare const matrixByVectorObjMultiAsSpace: (matrix: Matrix3x3, vector: {
-    [key: string]: number;
+  [key: string]: number;
 }, space: string[]) => {
-    [key: string]: number;
+  [key: string]: number;
 };
 /**
  * Multiplication of a 3 x 3 Matrix by an XYZ
@@ -58,7 +58,7 @@ export declare const matrixVectorMultiAsXyz: (matrix: Matrix3x3, vector: XYZ) =>
  * @returns {XYZ}                       - resulting xyz object
  */
 export declare const matrixSpaceMultiAsXyz: (matrix: Matrix3x3, vector: {
-    [key: string]: number;
+  [key: string]: number;
 }) => XYZ;
 /**
  * Multiplication of a 3 x 3 Matrix by an XYZ
@@ -68,7 +68,7 @@ export declare const matrixSpaceMultiAsXyz: (matrix: Matrix3x3, vector: {
  * @returns {{ [key: string]: number }} - resulting color space object
  */
 export declare const matrixXyzMultiAsSpace: (matrix: Matrix3x3, vector: XYZ, space: string[]) => {
-    [key: string]: number;
+  [key: string]: number;
 };
 /**
  * Multiplication of a 3 x 3 Matrix by an RGB
@@ -78,5 +78,5 @@ export declare const matrixXyzMultiAsSpace: (matrix: Matrix3x3, vector: XYZ, spa
  * @returns {{ [key: string]: number }} - resulting color space object
  */
 export declare const matrixRgbMultiAsSpace: (matrix: Matrix3x3, vector: RGB, space: string[]) => {
-    [key: string]: number;
+  [key: string]: number;
 };

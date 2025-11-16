@@ -83,16 +83,15 @@ Color utilities is a collection of tools used to work with colors.
 
 ## About Color Utilities
 
-Color Utilities aims to be a one-stop shop for any work related to colors, mostly built with pure functions
-One can use as little or as much of it as needed or wanted, avoiding unneeded project bloating.
-In the future, this library will most probably grow further.
+Color Utilities aims to be a one-stop shop for any work related to colors, mostly built with pure functions One can use
+as little or as much of it as needed or wanted, avoiding unneeded project bloating. In the future, this library will
+most probably grow further.
 
 ### Limits
 
-<a name="limits"></a>
-Due to the nature of color spaces, certain conversions are more computationally taxing than others.
-Further, certain conversions lead to data loss like RGB to Ansi16 and then back to RGB will most probably result in a
-significant difference in color.
+<a name="limits"></a> Due to the nature of color spaces, certain conversions are more computationally taxing than
+others. Further, certain conversions lead to data loss like RGB to Ansi16 and then back to RGB will most probably result
+in a significant difference in color.
 
 ### Performance Considerations
 
@@ -122,15 +121,13 @@ This library has no dependencies and is completely self-contained.
 
 <a name="importing"></a>
 
-Importing is done using the ES static import declaration.
-Example:
+Importing is done using the ES static import declaration. Example:
 
 ```javascript
 import { Color } from "@dynamize/color-utilities";
 ```
 
-In order to use the import declaration in a source file, the file must be interpreted by the runtime as a
-module.
+In order to use the import declaration in a source file, the file must be interpreted by the runtime as a module.
 
 ### TypeScript Support
 
@@ -147,9 +144,8 @@ const rgb: RGB = color.data.rgb;
 
 ## Color
 
-<a name="color"></a>
-A Color class is a representation of a color in Color Utilities. Use case for this is when you know you will need
-values for more then one color space.
+<a name="color"></a> A Color class is a representation of a color in Color Utilities. Use case for this is when you know
+you will need values for more then one color space.
 
 Usage examples:
 
@@ -191,38 +187,37 @@ const harmony = analogousHarmony(baseColor.data.hsl, true);
 const contrast = deltaECIE00Rgb(textColor.rgb, backgroundColor.rgb);
 ```
 
-| Param place | Description                            |     | Formats                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| ----------- | -------------------------------------- | --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1st         | Space in which color values are passed |     | adobe_98_rgb", "apple_rgb", "ansi16", "ansi256", "best_rgb", "beta_rgb", "bruce_rgb", "cie_rgb", "color_match_rgb", "cmy", "cmyk", "don_rgb_4", "eci_rgb_v2" "etka_space_ps5", "hcy", "hex", "hsi", "hsl", "hsv", "hunter_lab", "hwb", "lab", "lch_ab", "lch_uv", "luv", "lms", "ntsc_rgb", "pal_secam_rgb", "pro_photo_rgb", "rgb", "ryb", "tsl", "smpte_c_rgb", "wide_gamut_rgb", "uvw","xvycc", "xyy", "xyz", "ycbcr_BT601", "yccbccrc", "ycocg", "ydbdr", "yiq", "ypbpr" |
-| 2nd         | Color values                           |     | number, string, or color data object                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| 3rd         | optional - colors spaces to compute    |     | string [] of "all"                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| Param place | Description                            |   | Formats                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| ----------- | -------------------------------------- | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1st         | Space in which color values are passed |   | adobe_98_rgb", "apple_rgb", "ansi16", "ansi256", "best_rgb", "beta_rgb", "bruce_rgb", "cie_rgb", "color_match_rgb", "cmy", "cmyk", "don_rgb_4", "eci_rgb_v2" "etka_space_ps5", "hcy", "hex", "hsi", "hsl", "hsv", "hunter_lab", "hwb", "lab", "lch_ab", "lch_uv", "luv", "lms", "ntsc_rgb", "pal_secam_rgb", "pro_photo_rgb", "rgb", "ryb", "tsl", "smpte_c_rgb", "wide_gamut_rgb", "uvw","xvycc", "xyy", "xyz", "ycbcr_BT601", "yccbccrc", "ycocg", "ydbdr", "yiq", "ypbpr" |
+| 2nd         | Color values                           |   | number, string, or color data object                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| 3rd         | optional - colors spaces to compute    |   | string [] of "all"                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 
 - The first argument we pass is a string value and it represents the space in which color values will be passed.
 - The second argument is the actual color values and it's passed in form of an object.
-- The third argument is optional and has a form of string array or a string "all", if not passed, automatically
-  values for hex, hvs, lab, and cmyk, will be computed, alternatively color spaces listed in the array will be
-  computed.
+- The third argument is optional and has a form of string array or a string "all", if not passed, automatically values
+  for hex, hvs, lab, and cmyk, will be computed, alternatively color spaces listed in the array will be computed.
 
 The result of the above example is:
 
 ```javascript
- Color {
-  rgb: { red: 238, green: 200, blue: 27, inGamut: true },
-  xyz: { x: 56.11537464609447, y: 59.56827248834963, z: 9.578873171265526 },
-  hex: 'EEC81B',
-  hsv: { hue: 49, saturation: 89, value: 93 },
-  lab: {
-    luminance: 81.60296053275202,
-    a: -1.2482727232548951,
-    b: 79.33052440955292
- },
- cmyk: {
-   cyan: 0,
-   magenta: 15.96638655462185,
-   yellow: 88.65546218487395,
-   key: 6.666666666666665
-  }
+Color {
+ rgb: { red: 238, green: 200, blue: 27, inGamut: true },
+ xyz: { x: 56.11537464609447, y: 59.56827248834963, z: 9.578873171265526 },
+ hex: 'EEC81B',
+ hsv: { hue: 49, saturation: 89, value: 93 },
+ lab: {
+   luminance: 81.60296053275202,
+   a: -1.2482727232548951,
+   b: 79.33052440955292
+},
+cmyk: {
+  cyan: 0,
+  magenta: 15.96638655462185,
+  yellow: 88.65546218487395,
+  key: 6.666666666666665
  }
+}
 ```
 
 Lets see an alternative use:
@@ -257,21 +252,20 @@ Color {
 }
 ```
 
-Note:
-If you noticed RGB and XYZ values are returned regardless, they are needed for two main family of spaces and
-there for are computed by default.
+Note: If you noticed RGB and XYZ values are returned regardless, they are needed for two main family of spaces and there
+for are computed by default.
 
-If "all" is passed as a third argument, all 45 spaces will be computed (the return example is to big to show here),
-this option is computationally tasking and it's not a good option for color pickers or other use cases where there
-is a high frequency of re computation. Accidentally the default (no third argument) will return values utilized in
-a Photoshop color picker (rgb, hsv, lab, cmyk and hex).
+If "all" is passed as a third argument, all 45 spaces will be computed (the return example is to big to show here), this
+option is computationally tasking and it's not a good option for color pickers or other use cases where there is a high
+frequency of re computation. Accidentally the default (no third argument) will return values utilized in a Photoshop
+color picker (rgb, hsv, lab, cmyk and hex).
 
 ## Conversions
 
 <a name="conversions"></a>
 
-Here is a list of all color conversion methods, they are standalone, and can be utilized on their own.
-Some of them might have multiple conversions and that will be stated in the table.
+Here is a list of all color conversion methods, they are standalone, and can be utilized on their own. Some of them
+might have multiple conversions and that will be stated in the table.
 
 | Name                | Description                                          | Conversions              | Notes              | Parameter                                                      |
 | ------------------- | ---------------------------------------------------- | ------------------------ | ------------------ | -------------------------------------------------------------- |
@@ -407,61 +401,22 @@ Some of them might have multiple conversions and that will be stated in the tabl
 
 <a name="color_converter"></a>
 
-In situations where you might need to covert from one space into multiple spaces, you can use a color converter.
-Color Converter is faster and less task-intensive than using Color. There are two prebuilt Color Converters,
-RGB Converter and the XYZ Converter.
+In situations where you might need to covert from one space into multiple spaces, you can use a color converter. Color
+Converter is faster and less task-intensive than using Color. There are two prebuilt Color Converters, RGB Converter and
+the XYZ Converter.
 
 ### RGB Converter
 
 <a name="rgb_converter"></a>
 
-RGB Converter is a prebuilt Color Converter that takes a single attribute of a type:
-{ red: number, green: number, blue: number } or { r: number, g: number, b: number }.
+RGB Converter is a prebuilt Color Converter that takes a single attribute of a type: { red: number, green: number, blue:
+number } or { r: number, g: number, b: number }.
 
-It has a single method, "get" and it takes an attribute of type string which represents a color space you would like back.
-Supported conversion are:
-adobe_98_rgb,
-apple_rgb,
-ansi16,
-ansi256,
-best_rgb,
-beta_rgb,
-bruce_rgb,
-cie_rgb,
-color_match_rgb,
-cmy,
-cmyk,
-don_rgb_4,
-etka_space_ps5,
-eci_rgb_v2,
-hcy,
-hex,
-hsi,
-hsl,
-hsv,
-hwb,
-lab,
-lch_ab,
-lch_uv,
-luv,
-ntsc_rgb,
-pal_secam_rgb,
-pro_photo_rgb,
-ryb,
-smpte_c_rgb,
-tsl,
-uvw,
-wide_gamut_rgb,
-ycbcr_BT601,
-ycbcr_BT709,
-ycbcr_BT2020,
-ydbdr,
-ypbpr,
-yccbccrc,
-ycocg,
-yiq,
-xvycc,
-xyz.
+It has a single method, "get" and it takes an attribute of type string which represents a color space you would like
+back. Supported conversion are: adobe_98_rgb, apple_rgb, ansi16, ansi256, best_rgb, beta_rgb, bruce_rgb, cie_rgb,
+color_match_rgb, cmy, cmyk, don_rgb_4, etka_space_ps5, eci_rgb_v2, hcy, hex, hsi, hsl, hsv, hwb, lab, lch_ab, lch_uv,
+luv, ntsc_rgb, pal_secam_rgb, pro_photo_rgb, ryb, smpte_c_rgb, tsl, uvw, wide_gamut_rgb, ycbcr_BT601, ycbcr_BT709,
+ycbcr_BT2020, ydbdr, ypbpr, yccbccrc, ycocg, yiq, xvycc, xyz.
 
 Usage example:
 
@@ -479,35 +434,13 @@ This will return HSV values for the above-given color.
 
 <a name="xyz-converter"></a>
 
-XYZ Converter is a prebuilt Color Converter that takes a single attribute of a type:
-{ x: number, y: number, z: number }.
+XYZ Converter is a prebuilt Color Converter that takes a single attribute of a type: { x: number, y: number, z: number
+}.
 
-It has a single method, "get" and it takes an attribute of type string which represents a color space you would like back.
-Supported conversion are:
-lab,
-lch_ab,
-lch_uv,
-luv,
-uvw,
-rgb,
-adobe_98_rgb,
-apple_rgb,
-best_rgb,
-beta_rgb,
-bruce_rgb,
-cie_rgb,
-color_match_rgb,
-don_rgb_4,
-etka_space_ps5,
-eci_rgb_v2,
-ntsc_rgb,
-pal_secam_rgb,
-pro_photo_rgb,
-smpte_c_rgb,
-wide_gamut_rgb,
-xyy,
-lms,
-hunters_lab.
+It has a single method, "get" and it takes an attribute of type string which represents a color space you would like
+back. Supported conversion are: lab, lch_ab, lch_uv, luv, uvw, rgb, adobe_98_rgb, apple_rgb, best_rgb, beta_rgb,
+bruce_rgb, cie_rgb, color_match_rgb, don_rgb_4, etka_space_ps5, eci_rgb_v2, ntsc_rgb, pal_secam_rgb, pro_photo_rgb,
+smpte_c_rgb, wide_gamut_rgb, xyy, lms, hunters_lab.
 
 Usage example:
 
@@ -523,15 +456,14 @@ This will return LUV values for the above-given color.
 
 ## Color Blending
 
-<a name="color-blending"></a>
-In Color Utilities, there are two ways you can blend colors: either by using the standalone method "blend" or by using a Color Blender.
+<a name="color-blending"></a> In Color Utilities, there are two ways you can blend colors: either by using the
+standalone method "blend" or by using a Color Blender.
 
 ### Blender
 
-<a name="blender"></a>
-Color Blender is quite powerful, it allows you to blend two colors in rgb ,cmyk, hex, hsl ,hsv, hwb, hex, ryb and xyz formats.
-The two colors do not have to be in the same format to blend them, and the returned color can have any of the following formats:
-rgb ,cmyk, hex, hsl ,hsv, hwb, hex, ryb, xyz.
+<a name="blender"></a> Color Blender is quite powerful, it allows you to blend two colors in rgb ,cmyk, hex, hsl ,hsv,
+hwb, hex, ryb and xyz formats. The two colors do not have to be in the same format to blend them, and the returned color
+can have any of the following formats: rgb ,cmyk, hex, hsl ,hsv, hwb, hex, ryb, xyz.
 
 Usage example:
 
@@ -541,13 +473,14 @@ import { Blender } from "@dynamize/color-utilities";
 const color = new Blender(
   { c: 0, m: 7, y: 100, k: 0 },
   { h: 0, s: 100, v: 100 },
-  { weight: 0.67, returnType: "hex" }
+  { weight: 0.67, returnType: "hex" },
 );
 
 console.log(color.color);
 ```
 
-Color Blender can return two things: color or blend data. Color will just be a color value in the format that was requested, blend data will give you more information. Below, you can see the blend data for the above example:
+Color Blender can return two things: color or blend data. Color will just be a color value in the format that was
+requested, blend data will give you more information. Below, you can see the blend data for the above example:
 
 ```javascript
 {
@@ -567,9 +500,9 @@ Color Blender can return two things: color or blend data. Color will just be a c
 
 ### blend
 
-<a name="blend"></a>
-Using the blend method is pretty straight-forward. It takes three parameters, the first two being the RGB values of colors to blend, and the
-last one is a percentage of the first color, the remaining percentage will be allocated to the second one.
+<a name="blend"></a> Using the blend method is pretty straight-forward. It takes three parameters, the first two being
+the RGB values of colors to blend, and the last one is a percentage of the first color, the remaining percentage will be
+allocated to the second one.
 
 Usage example:
 
@@ -579,7 +512,7 @@ import { blend } from "@dynamize/color-utilities";
 const blended = blend(
   { red: 255, green: 237, blue: 0 },
   { red: 255, green: 0, blue: 0 },
-  0.67
+  0.67,
 );
 
 console.log(blended);
@@ -589,9 +522,10 @@ console.log(blended);
 
 <a name="color-harmonies"></a>
 
-With Color utilities, you can also generate a number of Harmony pallets.
-For more information about Harmonies, visit: https://simplified.com/blog/colors/color-harmony
-All Harmonies are a standalone functions and they all the a color in a HSL format ({ hue: number, saturation: number, lightness: number }) and return an array of hex values. In addition, in addition the second optional parameter is a boolean, which represents if returned hex values should start with a #.
+With Color utilities, you can also generate a number of Harmony pallets. For more information about Harmonies, visit:
+https://simplified.com/blog/colors/color-harmony All Harmonies are a standalone functions and they all the a color in a
+HSL format ({ hue: number, saturation: number, lightness: number }) and return an array of hex values. In addition, in
+addition the second optional parameter is a boolean, which represents if returned hex values should start with a #.
 
 ### Analogous
 
@@ -604,7 +538,7 @@ import { analogousHarmony } from "@dynamize/color-utilities";
 
 const pallet = analogousHarmony(
   { hue: 49, saturation: 86, lightness: 52 },
-  true
+  true,
 );
 
 console.log(pallet);
@@ -635,7 +569,7 @@ import { complementaryHarmony } from "@dynamize/color-utilities";
 
 const pallet = complementaryHarmony(
   { hue: 49, saturation: 86, lightness: 52 },
-  true
+  true,
 );
 
 console.log(pallet);
@@ -652,7 +586,7 @@ import { splitComplementaryHarmony } from "@dynamize/color-utilities";
 
 const pallet = splitComplementaryHarmony(
   { hue: 49, saturation: 86, lightness: 52 },
-  true
+  true,
 );
 
 console.log(pallet);
@@ -665,7 +599,7 @@ import { splitComplementaryCWHarmony } from "@dynamize/color-utilities";
 
 const pallet = splitComplementaryCWHarmony(
   { hue: 49, saturation: 86, lightness: 52 },
-  true
+  true,
 );
 
 console.log(pallet);
@@ -678,7 +612,7 @@ import { splitComplementaryCCWHarmony } from "@dynamize/color-utilities";
 
 const pallet = splitComplementaryCCWHarmony(
   { hue: 49, saturation: 86, lightness: 52 },
-  true
+  true,
 );
 
 console.log(pallet);
@@ -695,7 +629,7 @@ import { fourToneCWHarmony } from "@dynamize/color-utilities";
 
 const pallet = fourToneCWHarmony(
   { hue: 49, saturation: 86, lightness: 52 },
-  true
+  true,
 );
 
 console.log(pallet);
@@ -708,7 +642,7 @@ import { fourToneCCWHarmony } from "@dynamize/color-utilities";
 
 const pallet = fourToneCCWHarmony(
   { hue: 49, saturation: 86, lightness: 52 },
-  true
+  true,
 );
 
 console.log(pallet);
@@ -725,7 +659,7 @@ import { fiveToneAHarmony } from "@dynamize/color-utilities";
 
 const pallet = fiveToneAHarmony(
   { hue: 49, saturation: 86, lightness: 52 },
-  true
+  true,
 );
 
 console.log(pallet);
@@ -738,7 +672,7 @@ import { fiveToneBHarmony } from "@dynamize/color-utilities";
 
 const pallet = fiveToneBHarmony(
   { hue: 49, saturation: 86, lightness: 52 },
-  true
+  true,
 );
 
 console.log(pallet);
@@ -751,7 +685,7 @@ import { fiveToneCHarmony } from "@dynamize/color-utilities";
 
 const pallet = fiveToneCHarmony(
   { hue: 49, saturation: 86, lightness: 52 },
-  true
+  true,
 );
 
 console.log(pallet);
@@ -764,7 +698,7 @@ import { fiveToneDHarmony } from "@dynamize/color-utilities";
 
 const pallet = fiveToneDHarmony(
   { hue: 49, saturation: 86, lightness: 52 },
-  true
+  true,
 );
 
 console.log(pallet);
@@ -777,7 +711,7 @@ import { fiveToneEHarmony } from "@dynamize/color-utilities";
 
 const pallet = fiveToneEHarmony(
   { hue: 49, saturation: 86, lightness: 52 },
-  true
+  true,
 );
 
 console.log(pallet);
@@ -794,7 +728,7 @@ import { sixToneCWHarmony } from "@dynamize/color-utilities";
 
 const pallet = sixToneCWHarmony(
   { hue: 49, saturation: 86, lightness: 52 },
-  true
+  true,
 );
 
 console.log(pallet);
@@ -807,7 +741,7 @@ import { sixToneCCWHarmony } from "@dynamize/color-utilities";
 
 const pallet = sixToneCCWHarmony(
   { hue: 49, saturation: 86, lightness: 52 },
-  true
+  true,
 );
 
 console.log(pallet);
@@ -848,7 +782,7 @@ import { tetradicHarmony } from "@dynamize/color-utilities";
 
 const pallet = tetradicHarmony(
   { hue: 49, saturation: 86, lightness: 52 },
-  true
+  true,
 );
 
 console.log(pallet);
@@ -895,7 +829,7 @@ sanitizeColor("rgb", { red: 300, green: -5, blue: 128 });
 <a name="color-manipulation"></a>
 
 ```javascript
-import { lighten, darken, saturate, mix } from "@dynamize/color-utilities";
+import { darken, lighten, mix, saturate } from "@dynamize/color-utilities";
 
 const baseColor = { red: 238, green: 200, blue: 27 };
 
@@ -907,7 +841,9 @@ const saturated = saturate(baseColor, 30);
 // Color mixing
 const mixed = mix(baseColor, { red: 255, green: 0, blue: 0 }, 0.5);
 ```
+
 ## Accessibility Utilities
+
 <a name="accessibility"></a>
 
 ```javascript
@@ -919,46 +855,50 @@ const ratio = contrastRatio(white, black); // ~21:1
 // Verify WCAG compliance
 const accessible = isAccessible(
   { red: 255, green: 255, blue: 255 }, // text
-  { red: 0, green: 100, blue: 200 },   // background
-  'AA' // WCAG level
+  { red: 0, green: 100, blue: 200 }, // background
+  "AA", // WCAG level
 );
 ```
 
 ## CSS Color Utilities
+
 <a name="css-utilities"></a>
 
 ```javascript
-import { toCssString, fromCssString, parseHex, parseRgb } from "@dynamize/color-utilities";
+import { fromCssString, parseHex, parseRgb, toCssString } from "@dynamize/color-utilities";
 
 // Convert to CSS strings
-toCssString(color, 'hex');   // "#EEC81B"
-toCssString(color, 'rgb');   // "rgb(238 200 27)"
-toCssString(color, 'hsl');   // "hsl(49 86% 52%)"
-toCssString(color, 'oklch'); // "oklch(0.823 0.156 89.6)"
+toCssString(color, "hex"); // "#EEC81B"
+toCssString(color, "rgb"); // "rgb(238 200 27)"
+toCssString(color, "hsl"); // "hsl(49 86% 52%)"
+toCssString(color, "oklch"); // "oklch(0.823 0.156 89.6)"
 
 // Parse CSS strings
-fromCssString('#EEC81B');
-fromCssString('rgb(238 200 27)');
-fromCssString('hsl(49 86% 52%)');
+fromCssString("#EEC81B");
+fromCssString("rgb(238 200 27)");
+fromCssString("hsl(49 86% 52%)");
 
 // Or use individual parsers
-parseHex('#EEC81B');
-parseRgb('rgb(238, 200, 27)');
+parseHex("#EEC81B");
+parseRgb("rgb(238, 200, 27)");
 ```
+
 ## Color Interpolation & Scales
+
 <a name="color-interpolation"></a>
 
 ```javascript
-import { interpolate, createScale } from "@dynamize/color-utilities";
+import { createScale, interpolate } from "@dynamize/color-utilities";
 
 // Interpolate between colors
-const purple = interpolate(red, blue, 0.5, 'lab');
+const purple = interpolate(red, blue, 0.5, "lab");
 
 // Create color scales
-const gradient = createScale([red, green, blue], 10, 'hsl');
+const gradient = createScale([red, green, blue], 10, "hsl");
 ```
 
 ## Gamut Utilities
+
 <a name="gamut-utilities"></a>
 
 ```javascript
@@ -976,8 +916,11 @@ mapToGamut({ red: 300, green: -5, blue: 128 });
 
 <a name="color-mixes"></a>
 
-Color Utilities also provides three types of color mixes you can get: Shades, Tints and Tones.
-All of these are generated by a standalone function that receives two arguments, the first being a base color in RGB format, and the second one is an optional options object that can have two values: size (number of colors generated in the pallet) and prefixed (boolean stating if the colors should start with a #). The return value is an array of strings representing hex values.
+Color Utilities also provides three types of color mixes you can get: Shades, Tints and Tones. All of these are
+generated by a standalone function that receives two arguments, the first being a base color in RGB format, and the
+second one is an optional options object that can have two values: size (number of colors generated in the pallet) and
+prefixed (boolean stating if the colors should start with a #). The return value is an array of strings representing hex
+values.
 
 ### Tones
 
@@ -988,7 +931,7 @@ import { getTones } from "@dynamize/color-utilities";
 
 const tones = getTones(
   { red: 238, green: 200, blue: 27 },
-  { size: 10, prefixed: true }
+  { size: 10, prefixed: true },
 );
 
 console.log(tones);
@@ -1003,7 +946,7 @@ import { getTints } from "@dynamize/color-utilities";
 
 const tints = getTints(
   { red: 238, green: 200, blue: 27 },
-  { size: 10, prefixed: true }
+  { size: 10, prefixed: true },
 );
 
 console.log(tints);
@@ -1018,7 +961,7 @@ import { getShades } from "@dynamize/color-utilities";
 
 const shades = getShades(
   { red: 238, green: 200, blue: 27 },
-  { size: 10, prefixed: true }
+  { size: 10, prefixed: true },
 );
 
 console.log(shades);
@@ -1026,7 +969,8 @@ console.log(shades);
 
 ## Chromatic adaptation
 
-Chromatic adaptation can be preformed in two ways, either by using a standalone "adapt" function or by using an Adapter class.
+Chromatic adaptation can be preformed in two ways, either by using a standalone "adapt" function or by using an Adapter
+class.
 
 ### Supported Illuminants
 
@@ -1149,14 +1093,15 @@ The following illuminant adaptations are supported:
 
 ### adapt
 
-"adapt" function which takes two arguments, first being XYZ values 0f the color to be adapted, and a string value representing reference illuminant and a destination illuminant.
+"adapt" function which takes two arguments, first being XYZ values 0f the color to be adapted, and a string value
+representing reference illuminant and a destination illuminant.
 
 ```javascript
 import { adapt } from "@dynamize/color-utilities";
 
 const adapted = adapt(
   { x: 56.11537464609447, y: 59.56827248834963, z: 9.578873171265526 },
-  "A_B"
+  "A_B",
 );
 
 console.log(adapted);
@@ -1166,15 +1111,20 @@ The above example will adapt from a from reference illuminant A to destination i
 
 ### Adapter
 
-The Adapter class is a little bit more powerful but slower, it takes two optional arguments, first being color values, second is the color space of those values, if not passed
-default values will be for color white in XYZ format.
+The Adapter class is a little bit more powerful but slower, it takes two optional arguments, first being color values,
+second is the color space of those values, if not passed default values will be for color white in XYZ format.
 
 Here is a table of all available formats and values:
 
-| Param place | Description                    | Formats                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| ----------- | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
-| # 1         | Color data                     | { r: number, g: number, b: number }, { red: number, green: number, blue: number }, { l: number, a: number, b: number }, { luminance: number, a: number, b: number }, { L: number, u: number, v: number }, { l: number, c: number, h: number }, { lightness: number, chroma: number hue: number }, { long: number, medium: number, short: number }, { u: number, v: number, w: number }, { x: number, y: number, Y: number }, { x: number, y: number, z: number } |
-| # 2         | Color Space of the given color | adobe_98_rgb, apple_rgb, best_rgb, beta_rgb, bruce_rgb, cie_rgb, color_match_rgb, don_rgb_4, eci_rgb_v2, etka_space_ps5, ntsc_rgb, pal_secam_rgb, pro_photo_rgb, rgb, smpte_c_rgb, wide_gamut_rgb                                                                                                                                                                                                                                                                |     |
+## | Param place | Description | Formats | | ----------- | ------------------------------ |
+
+| --- | | # 1 | Color data | { r: number, g: number, b: number }, { red: number, green: number, blue: number }, { l:
+number, a: number, b: number }, { luminance: number, a: number, b: number }, { L: number, u: number, v: number }, { l:
+number, c: number, h: number }, { lightness: number, chroma: number hue: number }, { long: number, medium: number,
+short: number }, { u: number, v: number, w: number }, { x: number, y: number, Y: number }, { x: number, y: number, z:
+number } | | # 2 | Color Space of the given color | adobe_98_rgb, apple_rgb, best_rgb, beta_rgb, bruce_rgb, cie_rgb,
+color_match_rgb, don_rgb_4, eci_rgb_v2, etka_space_ps5, ntsc_rgb, pal_secam_rgb, pro_photo_rgb, rgb, smpte_c_rgb,
+wide_gamut_rgb | |
 
 Example 1:
 
@@ -1203,7 +1153,8 @@ const adapted = adapter
 console.log(adapted);
 ```
 
-The above example is using the "adapt" method with in the Adapter. The difference being that it takes an optional second argument, which is the desired color space of returned color values.
+The above example is using the "adapt" method with in the Adapter. The difference being that it takes an optional second
+argument, which is the desired color space of returned color values.
 
 Example 3:
 
@@ -1220,9 +1171,8 @@ console.log(adapted);
 
 ## Delta E / Color Difference
 
-<a name="delta-e"></a>
-There are multiple ways to calculate the color difference or color distance.
-More information about color difference: https://en.wikipedia.org/wiki/Color_difference
+<a name="delta-e"></a> There are multiple ways to calculate the color difference or color distance. More information
+about color difference: https://en.wikipedia.org/wiki/Color_difference
 
 | Name                | Description                         | Formats                                            |
 | ------------------- | ----------------------------------- | -------------------------------------------------- |
@@ -1241,7 +1191,7 @@ import { comparativeDistance } from "@dynamize/color-utilities";
 
 const diff = comparativeDistance(
   { red: 238, green: 200, blue: 27 },
-  { red: 217, green: 122, blue: 37 }
+  { red: 217, green: 122, blue: 37 },
 );
 
 console.log(diff);
@@ -1260,7 +1210,7 @@ const diff = deltaECIE76Lab(
     a: -1.2482727232548951,
     b: 79.33052440955292,
   },
-  { luminance: 60.61218950864361, a: 31.243719367882505, b: 58.52164206596838 }
+  { luminance: 60.61218950864361, a: 31.243719367882505, b: 58.52164206596838 },
 );
 
 console.log(diff);
@@ -1271,7 +1221,7 @@ import { deltaECIE76Rgb } from "@dynamize/color-utilities";
 
 const diff = deltaECIE76Rgb(
   { red: 238, green: 200, blue: 27 },
-  { red: 217, green: 122, blue: 37 }
+  { red: 217, green: 122, blue: 37 },
 );
 
 console.log(diff);
@@ -1290,7 +1240,7 @@ const diff = deltaECIE94Lab(
     a: -1.2482727232548951,
     b: 79.33052440955292,
   },
-  { luminance: 60.61218950864361, a: 31.243719367882505, b: 58.52164206596838 }
+  { luminance: 60.61218950864361, a: 31.243719367882505, b: 58.52164206596838 },
 );
 
 console.log(diff);
@@ -1309,7 +1259,7 @@ const diff = deltaECIE00Lab(
     a: -1.2482727232548951,
     b: 79.33052440955292,
   },
-  { luminance: 60.61218950864361, a: 31.243719367882505, b: 58.52164206596838 }
+  { luminance: 60.61218950864361, a: 31.243719367882505, b: 58.52164206596838 },
 );
 
 console.log(diff);
@@ -1320,7 +1270,7 @@ import { deltaECIE00Rgb } from "@dynamize/color-utilities";
 
 const diff = deltaECIE00Rgb(
   { red: 238, green: 200, blue: 27 },
-  { red: 217, green: 122, blue: 37 }
+  { red: 217, green: 122, blue: 37 },
 );
 
 console.log(diff);

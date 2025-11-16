@@ -5,21 +5,14 @@
  * Use of this source code is governed by an ISC-style license that can be
  * found at https://opensource.org/license/isc-license-txt/
  */
-import {
-  Adaptations,
-  AdaptiveColorSpaces,
-  AdaptiveColors
-} from '../types/adaptations';
-import { XYZ } from '../interfaces/color-spaces.interface';
-import { matrixVectorMultiAsXyz } from '../helpers/matrix';
-import { AdaptiveMatrices } from '../interfaces/adaptive-matrices.interface';
-import { ADAPTIVE_MATRICES } from '../constants/adaptive_matrices';
-import {
-  fromXyzConverters,
-  toXyzConverters
-} from '../color-converter/convertor-map';
-import { ToXyzConverters } from '../interfaces/converters.interface';
-import { XYZResolverMap } from '../interfaces/resolver.interface';
+import { Adaptations, AdaptiveColors, AdaptiveColorSpaces } from "../types/adaptations";
+import { XYZ } from "../interfaces/color-spaces.interface";
+import { matrixVectorMultiAsXyz } from "../helpers/matrix";
+import { AdaptiveMatrices } from "../interfaces/adaptive-matrices.interface";
+import { ADAPTIVE_MATRICES } from "../constants/adaptive_matrices";
+import { fromXyzConverters, toXyzConverters } from "../color-converter/convertor-map";
+import { ToXyzConverters } from "../interfaces/converters.interface";
+import { XYZResolverMap } from "../interfaces/resolver.interface";
 
 /**
  * Preforms a chromatic adaptation on a color in a XYZ space
@@ -31,7 +24,7 @@ import { XYZResolverMap } from '../interfaces/resolver.interface';
 export const adapt = (color: XYZ, adaptation: Adaptations): XYZ => {
   return matrixVectorMultiAsXyz(
     ADAPTIVE_MATRICES[adaptation as keyof AdaptiveMatrices],
-    color
+    color,
   );
 };
 
@@ -41,14 +34,12 @@ export const adapt = (color: XYZ, adaptation: Adaptations): XYZ => {
  */
 export class Adapter {
   private color!: XYZ;
-  constructor(color?: AdaptiveColors, colorSpace: AdaptiveColorSpaces = 'xyz') {
-    this.color = color
-      ? this.getXyz(color, colorSpace)
-      : { x: 95.05, y: 100.0, z: 108.9 };
+  constructor(color?: AdaptiveColors, colorSpace: AdaptiveColorSpaces = "xyz") {
+    this.color = color ? this.getXyz(color, colorSpace) : { x: 95.05, y: 100.0, z: 108.9 };
   }
 
   private getXyz(color: AdaptiveColors, colorSpace: AdaptiveColorSpaces): XYZ {
-    if (colorSpace === 'xyz') return color as XYZ;
+    if (colorSpace === "xyz") return color as XYZ;
     else return toXyzConverters[colorSpace as keyof ToXyzConverters](color);
   }
 
@@ -60,18 +51,18 @@ export class Adapter {
    */
   adapt(
     adaptation: Adaptations,
-    returnSpace: AdaptiveColorSpaces = 'xyz'
+    returnSpace: AdaptiveColorSpaces = "xyz",
   ): AdaptiveColors {
-    if (returnSpace === 'xyz') {
+    if (returnSpace === "xyz") {
       return adapt(this.color, adaptation);
     } else {
       return fromXyzConverters[returnSpace as keyof XYZResolverMap](
-        adapt(this.color, adaptation)
+        adapt(this.color, adaptation),
       );
     }
   }
 
   set(color: AdaptiveColors, colorSpace?: AdaptiveColorSpaces): void {
-    this.color = this.getXyz(color, colorSpace ?? 'xyz');
+    this.color = this.getXyz(color, colorSpace ?? "xyz");
   }
 }

@@ -7,7 +7,7 @@
  */
 import { CB_CR_CONVERSION_MATRICES } from "../constants/cb-cr-conversions-matrices";
 import { matrixByVectorObjMultiAsSpace } from "../helpers/matrix";
-import { RGB, YCbCr, YPbPr, xvYCC } from "../interfaces/color-spaces.interface";
+import { RGB, xvYCC, YCbCr, YPbPr } from "../interfaces/color-spaces.interface";
 
 /**
  * Converts a color form an ITU-R BT.601 Y′CbCr space to sRGB space:
@@ -22,7 +22,7 @@ export const yCbCrBT601ToSrgb = ({ Y, Cb, Cr }: YCbCr): RGB => {
   const { red, green, blue } = matrixByVectorObjMultiAsSpace(
     CB_CR_CONVERSION_MATRICES.BT_601_YCBCR_TO_RGB,
     { Y: Y - 16, Cb: Cb - 128, Cr: Cr - 128 },
-    ["red", "green", "blue"]
+    ["red", "green", "blue"],
   ) as unknown as RGB;
   return {
     red: Math.round(red),
@@ -69,7 +69,7 @@ export const yCbCrBT709ToSrgb = ({ Y, Cb, Cr }: YCbCr): RGB => {
   const { red, green, blue } = matrixByVectorObjMultiAsSpace(
     CB_CR_CONVERSION_MATRICES.BT_709_YCBCR_TO_RGB,
     { Y, Cb, Cr },
-    ["red", "green", "blue"]
+    ["red", "green", "blue"],
   ) as unknown as RGB;
   return {
     red: Math.round(red),

@@ -17,8 +17,8 @@
  * an illuminant called β into the cone-like or sharper sensor
  * spaces (𝑅, 𝐺, 𝐵 or 𝐿, 𝑀, 𝑆 spaces)
  */
-import { XYZ } from '../interfaces/color-spaces.interface';
-import { Matrix3x3 } from '../types/math-types';
+import { XYZ } from "../interfaces/color-spaces.interface";
+import { Matrix3x3 } from "../types/math-types";
 /**
  * Preforms a chromatic adaptation algorithm on given XYZ values
  * @param {XYZ}                                 - color values
@@ -27,13 +27,13 @@ import { Matrix3x3 } from '../types/math-types';
  * @returns {XYZ} - adapted xyz values
  */
 export declare const bradfordChromaticAdaptation: (xyz: XYZ, sRefWhite: {
-    X: number;
-    Y: number;
-    Z: number;
+  X: number;
+  Y: number;
+  Z: number;
 }, dRefWhite: {
-    X: number;
-    Y: number;
-    Z: number;
+  X: number;
+  Y: number;
+  Z: number;
 }) => XYZ;
 /**
  * Preforms a chromatic adaptation algorithm on given XYZ values with a

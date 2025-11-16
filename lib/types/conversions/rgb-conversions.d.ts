@@ -5,7 +5,32 @@
  * Use of this source code is governed by an ISC-style license that can be
  * found at https://www.isc.org/licenses/
  */
-import { CMY, CMYK, HCY, HSI, HSL, HSV, HWB, LAB, LCH, LUV, RGB, RGBA, RYB, SpaceData, TSL, UVW, XYZ, YCbCr, YCoCg, YDbDr, YIQ, YPbPr, YcCbcCrc, xvYCC } from '../interfaces/color-spaces.interface';
+import {
+  CMY,
+  CMYK,
+  HCY,
+  HSI,
+  HSL,
+  HSV,
+  HWB,
+  LAB,
+  LCH,
+  LUV,
+  RGB,
+  RGBA,
+  RYB,
+  SpaceData,
+  TSL,
+  UVW,
+  xvYCC,
+  XYZ,
+  YCbCr,
+  YcCbcCrc,
+  YCoCg,
+  YDbDr,
+  YIQ,
+  YPbPr,
+} from "../interfaces/color-spaces.interface";
 /*******************************************************************
  *                           HELPERS
  * *****************************************************************/

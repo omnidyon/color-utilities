@@ -18,7 +18,7 @@ export declare const luvToLch_uv: ({ L, u, v }: LUV) => LCH;
  * @returns {XYZ}                 - xyz color value
  */
 export declare const luvToXyz: ({ L, u, v }: LUV, refIlluminant?: {
-    X: number;
-    Y: number;
-    Z: number;
+  X: number;
+  Y: number;
+  Z: number;
 }) => XYZ;

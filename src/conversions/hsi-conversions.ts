@@ -6,8 +6,8 @@
  * found at https://www.isc.org/licenses/
  */
 
-import { HSI, RGB } from '../interfaces/color-spaces.interface';
-import { hcyOrHsiToSrgb } from './hcy-conversions';
+import { HSI, RGB } from "../interfaces/color-spaces.interface";
+import { hcyOrHsiToSrgb } from "./hcy-conversions";
 
 /**
  * Converts a color form an HSI space to sRGB space

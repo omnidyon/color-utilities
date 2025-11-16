@@ -7,7 +7,7 @@
  */
 
 import { REFERENCE_ILLUMINANT } from "../constants/reference-illuminants";
-import { Fu, _Fv } from "../helpers/white-point";
+import { _Fv, Fu } from "../helpers/white-point";
 import { UVW, XYZ } from "../interfaces/color-spaces.interface";
 
 /**
@@ -17,7 +17,7 @@ import { UVW, XYZ } from "../interfaces/color-spaces.interface";
  */
 export const uvwToXyz = (
   { u, v, w }: UVW,
-  refIlluminant = REFERENCE_ILLUMINANT.D65
+  refIlluminant = REFERENCE_ILLUMINANT.D65,
 ): XYZ => {
   if (w === 0) return { x: 0, y: 0, z: 0 };
   const v0 = _Fv({

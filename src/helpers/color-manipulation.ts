@@ -21,7 +21,7 @@ export const lighten = (rgb: RGB, amount: number): RGB => {
   const lab = sRgbToLab(rgb);
   const newLuminance = Math.min(100, Math.max(0, lab.luminance + amount));
   return labToSrgb({ ...lab, luminance: newLuminance });
-}
+};
 
 /**
  * Darkens a color by adjusting its luminance in LAB space
@@ -43,7 +43,7 @@ export const saturate = (rgb: RGB, amount: number): RGB => {
   const hsl = sRgbToHsl(rgb);
   const newSaturation = Math.min(100, Math.max(0, hsl.saturation + amount));
   return hslToRgb({ ...hsl, saturation: newSaturation });
-}
+};
 
 /**
  * Desaturates a color by reducing saturation in HSL space
@@ -93,6 +93,3 @@ export function mix(color1: RGB, color2: RGB, weight = 0.5): RGB {
     inGamut: true,
   };
 }
-
-
-

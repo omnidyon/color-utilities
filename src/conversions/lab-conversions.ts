@@ -25,10 +25,7 @@ export const labToXyz = ({ luminance, a, b }: LAB): XYZ => {
   const fY = (luminance + 16) / 116;
   const z = f(fY - b / 200) * REFERENCE_ILLUMINANT.D65.Z * 100 + 0;
   const x = f(a / 500 + fY) * REFERENCE_ILLUMINANT.D65.X * 100 + 0;
-  const y =
-    (luminance > CIE_κ * CIE_ϵ
-      ? Math.pow((luminance + 16) / 116, 3)
-      : luminance / CIE_κ) *
+  const y = (luminance > CIE_κ * CIE_ϵ ? Math.pow((luminance + 16) / 116, 3) : luminance / CIE_κ) *
       REFERENCE_ILLUMINANT.D65.Y *
       100 +
     0;
@@ -46,8 +43,7 @@ const f = (num: number): number => {
  */
 export const labToLch_ab = ({ luminance, a, b }: LAB): LCH => {
   const hr = Math.atan2(b, a);
-  const hue =
-    hr < 0 ? (hr * 360) / 2 / Math.PI + 360 : (hr * 360) / 2 / Math.PI;
+  const hue = hr < 0 ? (hr * 360) / 2 / Math.PI + 360 : (hr * 360) / 2 / Math.PI;
   const chroma = Math.sqrt(a * a + b * b);
 
   return { lightness: luminance, chroma, hue };
@@ -59,13 +55,13 @@ export const labToLch_ab = ({ luminance, a, b }: LAB): LCH => {
  * @param {OKLab} oklab            - OKLab color object to convert
  * @returns {LCH}                  - OKLCH color object with lightness, chroma, and hue
  */
-export const oklabToOKLCH = (oklab: LAB): LCH =>  {
+export const oklabToOKLCH = (oklab: LAB): LCH => {
   const C = Math.sqrt(oklab.a * oklab.a + oklab.b * oklab.b);
   let H = Math.atan2(oklab.b, oklab.a) * (180 / Math.PI);
   if (H < 0) H += 360;
-  
+
   return { lightness: oklab.luminance, chroma: C, hue: H };
-}
+};
 
 /**
  * Converts OKLAB color values to sRGB color values
@@ -73,11 +69,10 @@ export const oklabToOKLCH = (oklab: LAB): LCH =>  {
  * @returns {RGB} sRGB color values
  */
 export const oKLabToSRGB = (oklab: LAB): RGB => {
-
   const LMS_c = matrixByVectorObjMultiAsSpace(
     CB_CR_CONVERSION_MATRICES.OKLab_TO_LMS,
     { luminance: oklab.luminance, a: oklab.a, b: oklab.b },
-    ['L', 'M', 'S']
+    ["L", "M", "S"],
   );
 
   const LMS = {
@@ -89,15 +84,15 @@ export const oKLabToSRGB = (oklab: LAB): RGB => {
   const linearRGB = matrixByVectorObjMultiAsSpace(
     CB_CR_CONVERSION_MATRICES.LMS_TO_Linear_RGB,
     LMS,
-    ['red', 'green', 'blue']
+    ["red", "green", "blue"],
   );
 
   // Apply sRGB gamma correction
-   const srgb = {
-     red: Math.round(linearValToSRGBVal(linearRGB.red)),
-     green: Math.round(linearValToSRGBVal(linearRGB.green)),
-     blue: Math.round(linearValToSRGBVal(linearRGB.blue)),
-   };
+  const srgb = {
+    red: Math.round(linearValToSRGBVal(linearRGB.red)),
+    green: Math.round(linearValToSRGBVal(linearRGB.green)),
+    blue: Math.round(linearValToSRGBVal(linearRGB.blue)),
+  };
 
   // Convert to 0-255 range and check gamut
   const rgb = {
@@ -132,5 +127,3 @@ export const hunterLabToXyz = ({ luminance, a, b }: LAB): XYZ => {
   const z = -(((b / 7) * luminance) / 10 - y) / 0.847;
   return { x, y, z };
 };
-
-

@@ -6,23 +6,23 @@
  * found at https://opensource.org/license/isc-license-txt/
  */
 
-import { LAB, LCH, RGB } from '../interfaces/color-spaces.interface';
-import { degreesToRadians, radiansToDegrees } from '../helpers/formats-and-checks';
-import { getDeltaChroma } from './delta-e-helpers';
-import { sRgbToLab } from './../conversions/rgb-conversions';
+import { LAB, LCH, RGB } from "../interfaces/color-spaces.interface";
+import { degreesToRadians, radiansToDegrees } from "../helpers/formats-and-checks";
+import { getDeltaChroma } from "./delta-e-helpers";
+import { sRgbToLab } from "./../conversions/rgb-conversions";
 
 /**
  * Computes Delta E using the CIE2000 algorithm
  * - more infor: http://en.wikipedia.org/wiki/Color_difference#CIEDE2000
  * @param {LAB}				- values for the first color
  * @param {LAB}				- values for the second color
- * @param {LCH}				- optional waight configuration object 
+ * @param {LCH}				- optional waight configuration object
  * @returns {number}	    - color difference value
-*/
+ */
 export const deltaECIE00Lab = (
   lab1: LAB,
   lab2: LAB,
-  weights?: LCH
+  weights?: LCH,
 ): number => {
   const lightness = weights?.lightness ?? 1;
   const chroma = weights?.chroma ?? 1;
@@ -34,30 +34,29 @@ export const deltaECIE00Lab = (
   const c1 = getDeltaChroma(lab1.a, lab1.b);
   const c2 = getDeltaChroma(lab2.a, lab2.b);
 
-  const CBar = ( c1 + c2 ) / 2;
+  const CBar = (c1 + c2) / 2;
 
-  const aPrime1 = getPrimeA( lab1.a, CBar );
-  const aPrime2 = getPrimeA( lab2.a, CBar );
+  const aPrime1 = getPrimeA(lab1.a, CBar);
+  const aPrime2 = getPrimeA(lab2.a, CBar);
 
-  const CPrime1 = getDeltaChroma( aPrime1, lab1.b );
-  const CPrime2 = getDeltaChroma( aPrime2, lab2.b );
+  const CPrime1 = getDeltaChroma(aPrime1, lab1.b);
+  const CPrime2 = getDeltaChroma(aPrime2, lab2.b);
 
-  const CBarPrime = ( CPrime1 + CPrime2 ) / 2;
+  const CBarPrime = (CPrime1 + CPrime2) / 2;
   const deltaC = CPrime2 - CPrime1;
 
-  const SsubL = 1 + ( 0.015 * Math.pow( Lbar - 50, 2 ) ) / Math.sqrt( 20 + Math.pow( Lbar - 50, 2 ) );
+  const SsubL = 1 + (0.015 * Math.pow(Lbar - 50, 2)) / Math.sqrt(20 + Math.pow(Lbar - 50, 2));
   const SsubC = 1 + 0.045 * CBarPrime;
 
-  const hPrime1 = getHueAngle( lab1.b, aPrime1 ); 
-  const hPrime2 = getHueAngle(lab2.b, aPrime2); 
+  const hPrime1 = getHueAngle(lab1.b, aPrime1);
+  const hPrime2 = getHueAngle(lab2.b, aPrime2);
 
-  const deltahPrime = getDeltahPrime(c1, c2, hPrime1, hPrime2); 
-  const deltaHPrime =
-    2 *
+  const deltahPrime = getDeltahPrime(c1, c2, hPrime1, hPrime2);
+  const deltaHPrime = 2 *
     Math.sqrt(CPrime1 * CPrime2) *
-    Math.sin(degreesToRadians(deltahPrime) / 2); 
+    Math.sin(degreesToRadians(deltahPrime) / 2);
 
-  const HBarPrime = getHBarPrime(hPrime1, hPrime2); 
+  const HBarPrime = getHBarPrime(hPrime1, hPrime2);
   const T = getT(HBarPrime);
 
   const SsubH = 1 + 0.015 * CBarPrime * T;
@@ -68,7 +67,7 @@ export const deltaECIE00Lab = (
   const h = deltaHPrime / (hue * SsubH);
 
   return Math.sqrt(
-    Math.pow(L, 2) + Math.pow(c, 2) + Math.pow(h, 2) + RsubT * c * h
+    Math.pow(L, 2) + Math.pow(c, 2) + Math.pow(h, 2) + RsubT * c * h,
   );
 };
 
@@ -81,8 +80,8 @@ export const deltaECIE00Lab = (
  *  perception of two given colors
  */
 export const deltaECIE00Rgb = (rgb1: RGB, rgb2: RGB): number => {
-  return deltaECIE00Lab( sRgbToLab( rgb1 ), sRgbToLab( rgb2 ) );
-}
+  return deltaECIE00Lab(sRgbToLab(rgb1), sRgbToLab(rgb2));
+};
 
 /**
  * Calculates prime a.
@@ -122,7 +121,7 @@ const getDeltahPrime = (
   C1: number,
   C2: number,
   hPrime1: number,
-  hPrime2: number
+  hPrime2: number,
 ): number => {
   if (!C1 || !C2) return 0;
   else if (Math.abs(hPrime1 - hPrime2) <= 180) return hPrime2 - hPrime1;
@@ -137,9 +136,7 @@ const getDeltahPrime = (
  * @returns {number}               - H Bar value
  */
 const getHBarPrime = (hPrime1: number, hPrime2: number): number => {
-  return Math.abs(hPrime1 - hPrime2) > 180
-    ? (hPrime1 + hPrime2 + 360) / 2
-    : (hPrime1 + hPrime2) / 2;
+  return Math.abs(hPrime1 - hPrime2) > 180 ? (hPrime1 + hPrime2 + 360) / 2 : (hPrime1 + hPrime2) / 2;
 };
 
 /**
@@ -167,10 +164,10 @@ const getRsubT = (CBarPrime: number, HBarPrime: number): number => {
   return (
     -2 *
     Math.sqrt(
-      Math.pow(CBarPrime, 7) / (Math.pow(CBarPrime, 7) + Math.pow(25, 7))
+      Math.pow(CBarPrime, 7) / (Math.pow(CBarPrime, 7) + Math.pow(25, 7)),
     ) *
     Math.sin(
-      degreesToRadians(60 * Math.exp(-Math.pow((HBarPrime - 275) / 25, 2)))
+      degreesToRadians(60 * Math.exp(-Math.pow((HBarPrime - 275) / 25, 2))),
     )
   );
 };

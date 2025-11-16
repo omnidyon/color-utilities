@@ -6,7 +6,7 @@
  * found at https://www.isc.org/licenses/
  */
 
-import { sRgbToHex, sRgbaToHex } from "../conversions/rgb-conversions";
+import { sRgbaToHex, sRgbToHex } from "../conversions/rgb-conversions";
 import { RGB, RGBA } from "../interfaces/color-spaces.interface";
 import { MixerOptions } from "../interfaces/mixer.interface";
 
@@ -21,7 +21,7 @@ const scale = (
   rgb: RGB | RGBA,
   size: number,
   scale: number,
-  prefixed?: boolean
+  prefixed?: boolean,
 ): string[] => {
   let { red, green, blue } = rgb;
   const scaled = [];
@@ -70,12 +70,9 @@ const scale = (
  */
 export const getShades = (
   rgb: RGB | RGBA,
-  options?: MixerOptions
+  options?: MixerOptions,
 ): string[] => {
-  const size: number =
-    !options?.size || !isFinite(options?.size as number)
-      ? 10
-      : (options?.size as number);
+  const size: number = !options?.size || !isFinite(options?.size as number) ? 10 : (options?.size as number);
 
   return scale(rgb, size, 0, options?.prefixed);
 };
@@ -90,10 +87,7 @@ export const getShades = (
  * @returns {string[]} - array of tints in hex format
  */
 export const getTints = (rgb: RGB | RGBA, options?: MixerOptions): string[] => {
-  const size: number =
-    !options?.size || !isFinite(options?.size as number)
-      ? 10
-      : (options?.size as number);
+  const size: number = !options?.size || !isFinite(options?.size as number) ? 10 : (options?.size as number);
 
   return scale(rgb, size, 1, options?.prefixed);
 };
@@ -108,10 +102,7 @@ export const getTints = (rgb: RGB | RGBA, options?: MixerOptions): string[] => {
  * @returns {string[]} - array of tones in hex format
  */
 export const getTones = (rgb: RGB | RGBA, options?: MixerOptions): string[] => {
-  const size: number =
-    !options?.size || !isFinite(options?.size as number)
-      ? 10
-      : (options?.size as number);
+  const size: number = !options?.size || !isFinite(options?.size as number) ? 10 : (options?.size as number);
 
   return scale(rgb, size, 0.5, options?.prefixed);
 };

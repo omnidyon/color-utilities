@@ -1,6 +1,6 @@
-import { RGB, RGBA, RGBA_M, RGB_M } from '../interfaces/color-spaces.interface';
-import { RGBConSpaces } from '../types/colors';
-import { ColorConverter } from './color-converter';
+import { RGB, RGB_M, RGBA, RGBA_M } from "../interfaces/color-spaces.interface";
+import { RGBConSpaces } from "../types/colors";
+import { ColorConverter } from "./color-converter";
 /**
  * @description
  * A class used to convert a color in RGB color space in to other color spaces
@@ -9,6 +9,6 @@ import { ColorConverter } from './color-converter';
  *  @param {{ [key: string]: Function }} - a converter map
  */
 export declare class RgbConverter extends ColorConverter {
-    constructor(color: RGB | RGBA | RGB_M | RGBA_M);
-    get(converts: RGBConSpaces): any;
+  constructor(color: RGB | RGBA | RGB_M | RGBA_M);
+  get(converts: RGBConSpaces): any;
 }

@@ -6,22 +6,18 @@
  * found at https://www.isc.org/licenses/
  */
 
-import { CB_CR_CONVERSION_MATRICES } from '../constants/cb-cr-conversions-matrices';
-import { Nb, Nr } from '../constants/conditionals';
-import { SPACE_DATASETS } from '../constants/space-datasets';
-import {
-  CtoD65Adaptation,
-  D50toD65Adaptation,
-  EtoD65Adaptation,
-} from '../helpers/chromatic-adaptation';
+import { CB_CR_CONVERSION_MATRICES } from "../constants/cb-cr-conversions-matrices";
+import { Nb, Nr } from "../constants/conditionals";
+import { SPACE_DATASETS } from "../constants/space-datasets";
+import { CtoD65Adaptation, D50toD65Adaptation, EtoD65Adaptation } from "../helpers/chromatic-adaptation";
 import {
   inverseCompanding,
   inverseGammaCompanding,
   inverseLCompanding,
   inverseSrbgCompanding,
-} from '../helpers/companding';
-import { clamp, formatValue, gamutCheck } from '../helpers/formats-and-checks';
-import { matrixByVectorObjMultiAsSpace } from '../helpers/matrix';
+} from "../helpers/companding";
+import { clamp, formatValue, gamutCheck } from "../helpers/formats-and-checks";
+import { matrixByVectorObjMultiAsSpace } from "../helpers/matrix";
 import {
   CMY,
   CMYK,
@@ -39,18 +35,18 @@ import {
   SpaceData,
   TSL,
   UVW,
+  xvYCC,
   XYZ,
   YCbCr,
+  YcCbcCrc,
   YCoCg,
   YDbDr,
   YIQ,
   YPbPr,
-  YcCbcCrc,
-  xvYCC,
-} from '../interfaces/color-spaces.interface';
-import { labToLch_ab } from './lab-conversions';
-import { luvToLch_uv } from './luv-conversions';
-import { decimalToHex } from './number-conversions';
+} from "../interfaces/color-spaces.interface";
+import { labToLch_ab } from "./lab-conversions";
+import { luvToLch_uv } from "./luv-conversions";
+import { decimalToHex } from "./number-conversions";
 import {
   xyzToAdobeRgb,
   xyzToAppleRgb,
@@ -70,9 +66,9 @@ import {
   xyzToSmpteCRgb,
   xyzToUvw,
   xyzToWideGamutRgb,
-} from './xyz-conversions';
-import { yCbCrBT601ToXvYcc } from './ycbcr-jpeg-conversions';
-import { isOKLCHInGamut } from './lch-conversions';
+} from "./xyz-conversions";
+import { yCbCrBT601ToXvYcc } from "./ycbcr-jpeg-conversions";
+import { isOKLCHInGamut } from "./lch-conversions";
 
 /*******************************************************************
  *                           HELPERS
@@ -87,10 +83,8 @@ export const sRGBToLinear = (srgb: RGB): RGB => {
   const { red, green, blue } = srgb;
   return {
     red: red <= 0.04045 ? red / 12.92 : Math.pow((red + 0.055) / 1.055, 2.4),
-    green:
-      green <= 0.04045 ? green / 12.92 : Math.pow((green + 0.055) / 1.055, 2.4),
-    blue:
-      blue <= 0.04045 ? blue / 12.92 : Math.pow((blue + 0.055) / 1.055, 2.4),
+    green: green <= 0.04045 ? green / 12.92 : Math.pow((green + 0.055) / 1.055, 2.4),
+    blue: blue <= 0.04045 ? blue / 12.92 : Math.pow((blue + 0.055) / 1.055, 2.4),
   };
 };
 
@@ -103,16 +97,9 @@ export const sRGBToLinear = (srgb: RGB): RGB => {
 export const linearToSRGB = (linerRgb: RGB): RGB => {
   const { red, green, blue } = linerRgb;
   return {
-    red:
-      red <= 0.0031308 ? red * 12.92 : 1.055 * Math.pow(red, 1 / 2.4) - 0.055,
-    green:
-      green <= 0.0031308
-        ? green * 12.92
-        : 1.055 * Math.pow(green, 1 / 2.4) - 0.055,
-    blue:
-      blue <= 0.0031308
-        ? blue * 12.92
-        : 1.055 * Math.pow(blue, 1 / 2.4) - 0.055,
+    red: red <= 0.0031308 ? red * 12.92 : 1.055 * Math.pow(red, 1 / 2.4) - 0.055,
+    green: green <= 0.0031308 ? green * 12.92 : 1.055 * Math.pow(green, 1 / 2.4) - 0.055,
+    blue: blue <= 0.0031308 ? blue * 12.92 : 1.055 * Math.pow(blue, 1 / 2.4) - 0.055,
   };
 };
 
@@ -123,9 +110,7 @@ export const linearToSRGB = (linerRgb: RGB): RGB => {
  * @returns {number}                - sRGB color value (0-1 range)
  */
 export const linearValToSRGBVal = (val: number): number => {
-  return val <= 0.0031308
-    ? val * 12.92
-    : 1.055 * Math.pow(val, 1 / 2.4) - 0.055;
+  return val <= 0.0031308 ? val * 12.92 : 1.055 * Math.pow(val, 1 / 2.4) - 0.055;
 };
 
 /**
@@ -182,7 +167,7 @@ export const rgbInvert = ({ red, green, blue }: RGB): RGB => ({
 const getRange = (
   red: number,
   green: number,
-  blue: number
+  blue: number,
 ): { min: number; max: number; delta: number } => {
   const min = Math.min(red, green, blue);
   const max = Math.max(red, green, blue);
@@ -205,7 +190,7 @@ export const sRgbToHue = (
   green: number,
   blue: number,
   max: number,
-  delta: number
+  delta: number,
 ): number => {
   let hue = 0;
   switch (max) {
@@ -247,8 +232,7 @@ export const rgbTo1_0rgb = (rgb: RGB): RGB => {
  * @param {RBG}                   - sRBG values for a color
  * @returns {number}              - luminance value
  */
-export const sRgbToLuminance = ({ red, green, blue }: RGB): number =>
-  0.2126 * red + 0.7152 * green + 0.0722 * blue;
+export const sRgbToLuminance = ({ red, green, blue }: RGB): number => 0.2126 * red + 0.7152 * green + 0.0722 * blue;
 
 /*******************************************************************
  *                        ADOBE 1998 RGB
@@ -417,7 +401,7 @@ export const cieRgbToXyz = (rgb: RGB): XYZ => {
  */
 export const sRgbToColorMatchRgb = (
   rgb: RGB,
-  xyz: XYZ = sRgbToXyz(rgb)
+  xyz: XYZ = sRgbToXyz(rgb),
 ): RGB => {
   return xyzToColorMatchRgb(xyz);
 };
@@ -471,7 +455,7 @@ export const donRgb4ToXyz = (rgb: RGB): XYZ => {
  */
 export const sRgbToEtkaSpacePs5 = (
   rgb: RGB,
-  xyz: XYZ = sRgbToXyz(rgb)
+  xyz: XYZ = sRgbToXyz(rgb),
 ): RGB => {
   return xyzToEtkaSpacePs5(xyz);
 };
@@ -603,7 +587,7 @@ export const smpteCRgbToXyz = (rgb: RGB): XYZ => {
  */
 export const sRgbToWideGamutRgb = (
   rgb: RGB,
-  xyz: XYZ = sRgbToXyz(rgb)
+  xyz: XYZ = sRgbToXyz(rgb),
 ): RGB => {
   return xyzToWideGamutRgb(xyz);
 };
@@ -677,7 +661,7 @@ export const sRgbToXyz = (rgb: RGB): XYZ => {
  */
 export const sRgbToAnsi16 = (
   rgb: RGB,
-  saturation: number | null = null
+  saturation: number | null = null,
 ): number => {
   let value;
   if (saturation) value = saturation;
@@ -692,8 +676,7 @@ export const sRgbToAnsi16 = (
     return 30;
   }
 
-  let ansi =
-    30 +
+  let ansi = 30 +
     ((Math.round(rgb.blue / 255) << 2) |
       (Math.round(rgb.green / 255) << 1) |
       Math.round(rgb.red / 255));
@@ -759,15 +742,12 @@ export const sRgbToCmy = (rgb: RGB): CMY => {
  */
 export const sRgbToCmyk = (rgb: RGB, round?: boolean): CMYK => {
   if (!gamutCheck(rgb.red) || !gamutCheck(rgb.green) || !gamutCheck(rgb.blue)) {
-    throw new Error('Provided rgb values must be within range of 0 to 255!');
+    throw new Error("Provided rgb values must be within range of 0 to 255!");
   }
   const { red, green, blue } = normalizeRgb(rgb);
   let key = 1 - Math.max(red, green, blue);
   const K1 = 1 - key;
-  const f = (t: number): number =>
-    round
-      ? Math.round((K1 && (K1 - t) / K1) * 100)
-      : (K1 && (K1 - t) / K1) * 100;
+  const f = (t: number): number => round ? Math.round((K1 && (K1 - t) / K1) * 100) : (K1 && (K1 - t) / K1) * 100;
 
   return { cyan: f(red), magenta: f(green), yellow: f(blue), key: key * 100 };
 };
@@ -784,10 +764,10 @@ export const sRgbToCmyk = (rgb: RGB, round?: boolean): CMYK => {
  */
 const sRgbToHcyOrHsi = (
   { red, green, blue }: RGB,
-  ret: 'hcy' | 'hsi'
+  ret: "hcy" | "hsi",
 ): HCY | HSI => {
   if (!gamutCheck(red) || !gamutCheck(green) || !gamutCheck(blue)) {
-    throw new Error('Provided rgb values must be within range of 0 to 255!');
+    throw new Error("Provided rgb values must be within range of 0 to 255!");
   }
   const sum = red + green + blue;
   red = red / sum;
@@ -796,13 +776,13 @@ const sRgbToHcyOrHsi = (
 
   let hue = Math.acos(
     (0.5 * (red - green + (red - blue))) /
-      Math.sqrt((red - green) * (red - green) + (red - blue) * (green - blue))
+      Math.sqrt((red - green) * (red - green) + (red - blue) * (green - blue)),
   );
 
   if (blue > green) hue = ((2 * Math.PI - hue) * 180) / Math.PI;
   else hue = (hue * 180) / Math.PI;
 
-  if (ret === 'hsi') {
+  if (ret === "hsi") {
     const intensity = sum / 3;
     const saturation = (1 - 3 * Math.min(red, green, blue)) * 100;
     return { hue, saturation, intensity };
@@ -820,7 +800,7 @@ const sRgbToHcyOrHsi = (
  * @returns {HCY}                 - HCY values for a color
  */
 export const sRgbToHcy = (rgb: RGB): HCY => {
-  return sRgbToHcyOrHsi(rgb, 'hcy') as HCY;
+  return sRgbToHcyOrHsi(rgb, "hcy") as HCY;
 };
 
 /*******************************************************************
@@ -834,15 +814,14 @@ export const sRgbToHcy = (rgb: RGB): HCY => {
  */
 export const sRgbToHex = (
   { red, green, blue }: RGB,
-  prefixed?: boolean
+  prefixed?: boolean,
 ): string => {
-  const integer =
-    ((Math.round(red) & 0xff) << 16) +
+  const integer = ((Math.round(red) & 0xff) << 16) +
     ((Math.round(green) & 0xff) << 8) +
     (Math.round(blue) & 0xff);
 
   const string = integer.toString(16).toUpperCase();
-  return (prefixed ? '#' : '') + '000000'.substring(string.length) + string;
+  return (prefixed ? "#" : "") + "000000".substring(string.length) + string;
 };
 
 /**
@@ -853,17 +832,16 @@ export const sRgbToHex = (
  */
 export const sRgbaToHex = (
   { red, green, blue, alpha }: RGBA,
-  prefixed?: boolean
+  prefixed?: boolean,
 ): string => {
-  const integer =
-    ((Math.round(red) & 0xff) << 16) +
+  const integer = ((Math.round(red) & 0xff) << 16) +
     ((Math.round(green) & 0xff) << 8) +
     (Math.round(blue) & 0xff);
 
   const string = integer.toString(16).toUpperCase();
   return (
-    (prefixed ? '#' : '') +
-    '000000'.substring(string.length) +
+    (prefixed ? "#" : "") +
+    "000000".substring(string.length) +
     string +
     decimalToHex(alpha)
   );
@@ -879,7 +857,7 @@ export const sRgbaToHex = (
  * @returns {HSI}                 - HSI values for a color
  */
 export const sRgbToHsi = (rgb: RGB): HSI => {
-  return sRgbToHcyOrHsi(rgb, 'hsi') as HSI;
+  return sRgbToHcyOrHsi(rgb, "hsi") as HSI;
 };
 
 /*******************************************************************
@@ -900,10 +878,11 @@ export const sRgbToHsl = (rgb: RGB, pHue?: number): HSL => {
   let saturation = 0;
 
   if (!delta) return { hue, saturation, lightness };
-  else
+  else {
     saturation = formatValue(
-      lightness > 0.5 ? delta / (2 - max - min) : delta / (max + min)
+      lightness > 0.5 ? delta / (2 - max - min) : delta / (max + min),
     );
+  }
 
   if (!pHue) hue = sRgbToHue(red, green, blue, max, delta);
   else hue = pHue;
@@ -954,10 +933,8 @@ export const sRgbToHwb = (rgb: RGB, pHue?: number): HWB => {
     hue = sRgbToHue(red, green, blue, max, delta);
   } else hue = pHue;
 
-  const whiteness =
-    (1 / 255) * Math.min(rgb.red, Math.min(rgb.green, rgb.blue)) * 100;
-  const blackness =
-    (1 - (1 / 255) * Math.max(rgb.red, Math.max(rgb.green, rgb.blue))) * 100;
+  const whiteness = (1 / 255) * Math.min(rgb.red, Math.min(rgb.green, rgb.blue)) * 100;
+  const blackness = (1 - (1 / 255) * Math.max(rgb.red, Math.max(rgb.green, rgb.blue))) * 100;
 
   return { hue, whiteness, blackness };
 };
@@ -1086,14 +1063,14 @@ export const sRgbToUvw = (rgb: RGB): UVW => {
 const rgbToXyz = (
   rgb: RGB,
   space: SpaceData,
-  inverseCompandingFun: Function,
-  gamma?: boolean
+  inverseCompandingFun: (value: number, gamma?: number | null | undefined) => number,
+  gamma?: boolean,
 ): XYZ => {
   const { Rlin, Glin, Blin } = inverseCompanding(
     rgb,
     space,
     inverseCompandingFun,
-    gamma
+    gamma,
   );
   const { X, Y, Z } = space.RGB_TO_XYZ;
   const x = (Rlin * X.r + Glin * X.g + Blin * X.b) * 100;
@@ -1128,7 +1105,7 @@ export const sRgbToYCbCrBT601 = ({ red, green, blue }: RGB): YCbCr => {
   const { Y, Cb, Cr } = matrixByVectorObjMultiAsSpace(
     CB_CR_CONVERSION_MATRICES.RGB_TO_YCBCR_BT_601,
     { red, green, blue },
-    ['Y', 'Cb', 'Cr']
+    ["Y", "Cb", "Cr"],
   ) as unknown as YCbCr;
   return {
     Y: 16 + Y,
@@ -1147,7 +1124,7 @@ export const sRgbToYCbCrBT709 = ({ red, green, blue }: RGB): YCbCr => {
   return matrixByVectorObjMultiAsSpace(
     CB_CR_CONVERSION_MATRICES.RGB_TO_BT_709_YCBCR,
     { red, green, blue },
-    ['Y', 'Cb', 'Cr']
+    ["Y", "Cb", "Cr"],
   ) as unknown as YCbCr;
 };
 
@@ -1161,7 +1138,7 @@ export const sRgbToYDbDr = ({ red, green, blue }: RGB): YDbDr => {
   return matrixByVectorObjMultiAsSpace(
     CB_CR_CONVERSION_MATRICES.RGB_TO_YDBDR,
     { red, green, blue },
-    ['Y', 'Db', 'Dr']
+    ["Y", "Db", "Dr"],
   ) as unknown as YDbDr;
 };
 
@@ -1175,7 +1152,7 @@ export const sRgbToYPbPr = ({ red, green, blue }: RGB): YPbPr => {
   return matrixByVectorObjMultiAsSpace(
     CB_CR_CONVERSION_MATRICES.RGB_TO_YPBPR,
     { red, green, blue },
-    ['Y', 'Pb', 'Pr']
+    ["Y", "Pb", "Pr"],
   ) as unknown as YPbPr;
 };
 
@@ -1189,17 +1166,17 @@ export const sRgbToYPbPr = ({ red, green, blue }: RGB): YPbPr => {
  */
 export const sRgbToYcCbcCrc = ({ red, green, blue }: RGB): YcCbcCrc => {
   const Yc = 0.2627 * red + 0.678 * green + 0.0593 * blue;
-  const Cbc = (blue - Yc) / getDivider({ red, green, blue }, Yc, 'Cbc');
-  const Crc = (red - Yc) / getDivider({ red, green, blue }, Yc, 'Crc');
+  const Cbc = (blue - Yc) / getDivider({ red, green, blue }, Yc, "Cbc");
+  const Crc = (red - Yc) / getDivider({ red, green, blue }, Yc, "Crc");
   return { Yc, Cbc, Crc };
 };
 
 const getDivider = (
   { red, blue }: RGB,
   Yc: number,
-  chroma: 'Cbc' | 'Crc'
+  chroma: "Cbc" | "Crc",
 ): number => {
-  if (chroma === 'Crc') {
+  if (chroma === "Crc") {
     if (Nr <= red - Yc || red - Yc <= 0) return 1.7182;
     else return 0.9938;
   }
@@ -1217,7 +1194,7 @@ export const sRgbToYCgCo = ({ red, green, blue }: RGB): YCoCg => {
   return matrixByVectorObjMultiAsSpace(
     CB_CR_CONVERSION_MATRICES.RGB_TO_YCOCG,
     { red, green, blue },
-    ['Y', 'Co', 'Cg']
+    ["Y", "Co", "Cg"],
   ) as unknown as YCoCg;
 };
 
@@ -1232,7 +1209,7 @@ export const sRgbToYiq = ({ red, green, blue }: RGB): YIQ => {
     return matrixByVectorObjMultiAsSpace(
       CB_CR_CONVERSION_MATRICES.RGB_TO_YIQ,
       { red, green, blue },
-      ['Y', 'I', 'Q']
+      ["Y", "I", "Q"],
     ) as unknown as YIQ;
   } else return { Y: red * 0.299 + green * 0.587 + blue * 0.114, I: 0, Q: 0 };
 };
@@ -1263,11 +1240,10 @@ export const sRGBToOKLCH = (srgb: RGB): LCH => {
 
   const linearRGB = sRGBToLinear(srgb);
 
-
   const LMS = matrixByVectorObjMultiAsSpace(
     CB_CR_CONVERSION_MATRICES.RGB_TO_LMS,
     linearRGB as any,
-    ['L', 'M', 'S']
+    ["L", "M", "S"],
   );
 
   const LMS_c = {
@@ -1279,7 +1255,7 @@ export const sRGBToOKLCH = (srgb: RGB): LCH => {
   const OKLab = matrixByVectorObjMultiAsSpace(
     CB_CR_CONVERSION_MATRICES.LMS_c_TO_OKLab,
     LMS_c,
-    ['L', 'A', 'B']
+    ["L", "A", "B"],
   );
 
   const chroma = Math.sqrt(OKLab.A * OKLab.A + OKLab.B * OKLab.B);

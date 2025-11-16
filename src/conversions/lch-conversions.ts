@@ -6,12 +6,12 @@
  * found at https://www.isc.org/licenses/
  */
 
-import { LAB, LCH, LUV, XYZ, RGB } from '../interfaces/color-spaces.interface';
-import { labToXyz } from './lab-conversions';
-import { luvToXyz } from './luv-conversions';
-import { linearValToSRGBVal } from './rgb-conversions';
-import { matrixByVectorObjMultiAsSpace } from '../helpers/matrix';
-import { CB_CR_CONVERSION_MATRICES } from '../constants/cb-cr-conversions-matrices';
+import { LAB, LCH, LUV, RGB, XYZ } from "../interfaces/color-spaces.interface";
+import { labToXyz } from "./lab-conversions";
+import { luvToXyz } from "./luv-conversions";
+import { linearValToSRGBVal } from "./rgb-conversions";
+import { matrixByVectorObjMultiAsSpace } from "../helpers/matrix";
+import { CB_CR_CONVERSION_MATRICES } from "../constants/cb-cr-conversions-matrices";
 
 /**
  * Converts a color from LCH(ab) color space to LAB color space
@@ -86,7 +86,7 @@ export const oKLCHToSRGB = (oklch: LCH): RGB => {
   const LMS_c = matrixByVectorObjMultiAsSpace(
     CB_CR_CONVERSION_MATRICES.OKLab_TO_LMS,
     { luminance: OKLab.luminance, a: OKLab.a, b: OKLab.b },
-    ['L', 'M', 'S']
+    ["L", "M", "S"],
   );
 
   const LMS = {
@@ -98,7 +98,7 @@ export const oKLCHToSRGB = (oklch: LCH): RGB => {
   const linearRGB = matrixByVectorObjMultiAsSpace(
     CB_CR_CONVERSION_MATRICES.LMS_TO_Linear_RGB,
     LMS,
-    ['red', 'green', 'blue']
+    ["red", "green", "blue"],
   );
 
   const srgb = {

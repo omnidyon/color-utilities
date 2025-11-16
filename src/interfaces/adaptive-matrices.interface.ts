@@ -6,7 +6,7 @@
  * found at https://opensource.org/license/isc-license-txt/
  */
 
-import { Matrix3x3 } from '../types/math-types';
+import { Matrix3x3 } from "../types/math-types";
 
 export interface AdaptiveMatrices {
   A_B: Matrix3x3;
@@ -490,26 +490,26 @@ export interface AdaptiveMatrices {
   F10_9300K: Matrix3x3;
   F11_9300K: Matrix3x3;
   F12_9300K: Matrix3x3;
-  '9300K_A': Matrix3x3;
-  '9300K_B': Matrix3x3;
-  '9300K_C': Matrix3x3;
-  '9300K_D50': Matrix3x3;
-  '9300K_D55': Matrix3x3;
-  '9300K_D60': Matrix3x3;
-  '9300K_D65': Matrix3x3;
-  '9300K_D75': Matrix3x3;
-  '9300K_D93': Matrix3x3;
-  '9300K_E': Matrix3x3;
-  '9300K_F1': Matrix3x3;
-  '9300K_F2': Matrix3x3;
-  '9300K_F3': Matrix3x3;
-  '9300K_F4': Matrix3x3;
-  '9300K_F5': Matrix3x3;
-  '9300K_F6': Matrix3x3;
-  '9300K_F7': Matrix3x3;
-  '9300K_F8': Matrix3x3;
-  '9300K_F9': Matrix3x3;
-  '9300K_F10': Matrix3x3;
-  '9300K_F11': Matrix3x3;
-  '9300K_F12': Matrix3x3;
+  "9300K_A": Matrix3x3;
+  "9300K_B": Matrix3x3;
+  "9300K_C": Matrix3x3;
+  "9300K_D50": Matrix3x3;
+  "9300K_D55": Matrix3x3;
+  "9300K_D60": Matrix3x3;
+  "9300K_D65": Matrix3x3;
+  "9300K_D75": Matrix3x3;
+  "9300K_D93": Matrix3x3;
+  "9300K_E": Matrix3x3;
+  "9300K_F1": Matrix3x3;
+  "9300K_F2": Matrix3x3;
+  "9300K_F3": Matrix3x3;
+  "9300K_F4": Matrix3x3;
+  "9300K_F5": Matrix3x3;
+  "9300K_F6": Matrix3x3;
+  "9300K_F7": Matrix3x3;
+  "9300K_F8": Matrix3x3;
+  "9300K_F9": Matrix3x3;
+  "9300K_F10": Matrix3x3;
+  "9300K_F11": Matrix3x3;
+  "9300K_F12": Matrix3x3;
 }

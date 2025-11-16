@@ -22,6 +22,12 @@ export declare const labToLch_ab: ({ luminance, a, b }: LAB) => LCH;
  */
 export declare const oklabToOKLCH: (oklab: LAB) => LCH;
 /**
+ * Converts OKLAB color values to sRGB color values
+ * @param {OKLAB} oklab - OKLAB color values
+ * @returns {RGB} sRGB color values
+ */
+export declare const oKLabToSRGB: (oklab: LAB) => RGB;
+/**
  * Converts a color from CIE-L*ab color space to sRGB color space
  * @param {LAB}                   - Lab color value
  * @returns {RGB}                 - sRGB color value

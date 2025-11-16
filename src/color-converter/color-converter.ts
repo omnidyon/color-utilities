@@ -7,12 +7,7 @@
  */
 
 import { checkAndFormat } from "../helpers/color-checks";
-import {
-  ColorSpaceUnion,
-  RGBConSpaces,
-  Spaces,
-  XyzConSpaces,
-} from "../types/colors";
+import { ColorSpaceUnion, RGBConSpaces, Spaces, XyzConSpaces } from "../types/colors";
 
 /**
  * @description
@@ -27,7 +22,7 @@ export abstract class ColorConverter {
   constructor(
     space: Spaces,
     color: ColorSpaceUnion,
-    converterMap: { [key: string]: Function }
+    converterMap: { [key: string]: Function },
   ) {
     this.color = checkAndFormat(space, color);
     this.converterMap = converterMap;

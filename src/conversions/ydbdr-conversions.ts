@@ -18,6 +18,6 @@ export const yDbDrToSrgb = ({ Y, Db, Dr }: YDbDr): RGB => {
   return matrixByVectorObjMultiAsSpace(
     CB_CR_CONVERSION_MATRICES.YDBDR_TO_RGB,
     { Y, Db, Dr },
-    ["red", "green", "blue"]
+    ["red", "green", "blue"],
   ) as unknown as RGB;
 };

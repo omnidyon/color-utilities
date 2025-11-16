@@ -11,6 +11,6 @@
  *  - prefixed: should the resulting colors start with #
  */
 export interface MixerOptions {
-    size?: number;
-    prefixed?: boolean;
+  size?: number;
+  prefixed?: boolean;
 }

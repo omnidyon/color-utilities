@@ -5,7 +5,7 @@
  * Use of this source code is governed by an ISC-style license that can be
  * found at https://www.isc.org/licenses/
  */
-import { RGB, YCbCr, xvYCC } from "../public_api";
+import { RGB, xvYCC, YCbCr } from "../public_api";
 /**
  * Converts a color from digital to analog form.
  * Scales to min/max ranges

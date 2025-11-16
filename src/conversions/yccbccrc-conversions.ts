@@ -23,7 +23,7 @@ export const ycCbcCrcToSrgb = ({ Yc, Cbc, Crc }: YcCbcCrc): RGB => {
 
 const getChannel = (
   { Yc, Cbc, Crc }: YcCbcCrc,
-  channel: "red" | "blue"
+  channel: "red" | "blue",
 ): number => {
   if (channel === "red") {
     const testRed = Yc + Crc * 1.7182;

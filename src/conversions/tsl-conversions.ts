@@ -15,7 +15,7 @@ import { RGB, TSL } from "../interfaces/color-spaces.interface";
  */
 export const tslToSrgb = (
   { tint, saturation, lightness }: TSL,
-  round?: boolean
+  round?: boolean,
 ): RGB => {
   let _g;
   let _r;
@@ -37,8 +37,6 @@ export const tslToSrgb = (
   const k = lightness / (0.185 * r + 0.473 * g + 0.114);
   const red = round ? Math.round(k * r * 255) : k * r * 255;
   const green = round ? Math.round(k * g * 255) : k * g * 255;
-  const blue = round
-    ? Math.round(k * (1 - r - g) * 255)
-    : k * (1 - r - g) * 255;
+  const blue = round ? Math.round(k * (1 - r - g) * 255) : k * (1 - r - g) * 255;
   return { red, green, blue };
 };

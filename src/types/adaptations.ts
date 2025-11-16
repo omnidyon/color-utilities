@@ -6,9 +6,9 @@ import {
   LMS,
   LUV,
   RGB,
+  RGB_M,
   RGBA,
   RGBA_M,
-  RGB_M,
   UVW,
   XYY,
   XYZ,
@@ -82,7 +82,7 @@ export type Adaptations =
   | "D75_D55"
   | "D75_D65"
   | "D75_E"
-  | "D75_F2" 
+  | "D75_F2"
   | "D75_F7"
   | "D75_F11"
   | "E_A"
@@ -126,20 +126,20 @@ export type Adaptations =
   | "F11_F2"
   | "F11_F7";
 
-export type AdaptiveColors = 
- | RGB 
- | RGBA 
- | RGB_M 
- | RGBA_M 
- | LAB 
- | LAB_M 
- | LUV 
- | LCH 
- | LCH_M 
- | LMS 
- | UVW 
- | XYY 
- | XYZ;
+export type AdaptiveColors =
+  | RGB
+  | RGBA
+  | RGB_M
+  | RGBA_M
+  | LAB
+  | LAB_M
+  | LUV
+  | LCH
+  | LCH_M
+  | LMS
+  | UVW
+  | XYY
+  | XYZ;
 
 export type AdaptiveColorSpaces =
   | "adobe_98_rgb"

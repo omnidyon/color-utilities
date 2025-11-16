@@ -5,8 +5,8 @@
  * Use of this source code is governed by an ISC-style license that can be
  * found at https://www.isc.org/licenses/
  */
-import { RGB, RGBA } from '../interfaces/color-spaces.interface';
-import { MixerOptions } from '../interfaces/mixer.interface';
+import { RGB, RGBA } from "../interfaces/color-spaces.interface";
+import { MixerOptions } from "../interfaces/mixer.interface";
 /**
  * Creates an pallet of shades by mixing a given color
  * with black (#000000)

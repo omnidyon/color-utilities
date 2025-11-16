@@ -40,10 +40,8 @@ export const hslToHsv = ({ hue, saturation, lightness }: HSL): HSV => {
   saturation *= lightness <= 1 ? lightness : 2 - lightness;
   smin *= lmin <= 1 ? lmin : 2 - lmin;
   const value = ((lightness + saturation) / 2) * 100;
-  const hsvSaturation =
-    (lightness === 0
-      ? (2 * smin) / (lmin + smin)
-      : (2 * saturation) / (lightness + saturation)) * 100;
+  const hsvSaturation = (lightness === 0 ? (2 * smin) / (lmin + smin) : (2 * saturation) / (lightness + saturation)) *
+    100;
 
   return { hue, saturation: hsvSaturation, value };
 };
@@ -67,8 +65,8 @@ export const hslToHex = (hsl: HSL | HSLA, prefixed?: boolean): string => {
 
   const alphaHex: string = (hsl as HSLA).alpha
     ? Math.round((hsl as HSLA).alpha * 255)
-        .toString(16)
-        .padStart(2, "0")
+      .toString(16)
+      .padStart(2, "0")
     : "";
   const prefix = prefixed ? "#" : "";
   return `${prefix}${f(0)}${f(8)}${f(4)}${alphaHex}`.toLocaleUpperCase();

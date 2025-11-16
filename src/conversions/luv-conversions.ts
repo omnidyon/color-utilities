@@ -30,7 +30,7 @@ export const luvToLch_uv = ({ L, u, v }: LUV): LCH => {
  */
 export const luvToXyz = (
   { L, u, v }: LUV,
-  refIlluminant = REFERENCE_ILLUMINANT.D65
+  refIlluminant = REFERENCE_ILLUMINANT.D65,
 ): XYZ => {
   const v0 = Fv({
     x: refIlluminant.X,

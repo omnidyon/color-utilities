@@ -9,21 +9,21 @@
  * @description Representation of a 3 by 3 Matrix
  */
 export type Matrix3x3 = [
-    [
-        number,
-        number,
-        number
-    ],
-    [
-        number,
-        number,
-        number
-    ],
-    [
-        number,
-        number,
-        number
-    ]
+  [
+    number,
+    number,
+    number,
+  ],
+  [
+    number,
+    number,
+    number,
+  ],
+  [
+    number,
+    number,
+    number,
+  ],
 ];
 /**
  * @description Representation of a 3 point Vector

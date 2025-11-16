@@ -9,23 +9,8 @@
 import { colorConverters, toRgbConverters } from "../color-converter/convertor-map";
 import { checkAndFormat } from "../helpers/color-checks";
 import { BlendData, BlenderOptions } from "../interfaces/blender.interface";
-import {
-  ColorConverters,
-  ToRGBConverters,
-} from "../interfaces/converters.interface";
-import {
-  CMYK,
-  CMYK_M,
-  HSL,
-  HSL_M,
-  HSV,
-  HSV_M,
-  RGB,
-  RGB_M,
-  RYB,
-  RYB_M,
-  XYZ,
-} from "../public_api";
+import { ColorConverters, ToRGBConverters } from "../interfaces/converters.interface";
+import { CMYK, CMYK_M, HSL, HSL_M, HSV, HSV_M, RGB, RGB_M, RYB, RYB_M, XYZ } from "../public_api";
 import { BlenderColor } from "../types/colors";
 
 /**
@@ -61,32 +46,23 @@ export class Blender {
   constructor(
     color1: BlenderColor,
     color2: BlenderColor,
-    options: BlenderOptions
+    options: BlenderOptions,
   ) {
     const type1 = getColorType(color1);
     color1 = checkAndFormat(type1, color1) as BlenderColor;
     const type2 = getColorType(color2);
     color2 = checkAndFormat(type2, color2) as BlenderColor;
-    this.rgb1 =
-      type1 === "rgb"
-        ? color1
-        : toRgbConverters[getColorType(color1) as keyof ToRGBConverters](
-            color1
-          );
-    this.rgb2 =
-      type2 === "rgb"
-        ? color2
-        : toRgbConverters[getColorType(color2) as keyof ToRGBConverters](
-            color2
-          );
+    this.rgb1 = type1 === "rgb" ? color1 : toRgbConverters[getColorType(color1) as keyof ToRGBConverters](
+      color1,
+    );
+    this.rgb2 = type2 === "rgb" ? color2 : toRgbConverters[getColorType(color2) as keyof ToRGBConverters](
+      color2,
+    );
     const weight = options.weight ? options.weight : 0.5;
-    this.color =
-      options.returnType === "rgb" || !options.returnType
-        ? blend(this.rgb1, this.rgb2, weight)
-        : (
-            colorConverters[options.returnType as keyof ColorConverters]
-              ?.fun as Function
-          )(blend(this.rgb1, this.rgb2, weight));
+    this.color = options.returnType === "rgb" || !options.returnType ? blend(this.rgb1, this.rgb2, weight) : (
+      colorConverters[options.returnType as keyof ColorConverters]
+        ?.fun as Function
+    )(blend(this.rgb1, this.rgb2, weight));
     this.blendData = {
       color1: {
         data: color1,
@@ -112,28 +88,33 @@ const getColorType = (color: BlenderColor): string => {
   if (
     typeof (color as RGB).green === "number" ||
     typeof (color as RGB_M).g === "number"
-  )
+  ) {
     return "rgb";
+  }
   if (
     typeof (color as CMYK).cyan === "number" ||
     typeof (color as CMYK_M).c === "number"
-  )
+  ) {
     return "cmyk";
+  }
   if (typeof (color as XYZ).x == "number") return "xyz";
   if (
     typeof (color as RYB).yellow === "number" ||
     typeof (color as RYB_M).y === "number"
-  )
+  ) {
     return "ryb";
+  }
   if (
     typeof (color as HSL).lightness === "number" ||
     typeof (color as HSL_M).l === "number"
-  )
+  ) {
     return "hsl";
+  }
   if (
     typeof (color as HSV).value === "number" ||
     typeof (color as HSV_M).v === "number"
-  )
+  ) {
     return "hsv";
+  }
   return "hex";
 };

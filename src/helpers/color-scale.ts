@@ -11,7 +11,6 @@ import { labToSrgb } from "../conversions/lab-conversions";
 import { sRgbToHsl, sRgbToLab } from "../conversions/rgb-conversions";
 import { RGB } from "../interfaces/color-spaces.interface";
 
-
 /**
  * Generates a color scale between multiple colors
  * @param colors - Array of RGB colors to interpolate between
@@ -22,7 +21,7 @@ import { RGB } from "../interfaces/color-spaces.interface";
 export const createScale = (
   colors: RGB[],
   steps: number,
-  space: "rgb" | "hsl" | "lab" = "rgb"
+  space: "rgb" | "hsl" | "lab" = "rgb",
 ): RGB[] => {
   if (colors.length < 2 || steps < 2) return [...colors];
 
@@ -31,10 +30,7 @@ export const createScale = (
   const colorsPerSegment = (steps - 1) / segments;
 
   for (let i = 0; i < segments; i++) {
-    const segmentSteps =
-      i === segments - 1
-        ? steps - scale.length
-        : Math.ceil(colorsPerSegment) + 1;
+    const segmentSteps = i === segments - 1 ? steps - scale.length : Math.ceil(colorsPerSegment) + 1;
 
     for (let j = 0; j < segmentSteps; j++) {
       if (i > 0 && j === 0) continue; // Avoid duplicates
@@ -45,7 +41,7 @@ export const createScale = (
   }
 
   return scale;
-}
+};
 
 /**
  * Linear interpolation between two colors in specified color space
@@ -55,11 +51,11 @@ export const createScale = (
  * @param space - Color space for interpolation ('rgb', 'hsl', 'lab')
  * @returns Interpolated color in RGB format
  */
-export const interpolate = ( 
+export const interpolate = (
   color1: RGB,
   color2: RGB,
   t: number,
-  space: "rgb" | "hsl" | "lab" = "rgb"
+  space: "rgb" | "hsl" | "lab" = "rgb",
 ): RGB => {
   t = Math.max(0, Math.min(1, t));
 
@@ -96,4 +92,4 @@ export const interpolate = (
         inGamut: true,
       };
   }
-}
+};

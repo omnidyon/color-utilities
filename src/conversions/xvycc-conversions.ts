@@ -6,7 +6,7 @@
  * found at https://www.isc.org/licenses/
  */
 
-import { RGB, YCbCr, xvYCC } from "../public_api";
+import { RGB, xvYCC, YCbCr } from "../public_api";
 import { yCbCrBT601ToSrgb } from "./ycbcr-jpeg-conversions";
 
 /**

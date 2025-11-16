@@ -18,11 +18,11 @@ import { Matrix3x3 } from "../types/math-types";
  */
 export const lmsToXyz = (
   lms: LMS | { [key: string]: number },
-  matrix?: Matrix3x3
+  matrix?: Matrix3x3,
 ): XYZ => {
   if (!matrix) matrix = VON_KRIES_COEFFICIENT_MATRICES.MA_1;
   return matrixSpaceMultiAsXyz(
     matrix,
-    lms as unknown as { [key: string]: number }
+    lms as unknown as { [key: string]: number },
   );
 };

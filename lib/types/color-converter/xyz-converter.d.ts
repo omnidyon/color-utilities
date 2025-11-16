@@ -9,6 +9,6 @@ import { ColorConverter } from "./color-converter";
  *  @param {{ [key: string]: Function }} - a converter map
  */
 export declare class XyzConverter extends ColorConverter {
-    constructor(color: XYZ);
-    get(converts: XyzConSpaces): any;
+  constructor(color: XYZ);
+  get(converts: XyzConSpaces): any;
 }

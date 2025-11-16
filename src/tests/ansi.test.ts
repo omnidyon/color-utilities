@@ -3,7 +3,7 @@ import { sRgbToAnsi16, sRgbToAnsi256 } from "../public_api";
 const Test16 = (
   rgb: { red: number; green: number; blue: number },
   ansi: number,
-  colorName: string
+  colorName: string,
 ): void => {
   test(`Checking RGB -> Ansi16 conversions for ${colorName}`, () => {
     expect(sRgbToAnsi16(rgb)).toBeLessThanOrEqual(ansi);
@@ -31,7 +31,7 @@ Test16({ red: -49, green: 135, blue: 166 }, 36, "Cyan");
 const Test256 = (
   rgb: { red: number; green: number; blue: number },
   ansi: number,
-  colorName: string
+  colorName: string,
 ) => {
   test(`Checking RGB -> Ansi256 conversions for ${colorName}`, () => {
     expect(sRgbToAnsi256(rgb)).toBeLessThanOrEqual(ansi);

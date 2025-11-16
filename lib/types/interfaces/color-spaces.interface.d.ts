@@ -10,56 +10,56 @@
  *   - more info: https://learn.microsoft.com/en-us/windows/win32/wcs/cmy-and-cmyk-color-spaces
  */
 export interface CMY {
-    cyan: number;
-    magenta: number;
-    yellow: number;
+  cyan: number;
+  magenta: number;
+  yellow: number;
 }
 /**
  * @description Representation of an CMY color space:
  *   - more info: https://learn.microsoft.com/en-us/windows/win32/wcs/cmy-and-cmyk-color-spaces
  */
 export interface CMY_M {
-    c: number;
-    m: number;
-    y: number;
+  c: number;
+  m: number;
+  y: number;
 }
 /**
  * @description Representation of an CMYK color space:
  *   - more info: https://en.wikipedia.org/wiki/CMYK_color_model
  */
 export interface CMYK {
-    cyan: number;
-    magenta: number;
-    yellow: number;
-    key: number;
+  cyan: number;
+  magenta: number;
+  yellow: number;
+  key: number;
 }
 /**
  * @description Representation of an CMYK color space:
  *   - more info: https://en.wikipedia.org/wiki/CMYK_color_model
  */
 export interface CMYK_M {
-    c: number;
-    m: number;
-    y: number;
-    k: number;
+  c: number;
+  m: number;
+  y: number;
+  k: number;
 }
 /**
  * @description Representation of an HCL color space:
  * - more info: https://en.wikipedia.org/wiki/HCL_color_space
  */
 export interface HCL {
-    hue: number;
-    chroma: number;
-    luminance: number;
+  hue: number;
+  chroma: number;
+  luminance: number;
 }
 /**
  * @description Representation of an HCL color space:
  *   - more info: https://en.wikipedia.org/wiki/HCL_color_space
  */
 export interface HCL_M {
-    h: number;
-    c: number;
-    l: number;
+  h: number;
+  c: number;
+  l: number;
 }
 /**
  * @description Representation of an HCY color space:
@@ -76,9 +76,9 @@ export interface HCL_M {
  *   - more info: http://chilliant.blogspot.ca/2012/08/rgbhcy-in-hlsl.html
  */
 export interface HCY {
-    hue: number;
-    chroma: number;
-    Yluminance: number;
+  hue: number;
+  chroma: number;
+  Yluminance: number;
 }
 /**
  * @description Representation of an HCY color space:
@@ -86,9 +86,9 @@ export interface HCY {
  * - more info: http://chilliant.blogspot.ca/2012/08/rgbhcy-in-hlsl.html
  */
 export interface HCY_M {
-    h: number;
-    c: number;
-    y: number;
+  h: number;
+  c: number;
+  y: number;
 }
 /**
  * @description Representation of an HSI color space:
@@ -99,128 +99,128 @@ export interface HCY_M {
  *   - more info: https://www.blackice.com/colorspaceHSI.htm
  */
 export interface HSI {
-    hue: number;
-    saturation: number;
-    intensity: number;
+  hue: number;
+  saturation: number;
+  intensity: number;
 }
 /**
  * @description Representation of an HSL color space:
  *   - more info: https://en.wikipedia.org/wiki/HSL_and_HSV
  */
 export interface HSL {
-    hue: number;
-    saturation: number;
-    lightness: number;
+  hue: number;
+  saturation: number;
+  lightness: number;
 }
 /**
  * @description Representation of an HSLA color space:
  *   - more info: https://en.wikipedia.org/wiki/HSL_and_HS
  */
 export interface HSLA extends HSL {
-    alpha: number;
+  alpha: number;
 }
 /**
  * @description Representation of an HSL color space:
  *   - more info: https://en.wikipedia.org/wiki/HSL_and_HS
  */
 export interface HSL_M {
-    h: number;
-    s: number;
-    l: number;
+  h: number;
+  s: number;
+  l: number;
 }
 /**
  * @description Representation of an HSLA color space:
  *   - more info: https://en.wikipedia.org/wiki/HSL_and_HS
  */
 export interface HSLA_M extends HSL_M {
-    a: number;
+  a: number;
 }
 /**
  * @description Representation of an HSV color space:
  *   - more info: https://en.wikipedia.org/wiki/HSL_and_HS
  */
 export interface HSV {
-    hue: number;
-    saturation: number;
-    value: number;
+  hue: number;
+  saturation: number;
+  value: number;
 }
 /**
  * @description Representation of an HSVA color space:
  *   - more info: https://en.wikipedia.org/wiki/HSL_and_HS
  */
 export interface HSVA extends HSV {
-    alpha: number;
+  alpha: number;
 }
 /**
  * @description Representation of an HSV color space:
  *   - more info: https://en.wikipedia.org/wiki/HSL_and_HS
  */
 export interface HSV_M {
-    h: number;
-    s: number;
-    v: number;
+  h: number;
+  s: number;
+  v: number;
 }
 /**
  * @description Representation of an HSVA color space:
  *   - more info: https://en.wikipedia.org/wiki/HSL_and_HS
  */
 export interface HSVA_M extends HSV_M {
-    a: number;
+  a: number;
 }
 /**
  * @description Representation of an HWB color space:
  *   - more info: https://dev.to/alvaromontoro/hwb-13h7
  */
 export interface HWB {
-    hue: number;
-    whiteness: number;
-    blackness: number;
+  hue: number;
+  whiteness: number;
+  blackness: number;
 }
 /**
  * @description Representation of an HWB color space:
  * - more info: https://dev.to/alvaromontoro/hwb-13h7
  */
 export interface HWB_M {
-    h: number;
-    w: number;
-    b: number;
+  h: number;
+  w: number;
+  b: number;
 }
 /**
  * @description Representation of an LAB color space:
  *   - more info: https://en.wikipedia.org/wiki/CIELAB_color_space
  */
 export interface LAB {
-    luminance: number;
-    a: number;
-    b: number;
+  luminance: number;
+  a: number;
+  b: number;
 }
 /**
  * @description Representation of an LAB color space:
  *   - more info: https://en.wikipedia.org/wiki/CIELAB_color_space
  */
 export interface LAB_M {
-    l: number;
-    a: number;
-    b: number;
+  l: number;
+  a: number;
+  b: number;
 }
 /**
  * @description Representation of an LCH color space:
  *  - more info: https://sensing.konicaminolta.us/us/blog/understanding-the-cie-lch-color-space/
  */
 export interface LCH {
-    lightness: number;
-    chroma: number;
-    hue: number;
-    inGamut?: boolean;
+  lightness: number;
+  chroma: number;
+  hue: number;
+  inGamut?: boolean;
 }
 /**
  * @description Representation of an LCH color space:
  * - more info: https://sensing.konicaminolta.us/us/blog/understanding-the-cie-lch-color-space/
  */
 export interface LCH_M {
-    l: number;
-    c: number;
-    h: number;
+  l: number;
+  c: number;
+  h: number;
 }
 /**
  * @description Representation of an LMS color space:
@@ -231,9 +231,9 @@ export interface LCH_M {
  *   - more info : https://en.wikipedia.org/wiki/LMS_color_space
  */
 export interface LMS {
-    long: number;
-    medium: number;
-    short: number;
+  long: number;
+  medium: number;
+  short: number;
 }
 /**
  * @description Representation of an LUV color space:
@@ -247,69 +247,69 @@ export interface LMS {
  *     https://en.wikipedia.org/wiki/CIELUV
  */
 export interface LUV {
-    L: number;
-    u: number;
-    v: number;
+  L: number;
+  u: number;
+  v: number;
 }
 /**
  * @description Representation of an RGB color space:
  *   - more info: https://en.wikipedia.org/wiki/RGB_color_spaces
  */
 export interface RGB {
-    red: number;
-    green: number;
-    blue: number;
-    inGamut?: boolean;
+  red: number;
+  green: number;
+  blue: number;
+  inGamut?: boolean;
 }
 /**
  * @description Representation of an RGBA color space:
  *   - more info: https://en.wikipedia.org/wiki/RGB_color_spaces
  */
 export interface RGBA extends RGB {
-    alpha: number;
+  alpha: number;
 }
 /**
  * @description Representation of an RGB color space:
  *   - more info: https://en.wikipedia.org/wiki/RGB_color_spaces
  */
 export interface RGB_M {
-    r: number;
-    g: number;
-    b: number;
+  r: number;
+  g: number;
+  b: number;
 }
 /**
  * @description Representation of an RGBA color space:
  *   - more info: https://en.wikipedia.org/wiki/RGB_color_spaces
  */
 export interface RGBA_M extends RGB_M {
-    a: number;
+  a: number;
 }
 /**
  * @description Representation of an RYB color space:
  *   - more info: https://en.wikipedia.org/wiki/RYB_color_model
  */
 export interface RYB {
-    red: number;
-    yellow: number;
-    blue: number;
+  red: number;
+  yellow: number;
+  blue: number;
 }
 /**
  * @description Representation of an RYB color space:
  *   - more info: https://en.wikipedia.org/wiki/RYB_color_model
  */
 export interface RYB_M {
-    r: number;
-    y: number;
-    b: number;
+  r: number;
+  y: number;
+  b: number;
 }
 /**
  * @description Representation of an TSL color space:
  *   - more info: https://en.wikipedia.org/wiki/TSL_color_space
  */
 export interface TSL {
-    tint: number;
-    saturation: number;
-    lightness: number;
+  tint: number;
+  saturation: number;
+  lightness: number;
 }
 /**
  * @description Representation of an UVW color space:
@@ -323,9 +323,9 @@ export interface TSL {
  *     https://en.wikipedia.org/wiki/CIELUV
  */
 export interface UVW {
-    u: number;
-    v: number;
-    w: number;
+  u: number;
+  v: number;
+  w: number;
 }
 /**
  * @description Representation of an xvYCC color space:
@@ -341,9 +341,9 @@ export interface UVW {
  *   - more info: https://en.wikipedia.org/wiki/XvYCC
  */
 export interface xvYCC {
-    Y: number;
-    Cb: number;
-    Cr: number;
+  Y: number;
+  Cb: number;
+  Cr: number;
 }
 /**
  * @description Representation of an xyY color space:
@@ -353,18 +353,18 @@ export interface xvYCC {
  *   - more info: http://www.colorwiki.com/wiki/XyY
  */
 export interface XYY {
-    x: number;
-    y: number;
-    Y: number;
+  x: number;
+  y: number;
+  Y: number;
 }
 /**
  * @description Representation of an XYZ color space:
  *   - more info: https://en.wikipedia.org/wiki/CIE_1931_color_space
  */
 export interface XYZ {
-    x: number;
-    y: number;
-    z: number;
+  x: number;
+  y: number;
+  z: number;
 }
 /**
  * @description Representation of an YCbCr color space:
@@ -378,9 +378,9 @@ export interface XYZ {
  *   - more info: https://en.wikipedia.org/wiki/YCbCr
  */
 export interface YCbCr {
-    Y: number;
-    Cb: number;
-    Cr: number;
+  Y: number;
+  Cb: number;
+  Cr: number;
 }
 /**
  * @description Representation of an YcCbcCrc color space:
@@ -394,9 +394,9 @@ export interface YCbCr {
  *   - more info: https://en.wikipedia.org/wiki/YCbCr
  */
 export interface YcCbcCrc {
-    Yc: number;
-    Cbc: number;
-    Crc: number;
+  Yc: number;
+  Cbc: number;
+  Crc: number;
 }
 /**
  * @description Representation of an YCoCg color space:
@@ -406,9 +406,9 @@ export interface YcCbcCrc {
  *   - more info: https://en.wikipedia.org/wiki/YCoCg
  */
 export interface YCoCg {
-    Y: number;
-    Co: number;
-    Cg: number;
+  Y: number;
+  Co: number;
+  Cg: number;
 }
 /**
  * @description Representation of an YDbDr color space:
@@ -419,9 +419,9 @@ export interface YCoCg {
  *   - more info: https://en.wikipedia.org/?title=YDbDr
  */
 export interface YDbDr {
-    Y: number;
-    Db: number;
-    Dr: number;
+  Y: number;
+  Db: number;
+  Dr: number;
 }
 /**
  * @description Representation of an YIQ color space:
@@ -431,9 +431,9 @@ export interface YDbDr {
  *   - more info: https://en.wikipedia.org/?title=YIQ
  */
 export interface YIQ {
-    Y: number;
-    I: number;
-    Q: number;
+  Y: number;
+  I: number;
+  Q: number;
 }
 /**
  * @description Representation of an YPbPr color space:
@@ -448,18 +448,18 @@ export interface YIQ {
  *   - more info: https://en.wikipedia.org/?title=YPbPr
  */
 export interface YPbPr {
-    Y: number;
-    Pb: number;
-    Pr: number;
+  Y: number;
+  Pb: number;
+  Pr: number;
 }
 /**
  * @description Representation of an YUV color space:
  *   - more info: https://en.wikipedia.org/?title=YUV
  */
 export interface YUV {
-    y: number;
-    u: number;
-    v: number;
+  y: number;
+  u: number;
+  v: number;
 }
 /**
  * @description Representation data in a Color Space Dataset:
@@ -470,36 +470,36 @@ export interface YUV {
  *  - GAMMA: Used for companding
  */
 export interface SpaceData {
-    RGB_TO_XYZ: RgbToXyzMatrix;
-    XYZ_TO_RGB: XyzToRgbMatrix;
-    REFERENCE_WHITE: string;
-    GAMMA: number;
+  RGB_TO_XYZ: RgbToXyzMatrix;
+  XYZ_TO_RGB: XyzToRgbMatrix;
+  REFERENCE_WHITE: string;
+  GAMMA: number;
 }
 /**
  * @description Representation Matrix used for RGB to XYZ conversion
  */
 export interface RgbToXyzMatrix {
-    X: {
-        r: number;
-        g: number;
-        b: number;
-    };
-    Y: {
-        r: number;
-        g: number;
-        b: number;
-    };
-    Z: {
-        r: number;
-        g: number;
-        b: number;
-    };
+  X: {
+    r: number;
+    g: number;
+    b: number;
+  };
+  Y: {
+    r: number;
+    g: number;
+    b: number;
+  };
+  Z: {
+    r: number;
+    g: number;
+    b: number;
+  };
 }
 /**
  * @description Representation Matrix used for XYZ to RGB conversion.
  */
 export interface XyzToRgbMatrix {
-    R: XYZ;
-    G: XYZ;
-    B: XYZ;
+  R: XYZ;
+  G: XYZ;
+  B: XYZ;
 }

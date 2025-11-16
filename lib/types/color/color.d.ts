@@ -15,8 +15,8 @@ import { ColorSpaceUnion, Spaces } from "../types/colors";
  *  @param {(Spaces | "web_safe")[]}    - What information do we want back
  */
 export declare class Color {
-    rgb: RGB;
-    xyz: XYZ;
-    constructor(space: Spaces, color: ColorSpaceUnion, resolve?: (Spaces | "web_safe")[] | "all");
-    get data(): ColorData;
+  rgb: RGB;
+  xyz: XYZ;
+  constructor(space: Spaces, color: ColorSpaceUnion, resolve?: (Spaces | "web_safe")[] | "all");
+  get data(): ColorData;
 }

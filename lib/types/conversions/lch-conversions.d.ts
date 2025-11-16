@@ -5,7 +5,7 @@
  * Use of this source code is governed by an ISC-style license that can be
  * found at https://www.isc.org/licenses/
  */
-import { LAB, LCH, LUV, XYZ, RGB } from '../interfaces/color-spaces.interface';
+import { LAB, LCH, LUV, RGB, XYZ } from "../interfaces/color-spaces.interface";
 /**
  * Converts a color from LCH(ab) color space to LAB color space
  * @param {LCH}                   - Lch(ab) color value
@@ -36,7 +36,7 @@ export declare const lch_uvToXyz: (lch: LCH) => XYZ;
  * @param {LCH} oklch              - OKLCH color object to convert
  * @returns {LAB}                  - OKLab color object with L, A, B components
  */
-export declare const OKLCHToOKLab: (oklch: LCH) => LAB;
+export declare const oKLCHToOKLab: (oklch: LCH) => LAB;
 /**
  * Converts a color from OKLCH color space to sRGB
  *

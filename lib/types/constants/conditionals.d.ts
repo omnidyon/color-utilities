@@ -24,7 +24,7 @@ export declare const SRGB_INVERSE_NORMALIZED_BELOW: number;
 export declare const SRGB_NORMALIZED_BELOW: number;
 export declare const L_INVERSE_NORMALIZED_BELOW: number;
 export declare const OKLCH_TOLERANCE_VALUES: {
-    lightness: number;
-    chroma: number;
-    hue: number;
+  lightness: number;
+  chroma: number;
+  hue: number;
 };

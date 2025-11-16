@@ -14,12 +14,12 @@ import { ColorSpaceUnion, RGBConSpaces, Spaces, XyzConSpaces } from "../types/co
  *  @param {{ [key: string]: Function }} - a converter map
  */
 export declare abstract class ColorConverter {
-    protected color: ColorSpaceUnion;
-    protected converterMap: {
-        [key: string]: Function;
-    };
-    constructor(space: Spaces, color: ColorSpaceUnion, converterMap: {
-        [key: string]: Function;
-    });
-    abstract get(converts: Spaces | XyzConSpaces | RGBConSpaces): ColorSpaceUnion;
+  protected color: ColorSpaceUnion;
+  protected converterMap: {
+    [key: string]: Function;
+  };
+  constructor(space: Spaces, color: ColorSpaceUnion, converterMap: {
+    [key: string]: Function;
+  });
+  abstract get(converts: Spaces | XyzConSpaces | RGBConSpaces): ColorSpaceUnion;
 }

@@ -4,7 +4,7 @@
  *
  * Use of this source code is governed by an ISC-style license that can be
  * found at https://opensource.org/license/isc-license-txt/
-*/
+ */
 import { LAB, LCH, RGB } from "../interfaces/color-spaces.interface";
 /**
  * Gets a delta E CIE 1976 value for a given colors

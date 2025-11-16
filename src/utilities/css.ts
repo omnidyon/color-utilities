@@ -19,11 +19,11 @@ import { LCH, RGB } from "../interfaces/color-spaces.interface";
  * @returns {RGB | null} RGB color or null if invalid
  */
 export const parseHex = (cssString: string): RGB | null => {
-  if (!cssString?.startsWith('#')) return null;
-  
+  if (!cssString?.startsWith("#")) return null;
+
   const hex = cssString.slice(1).trim();
   if (!/^[0-9a-f]{3,8}$/i.test(hex)) return null;
-  
+
   return hexToRgb(hex);
 };
 
@@ -33,14 +33,16 @@ export const parseHex = (cssString: string): RGB | null => {
  * @returns {RGB | null} RGB color or null if invalid
  */
 export const parseRgb = (cssString: string): RGB | null => {
-  const match = cssString.match(/^rgba?\(\s*([^,)\s]+)\s*[, ]\s*([^,)\s]+)\s*[, ]\s*([^,)\s]+)(?:\s*[,/]\s*([^)\s]+))?\s*\)$/i);
+  const match = cssString.match(
+    /^rgba?\(\s*([^,)\s]+)\s*[, ]\s*([^,)\s]+)\s*[, ]\s*([^,)\s]+)(?:\s*[,/]\s*([^)\s]+))?\s*\)$/i,
+  );
   if (!match) return null;
-  
+
   return {
     red: parseColorValue(match[1], 255),
     green: parseColorValue(match[2], 255),
     blue: parseColorValue(match[3], 255),
-    inGamut: true
+    inGamut: true,
   };
 };
 
@@ -50,15 +52,17 @@ export const parseRgb = (cssString: string): RGB | null => {
  * @returns {RGB | null} RGB color or null if invalid
  */
 export const parseHsl = (cssString: string): RGB | null => {
-  const match = cssString.match(/^hsla?\(\s*([^,)\s]+)\s*[, ]\s*([^,)\s]+)\s*[, ]\s*([^,)\s]+)(?:\s*[,/]\s*([^)\s]+))?\s*\)$/i);
+  const match = cssString.match(
+    /^hsla?\(\s*([^,)\s]+)\s*[, ]\s*([^,)\s]+)\s*[, ]\s*([^,)\s]+)(?:\s*[,/]\s*([^)\s]+))?\s*\)$/i,
+  );
   if (!match) return null;
-  
+
   const hsl = {
     hue: parseColorValue(match[1], 360),
     saturation: parsePercentage(match[2]),
-    lightness: parsePercentage(match[3])
+    lightness: parsePercentage(match[3]),
   };
-  
+
   return hslToRgb(hsl);
 };
 
@@ -68,15 +72,17 @@ export const parseHsl = (cssString: string): RGB | null => {
  * @returns {RGB | null} RGB color or null if invalid
  */
 export const parseHwb = (cssString: string): RGB | null => {
-  const match = cssString.match(/^hwb\(\s*([^,)\s]+)\s*[, ]\s*([^,)\s]+)\s*[, ]\s*([^,)\s]+)(?:\s*[,/]\s*([^)\s]+))?\s*\)$/i);
+  const match = cssString.match(
+    /^hwb\(\s*([^,)\s]+)\s*[, ]\s*([^,)\s]+)\s*[, ]\s*([^,)\s]+)(?:\s*[,/]\s*([^)\s]+))?\s*\)$/i,
+  );
   if (!match) return null;
-  
+
   const hwb = {
     hue: parseColorValue(match[1], 360),
     whiteness: parsePercentage(match[2]),
-    blackness: parsePercentage(match[3])
+    blackness: parsePercentage(match[3]),
   };
-  
+
   return hwbToRgb(hwb);
 };
 
@@ -88,13 +94,13 @@ export const parseHwb = (cssString: string): RGB | null => {
 export const parseLab = (cssString: string): RGB | null => {
   const match = cssString.match(/^lab\(\s*([^,)\s]+)\s*[, ]\s*([^,)\s]+)\s*[, ]\s*([^,)\s]+)\s*\)$/i);
   if (!match) return null;
-  
+
   const lab = {
     luminance: parsePercentage(match[1]),
     a: parseFloat(match[2]),
-    b: parseFloat(match[3])
+    b: parseFloat(match[3]),
   };
-  
+
   return labToSrgb(lab);
 };
 
@@ -106,13 +112,13 @@ export const parseLab = (cssString: string): RGB | null => {
 export const parseLch = (cssString: string): RGB | null => {
   const match = cssString.match(/^lch\(\s*([^,)\s]+)\s*[, ]\s*([^,)\s]+)\s*[, ]\s*([^,)\s]+)\s*\)$/i);
   if (!match) return null;
-  
+
   const lch = {
     lightness: parsePercentage(match[1]),
     chroma: parseFloat(match[2]),
-    hue: parseFloat(match[3])
+    hue: parseFloat(match[3]),
   };
-  
+
   // Convert LCH -> LAB -> RGB using your existing functions
   const lab = lch_abToLab(lch);
   return labToSrgb(lab);
@@ -126,13 +132,13 @@ export const parseLch = (cssString: string): RGB | null => {
 export const parseOklab = (cssString: string): RGB | null => {
   const match = cssString.match(/^oklab\(\s*([^,)\s]+)\s*[, ]\s*([^,)\s]+)\s*[, ]\s*([^,)\s]+)\s*\)$/i);
   if (!match) return null;
-  
+
   const oklab = {
     luminance: parseFloat(match[1]),
     a: parseFloat(match[2]),
-    b: parseFloat(match[3])
+    b: parseFloat(match[3]),
   };
-  
+
   return oKLabToSRGB(oklab);
 };
 
@@ -144,13 +150,13 @@ export const parseOklab = (cssString: string): RGB | null => {
 export const parseOklch = (cssString: string): RGB | null => {
   const match = cssString.match(/^oklch\(\s*([^,)\s]+)\s*[, ]\s*([^,)\s]+)\s*[, ]\s*([^,)\s]+)\s*\)$/i);
   if (!match) return null;
-  
+
   const oklch: LCH = {
     lightness: parseFloat(match[1]),
     chroma: parseFloat(match[2]),
-    hue: parseFloat(match[3])
+    hue: parseFloat(match[3]),
   };
-  
+
   return oKLCHToSRGB(oklch);
 };
 
@@ -161,14 +167,14 @@ export const parseOklch = (cssString: string): RGB | null => {
  */
 export const fromCssString = (cssString: string): RGB | null => {
   if (!cssString) return null;
-  
+
   const parsers = [parseHex, parseRgb, parseHsl, parseHwb, parseLab, parseLch, parseOklab, parseOklch];
-  
+
   for (const parser of parsers) {
     const result = parser(cssString);
     if (result) return result;
   }
-  
+
   return null;
 };
 
@@ -179,7 +185,7 @@ export const fromCssString = (cssString: string): RGB | null => {
  * @returns {number} Parsed numeric value
  */
 const parseColorValue = (value: string, max: number): number => {
-  if (value.endsWith('%')) {
+  if (value.endsWith("%")) {
     return (parseFloat(value) * max) / 100;
   }
   return parseFloat(value);
@@ -191,5 +197,5 @@ const parseColorValue = (value: string, max: number): number => {
  * @returns {number} Parsed percentage value
  */
 const parsePercentage = (value: string): number => {
-  return value.endsWith('%') ? parseFloat(value) : parseFloat(value);
+  return value.endsWith("%") ? parseFloat(value) : parseFloat(value);
 };

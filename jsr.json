@@ -3,7 +3,7 @@
   "version": "1.0.2",
   "type": "module",
   "exports": "./src/public_api.ts",
-   "publishConfig": {
+  "publishConfig": {
     "access": "public"
   },
   "scripts": {

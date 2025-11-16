@@ -34,6 +34,7 @@ import {
   palSecamRgbToXyz,
   proPhotoRgbToXyz,
   rgbTo1_0rgb,
+  smpteCRgbToXyz,
   sRgbToAdobeRgb,
   sRgbToAnsi16,
   sRgbToAnsi256,
@@ -70,12 +71,11 @@ import {
   sRgbToXyz,
   sRgbToYCbCrBT601,
   sRgbToYCbCrBT709,
+  sRgbToYcCbcCrc,
   sRgbToYCgCo,
   sRgbToYDbDr,
-  sRgbToYPbPr,
-  sRgbToYcCbcCrc,
   sRgbToYiq,
-  smpteCRgbToXyz,
+  sRgbToYPbPr,
   wideGamutRgbToXyz,
 } from "../conversions/rgb-conversions";
 import { rybToSrgb } from "../conversions/ryb-conversions";
@@ -84,7 +84,6 @@ import { uvwToXyz } from "../conversions/uvw-conversions";
 import { xvYccToSrgb } from "../conversions/xvycc-conversions";
 import { xyYToXyz } from "../conversions/xyy-conversions";
 import {
-  xyzToLms,
   xyzToAdobeRgb,
   xyzToAppleRgb,
   xyzToBestRgb,
@@ -99,6 +98,7 @@ import {
   xyzToLab,
   xyzToLch_ab,
   xyzToLch_uv,
+  xyzToLms,
   xyzToLuv,
   xyzToNtscRgb,
   xyzToPalSecamRgb,
@@ -116,15 +116,8 @@ import { yDbDrToSrgb } from "../conversions/ydbdr-conversions";
 import { yiqToSrgb } from "../conversions/yiq-conversions";
 import { yPbPrToSrgb } from "../conversions/ypbpr-conversions";
 import { isWebSafeRGB } from "../helpers/formats-and-checks";
-import {
-  ColorConverters,
-  ToRGBConverters,
-  ToXyzConverters,
-} from "../interfaces/converters.interface";
-import {
-  RGBResolverMap,
-  XYZResolverMap,
-} from "../interfaces/resolver.interface";
+import { ColorConverters, ToRGBConverters, ToXyzConverters } from "../interfaces/converters.interface";
+import { RGBResolverMap, XYZResolverMap } from "../interfaces/resolver.interface";
 
 /**
  * Map of color converter paired with the
