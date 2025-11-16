@@ -30,9 +30,9 @@ const scale = (
   const normGreen = green / 255;
   const normBlue = blue / 255;
 
-  const scaleR = (scale - normRed) / size;
-  const scaleG = (scale - normGreen) / size;
-  const scaleB = (scale - normBlue) / size;
+  const scaleR = (scale - normRed) / (size - 1);
+  const scaleG = (scale - normGreen) / (size - 1);
+  const scaleB = (scale - normBlue) / (size - 1);
 
   let currentRed = normRed;
   let currentGreen = normGreen;
