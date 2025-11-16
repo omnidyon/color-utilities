@@ -5,19 +5,16 @@ const Test = (
   colorName: string
 ) => {
   test(`Checking Shades generation ${colorName}`, () => {
-    console.log(rgb);
     const shades = getShades(rgb, { size: 8, prefixed: true });
     expect(shades.length).toBe(8);
   });
 
   test(`Checking Tints generation ${colorName}`, () => {
-    console.log(rgb);
     const shades = getTints(rgb, { size: 8, prefixed: true });
     expect(shades.length).toBe(8);
   });
 
   test(`Checking Tones generation ${colorName}`, () => {
-    console.log(rgb);
     const shades = getTones(rgb, { size: 8, prefixed: true });
     expect(shades.length).toBe(8);
   });
