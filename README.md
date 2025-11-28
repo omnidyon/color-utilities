@@ -1,3 +1,4 @@
+[![Live Demo](https://img.shields.io/badge/demo-online-brightgreen)](https://omnidyon.com/project-demo/color-utilities)
 [![npm version](https://img.shields.io/npm/v/@omnidyon/color-utilities.svg)](https://www.npmjs.com/package/@omnidyon/color-utilities)
 [![JSR version](https://img.shields.io/jsr/v/@omnidyon/color-utilities)](https://jsr.io/@omnidyon/color-utilities)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
@@ -7,7 +8,7 @@
 
 
 <p align="center">
-  <img src="./imgs/color_utilities_full.svg" alt="cu-logo" width="500"/>
+  <img src="./imgs/color_utilities_full.svg" alt="cu-logo" width="400"/>
 </p>
 
 #### _Tools for all your color needs_
@@ -15,6 +16,11 @@
 Color utilities is a collection of tools used to work with colors.
 
 ---
+
+### Live Demo
+
+Explore full interactive usage, color harmonies, mixers, blends, and accessibility tooling:  
+**[Launch the Demo](https://omnidyon.com/project-demo/color-utilities)**
 
 ⭐ Found this useful? [Star it on GitHub](https://github.com/omnidyon/color-utilities)  
 💬 Need help integrating or customizing it? [Book a free consult](https://cal.com/omnidyon)
