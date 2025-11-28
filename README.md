@@ -3,6 +3,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![npm downloads](https://img.shields.io/npm/dm/@omnidyon/color-utilities.svg)](https://www.npmjs.com/package/@omnidyon/color-utilities)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Included-blue)](https://github.com/omnidyon/color-utilities)
+[![GitHub stars](https://img.shields.io/github/stars/omnidyon/color-utilities?style=social)](https://github.com/omnidyon/color-utilities)
+
 
 <p align="center">
   <img src="./imgs/color_utilities_full.svg" alt="cu-logo" width="500"/>
@@ -11,6 +13,12 @@
 #### _Tools for all your color needs_
 
 Color utilities is a collection of tools used to work with colors.
+
+---
+
+⭐ Found this useful? [Star it on GitHub](https://github.com/omnidyon/color-utilities)  
+💬 Need help integrating or customizing it? [Book a free consult](https://cal.com/omnidyon)
+
 
 ## Features
 
